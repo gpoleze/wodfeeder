@@ -19,8 +19,7 @@ public class FindHeaderIndexes<T> {
 
 		HashMap<T, Integer> headerIndexes = new HashMap<>();
 
-		headers.stream()
-				.forEach(header -> {
+		headers.forEach(header -> {
 					Pattern pattern = Pattern.compile("(?i)" + header.toString());
 					OptionalInt line = IntStream.range(0, indexes.size())
 							.filter(i -> pattern.matcher(indexes.get(i)).find())
