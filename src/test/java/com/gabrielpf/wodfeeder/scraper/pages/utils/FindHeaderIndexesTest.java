@@ -1,32 +1,23 @@
-package ca.gabrielferreira.wodfeeder.scraper.pages.utils;
+package com.gabrielpf.wodfeeder.scraper.pages.utils;
 
-import ca.gabrielferreira.wodfeeder.scraper.HtmlFileReader;
+import com.gabrielpf.wodfeeder.scraper.HtmlFileReader;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class FindHeaderIndexesTest {
@@ -35,7 +26,8 @@ public class FindHeaderIndexesTest {
 
 	@BeforeAll
 	private static void setUp() throws IOException {
-		paragraphs = new HtmlFileReader().readHtmlFromFile();
+		paragraphs = new HtmlFileReader("./src/test/resources/weeklyWorkputPageFragment.html")
+				.readHtmlFromFile(".entry-content p");
 	}
 
 	@Test
