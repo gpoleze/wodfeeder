@@ -1,15 +1,12 @@
-package ca.gabrielferreira.wodfeeder.scraper.pages.utils;
+package com.gabrielpf.wodfeeder.scraper.pages.utils;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toList;
 
 public class FindHeaderIndexes<T> {
 
