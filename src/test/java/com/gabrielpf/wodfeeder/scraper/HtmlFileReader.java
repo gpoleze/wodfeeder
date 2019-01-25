@@ -6,7 +6,6 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class HtmlFileReader {
 	private String filepath;
@@ -16,11 +15,12 @@ public class HtmlFileReader {
 	}
 
 	public Elements readHtmlFromFile(String cssSelection) throws IOException {
-		File in = new File(filepath);
-		Document dom = Jsoup.parse(in, null);
-
-		Elements elements = dom.select(cssSelection);
-		return elements;
+		return readHtmlFromFile().select(cssSelection);
 	}
+
+    public Document readHtmlFromFile() throws IOException {
+        File in = new File(filepath);
+        return Jsoup.parse(in, null);
+    }
 
 }

@@ -10,6 +10,10 @@ public class WorkoutPage extends BasePage {
 		super(url);
 	}
 
+	public WorkoutPage(Document document) {
+		super(document);
+	}
+
 	public String getLastPostLink(String cssSelection) throws NoSuchFieldException {
 
 		return document
