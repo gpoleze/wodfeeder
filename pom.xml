@@ -7,6 +7,7 @@
     <artifactId>wodfeeder</artifactId>
     <version>0.0.1</version>
     <name>wodfeeder</name>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>8</java.version>
@@ -74,6 +75,11 @@
             <artifactId>jsoup</artifactId>
             <version>1.10.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.rometools</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.12.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -82,6 +88,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-framework.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

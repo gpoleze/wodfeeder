@@ -19,11 +19,16 @@ public class WeekWodPage extends BasePage {
 
     public WeekWodPage(String url) throws UnknownHostException {
         super(url);
+        workouts = readParagraphs(document);
     }
 
     public WeekWodPage(Document document) {
         super(document);
-        workouts = new DailyWorkoutReader(document.select("p"));
+        workouts = readParagraphs(document);
+    }
+
+    public DailyWorkoutReader readParagraphs(Document document) {
+        return new DailyWorkoutReader(document.select("p"));
     }
 
     public LocalDate readPublishingDate() {

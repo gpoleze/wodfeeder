@@ -26,11 +26,7 @@ class WorkoutPageTest {
 
         WorkoutPage workoutPage = new WorkoutPage(dom);
         String actual = null;
-        try {
-            actual = workoutPage.getLastPostLink(cssSelector);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        actual = workoutPage.getLastPostLink(cssSelector);
 
         assertEquals(expected, actual);
     }

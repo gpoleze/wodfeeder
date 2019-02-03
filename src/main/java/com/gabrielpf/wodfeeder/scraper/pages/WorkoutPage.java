@@ -14,11 +14,16 @@ public class WorkoutPage extends BasePage {
 		super(document);
 	}
 
-	public String getLastPostLink(String cssSelection) throws NoSuchFieldException {
+	public String getLastPostLink(String cssSelection){
 
 		return document
 				.select(cssSelection)
 				.get(0)
 				.attr("href");
 	}
+
+	public String getLastPostLink(){
+		return getLastPostLink(".entry-title-link");
+	}
+
 }
