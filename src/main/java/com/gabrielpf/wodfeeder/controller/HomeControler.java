@@ -1,4 +1,4 @@
-package com.gabrielpf.wodfeeder;
+package com.gabrielpf.wodfeeder.controller;
 
 import com.gabrielpf.wodfeeder.feeder.Feeder;
 import com.gabrielpf.wodfeeder.scraper.pages.WeekWodPage;
