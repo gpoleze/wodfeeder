@@ -31,15 +31,21 @@
             <thead>
             <tr>
                 <th scope="col">Day</th>
-                <th scope="col">Date</th>
                 <th scope="col">Workout</th>
             </tr>
             </thead>
             <tbody>
             <tr scope="row" th:each="workout : ${latestWorkouts}">
-                <td><span th:text="${workout.getKey().dayOfWeek}"></span></td>
-                <td class="dates"><span th:text="${workout.getKey()}"></span></td>
-                <td><span th:text="${workout.getValue()}"></span></td>
+
+                <td>
+                    <span th:text="${workout.getKey().dayOfWeek}"></span>
+                    <span class="dates" th:text="${workout.getKey()}"></span>
+                </td>
+                <td>
+                    <div th:each='line : ${workout.getValue().split("\n")}'>
+                        <span th:text="${line}"></span><br>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
