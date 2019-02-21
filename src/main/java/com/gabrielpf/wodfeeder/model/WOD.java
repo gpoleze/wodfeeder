@@ -44,4 +44,13 @@ public class WOD {
     public void setExercises(String exercises) {
         this.exercises = exercises;
     }
+
+    @Override
+    public String toString() {
+        return "WOD{" +
+                "id=" + id +
+                ", date=" + date +
+                ", exercises='" + exercises + '\'' +
+                '}';
+    }
 }
