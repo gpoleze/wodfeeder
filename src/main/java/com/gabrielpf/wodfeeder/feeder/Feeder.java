@@ -1,62 +1,65 @@
 package com.gabrielpf.wodfeeder.feeder;
 
-import com.rometools.rome.feed.synd.*;
-import com.rometools.rome.io.FeedException;
-import com.rometools.rome.io.SyndFeedOutput;
+import com.gabrielpf.wodfeeder.model.WOD;
+import com.gabrielpf.wodfeeder.vo.WodVO;
+import com.rometools.rome.feed.rss.Channel;
+import com.rometools.rome.feed.rss.Content;
+import com.rometools.rome.feed.rss.Description;
+import com.rometools.rome.feed.rss.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.feed.AbstractRssFeedView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class Feeder {
+@Component
+public class Feeder extends AbstractRssFeedView {
 
-    private final SyndFeed feed;
+    @Autowired
+    private WodVO vo;
 
-    public Feeder() {
-        feed = new SyndFeedImpl();
-        feed.setFeedType("rss_1.0");
-        feed.setTitle("Workout of the Day");
-        feed.setLink("192.168.0.10/2019-02-02");
-        feed.setDescription("Let's see what goodies we have today and rock it out!");
+    @Override
+    protected void buildFeedMetadata(Map<String, Object> model, Channel feed, HttpServletRequest request) {
+        feed.setTitle("WodFeeder RSS Feed");
+        feed.setDescription("All your workouts in your hands");
+        feed.setLink("https://wodfeeder.herokuapp.com");
     }
 
-    private Feeder setEntry(SyndEntry entry) {
-        entry.setTitle("Entry title");
-        entry.setLink("http://www.somelink.com/entry1");
+    @Override
+    protected List<Item> buildFeedItems(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        feed.setEntries(Arrays.asList(entry));
-        return this;
-    }
+        List<Item> items = new ArrayList<>();
 
-    private Feeder addDescription(SyndEntry entry) {
-        SyndContent description = new SyndContentImpl();
-        description.setType("text/html");
-        description.setValue("First entry");
+        List<WOD> wods = vo.getWodsForTheCurrentWeek();
 
-        entry.setDescription(description);
+        wods.forEach(wod -> {
 
-        return this;
-    }
+                    String title = "Workout of the Day " + wod.getDate();
+                    String link = "https://wodfeeder.herokuapp.com/wod/" + wod.getDate();
+                    Description description = new Description();
+                    description.setValue("Let's see what goodies we have today and rock it out!");
 
-    private Feeder addCategory(SyndEntry entry) {
-        List<SyndCategory> categories = new ArrayList<>();
-        SyndCategory category = new SyndCategoryImpl();
-        category.setName("Sophisticated category");
-        categories.add(category);
+                    Content content = new Content();
+                    content.setValue(wod.getExercises());
 
-        entry.setCategories(categories);
+                    Item entryOne = new Item();
 
-        return this;
-    }
+                    entryOne.setTitle(title);
+                    entryOne.setLink(link);
+                    entryOne.setDescription(description);
+                    entryOne.setPubDate(Date.from(wod.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                    entryOne.setContent(content);
 
-    public String publish() {
-        SyndFeedOutput syndFeedOutput = new SyndFeedOutput();
-        String output = "";
-        try {
-            output = syndFeedOutput.outputString(feed);
-        } catch (FeedException e) {
-            e.printStackTrace();
-        }
-        return output;
+                    items.add(entryOne);
+                }
+        );
+
+        return items;
     }
 }
