@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class WodVO {
@@ -44,4 +42,19 @@ public class WodVO {
         return new WOD(date, "No Exercises found for " + date);
     }
 
+
+    public List<WOD> getWodsForTheCurrentWeek() {
+        List<WOD> wods = new ArrayList<>();
+
+        LocalDate firstDayOfWeek = LocalDate.now().minusDays(LocalDate.now().getDayOfWeek().getValue() - 1);
+        for (int i = 0; i < 7; i++) {
+            LocalDate date = firstDayOfWeek.plusDays(i);
+            WOD wod = getWorkout(date).orElseGet(() -> {
+                return getInstanceWithNoExerciceForTheDate(date);
+            });
+            wods.add(wod);
+        }
+
+        return wods;
+    }
 }
