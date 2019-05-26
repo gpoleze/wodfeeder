@@ -20,24 +20,24 @@ public class WOD {
 	@Column(name = "exercises", nullable = false)
 	private String exercises;
 
-	@Column(name = "warmUp", nullable = true)
-	private WarmUp warmUp;
-
-	@Column(name = "weightlifting", nullable = true)
-	private Weightlifting weightlifting;
-
-	public WOD(LocalDate date, String exercises, WarmUp warmUp, Weightlifting weightlifting) {
-		this.date = date;
-		this.exercises = exercises;
-		this.warmUp = warmUp;
-		this.weightlifting = weightlifting;
-	}
+//	@Column(name = "warmUp", nullable = true)
+//	private WarmUp warmUp;
+//
+//	@Column(name = "weightlifting", nullable = true)
+//	private Weightlifting weightlifting;
+//
+//	public WOD(LocalDate date, String exercises, WarmUp warmUp, Weightlifting weightlifting) {
+//		this.date = date;
+//		this.exercises = exercises;
+//		this.warmUp = warmUp;
+//		this.weightlifting = weightlifting;
+//	}
 
 	public WOD(LocalDate date, String exercises) {
 		this.date = date;
 		this.exercises = exercises;
-		this.warmUp = null;
-		this.weightlifting = null;
+//		this.warmUp = null;
+//		this.weightlifting = null;
 	}
 
 	private WOD() {}
