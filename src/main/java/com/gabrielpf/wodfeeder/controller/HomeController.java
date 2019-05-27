@@ -22,8 +22,7 @@ public class HomeController {
     @Autowired
     private ScheduledTasks tasks;
 
-    //    @RequestMapping(value = "/", produces = "application/json")
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/home")
     public String home(Model model) {
 
         Map<LocalDate, String> localDateStringMap = vo.getWorkoutForTheCurrentWeek();
