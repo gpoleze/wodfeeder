@@ -1,6 +1,6 @@
 package com.gabrielpf.wodfeeder.controller;
 
-import com.gabrielpf.wodfeeder.ScheduledTasks;
+import com.gabrielpf.wodfeeder.service.ScheduledTasks;
 import com.gabrielpf.wodfeeder.vo.WodVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Controller
-public class HomeControler {
+public class HomeController {
 
     @Autowired
     private WodVO vo;
@@ -22,8 +22,7 @@ public class HomeControler {
     @Autowired
     private ScheduledTasks tasks;
 
-    //    @RequestMapping(value = "/", produces = "application/json")
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/home")
     public String home(Model model) {
 
         Map<LocalDate, String> localDateStringMap = vo.getWorkoutForTheCurrentWeek();

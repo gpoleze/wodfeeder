@@ -1,4 +1,4 @@
-package com.gabrielpf.wodfeeder;
+package com.gabrielpf.wodfeeder.service;
 
 import com.gabrielpf.wodfeeder.model.WOD;
 import com.gabrielpf.wodfeeder.repo.WodRepo;
