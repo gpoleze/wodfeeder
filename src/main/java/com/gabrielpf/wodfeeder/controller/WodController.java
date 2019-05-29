@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping(value = "/wod", produces = "application/json")
+@RequestMapping(value = "/api/wod", produces = "application/json")
 public class WodController {
 
 	@Autowired

@@ -12,7 +12,6 @@ class MainArea extends Component {
     toFormatedDate = date => `${date.year}-${date.month}-${date.day}`;
 
     render() {
-        console.log(this.props.workouts);
         return (
             <Table>
                 <TableHead>

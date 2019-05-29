@@ -1,13 +1,13 @@
 import {weeksAction} from '../reducers/actions/actionCreator';
 
-export const listWeekWorkouts = (week, year = new Date().getFullYear()) => {
-    let url;
-    if (!week)
-        url = 'wod/week';
-    else if (!year)
-        url = `wod/week/${week}`;
-    else
-        url = `/wod/week/${week}/year/${year}`;
+export const listWeekWorkouts = (week, year) => {
+    let url = 'api/wod/week';
+
+    if (year)
+        if (week)
+            url = `${url}/${week}/year/${year}`;
+        else
+            url = `${url}/${week}`;
 
     return dispatch => fetch(url)
         .then(response => response.text())
