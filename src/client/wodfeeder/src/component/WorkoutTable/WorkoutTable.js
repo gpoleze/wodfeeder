@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import './WokoutTable.styles.css'
 
 const WorkoutTable = props => {
     return !props.workouts ?
@@ -17,7 +18,7 @@ const WorkoutTable = props => {
                         props.workouts.map(
                             workout => (
                                 <TableRow key={`${workout.id}_${workout.date}`} data-test='row'>
-                                    <TableCell align="left" data-test='date'>
+                                    <TableCell align="left" className="date" data-test='date'>
                                         {`${workout.date.year}-${workout.date.month}-${workout.date.day}`}
                                     </TableCell>
                                     <TableCell align="left" data-test='exercise'>{workout.exercises}</TableCell>
