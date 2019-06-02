@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {listWeekWorkouts} from '../logic/wod-api';
 import WorkoutTable from "../component/WorkoutTable/WorkoutTable";
-import {Route} from "react-router-dom";
-import {Switch} from "@material-ui/core";
 
 class MainArea extends Component {
 
