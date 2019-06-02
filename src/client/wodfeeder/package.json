@@ -39,6 +39,7 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
+    "@types/jasmine": "^3.3.13",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2"
   }
