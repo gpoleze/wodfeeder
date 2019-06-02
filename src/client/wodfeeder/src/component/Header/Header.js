@@ -1,9 +1,5 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import {AppBar, IconButton, Toolbar, Typography, makeStyles} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function ButtonAppBar() {
+const Header = props =>{
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -27,13 +23,13 @@ function ButtonAppBar() {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h6" className={classes.title} data-test="headerText">
                         Wod Feeder
                     </Typography>
                 </Toolbar>
             </AppBar>
         </div>
     );
-}
+};
 
-export default ButtonAppBar;
+export default Header;

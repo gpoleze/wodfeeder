@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 import {connect} from "react-redux";
 import {listWeekWorkouts} from '../logic/wod-api';
+import WorkoutTable from "../component/WorkoutTable/WorkoutTable";
 
 class MainArea extends Component {
 
@@ -9,29 +9,8 @@ class MainArea extends Component {
         this.props.listWeeksWorkouts();
     }
 
-    toFormatedDate = date => `${date.year}-${date.month}-${date.day}`;
-
     render() {
-        return (
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell align="left">Exercises</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        this.props.workouts.map(workout => (
-                            <TableRow key={this.toFormatedDate(workout.date)}>
-                                <TableCell align="left">{this.toFormatedDate(workout.date)}</TableCell>
-                                <TableCell align="left">{workout.exercises}</TableCell>
-                            </TableRow>
-                        ))
-                    }
-                </TableBody>
-            </Table>
-        );
+        return (<WorkoutTable {...this.props}/>);
     }
 }
 

@@ -6,11 +6,11 @@ import './index.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./stores/store";
-import ButtonAppBar from "./header/ButtonAppBar";
+import Header from "./component/Header/Header";
 
 ReactDOM.render(
     <Provider store={store}>
-        <ButtonAppBar/>
+        <Header/>
         <BrowserRouter>
             <Switch>
                 <Route exact path='/' component={App}/>
