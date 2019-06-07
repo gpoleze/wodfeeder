@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {listWeekWorkouts} from '../logic/wod-api';
-import WorkoutTable from "../component/WorkoutTable/WorkoutTable";
+import WorkoutTable from "../components/WorkoutTable/WorkoutTable";
 
 class MainArea extends Component {
 
