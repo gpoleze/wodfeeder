@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import './App.css';
 
-import Workouts from "./workouts.index";
+import Workouts from "../containers/workouts.index";
 
 class App extends Component {
     static contentTypes = {

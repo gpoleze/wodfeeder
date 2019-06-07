@@ -6,7 +6,7 @@ import {findByTestAttrib} from "../../../utils/test-functions";
 
 const setUp = (props = {}) => shallow(<HeaderIndex {...props}/>);
 
-describe('HeaderIndex Component', () => {
+describe('Header Component', () => {
 
     let component;
     beforeEach(() => {

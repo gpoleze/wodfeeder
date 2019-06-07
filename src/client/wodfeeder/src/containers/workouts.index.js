@@ -1,25 +1,17 @@
-import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {listWeekWorkouts} from '../logic/wod-api';
-import WorkoutTableIndex from "../components/workout-table/workout-table.index";
+import {listWeekWorkouts} from '../store/workouts/workouts.thunk';
+import Workouts from '../pages/workouts/workouts.page';
 
-class WorkoutsIndex extends Component {
-
-    componentDidMount() {
-        this.props.listWeeksWorkouts();
+const mapStateToProps = state => (
+    {
+        workouts: state.weeksWorkouts
     }
+);
 
-    render() {
-        return (<WorkoutTableIndex {...this.props}/>);
-    }
-}
-
-const mapStateToProps = state => ({workouts: state.weeksWorkouts});
-
-const mapDispatchToProps = dispatch => {
-    return {
+const mapDispatchToProps = dispatch => (
+    {
         listWeeksWorkouts: weekNumber => dispatch(listWeekWorkouts(weekNumber))
-    };
-};
+    }
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkoutsIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(Workouts);

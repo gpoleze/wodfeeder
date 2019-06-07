@@ -1,4 +1,4 @@
-import {weeksAction} from '../reducers/actions/actionCreator';
+import {weeksAction} from './workout.actions';
 
 export const listWeekWorkouts = (week, year) => {
     let url = 'api/wod/week';

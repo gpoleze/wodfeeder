@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import './workout-table.styles.css'
 
-const WorkoutTableIndex = props => {
+const WorkoutTable = props => {
     return !props.workouts ?
         null :
         (
@@ -30,4 +30,4 @@ const WorkoutTableIndex = props => {
         );
 };
 
-export default WorkoutTableIndex;
+export default WorkoutTable;

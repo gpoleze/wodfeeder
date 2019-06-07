@@ -1,12 +1,12 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import WorkoutTableIndex from './workout-table.index'
+import WorkoutTable from './workout-table.index'
 import {findByTestAttrib} from "../../../utils/test-functions";
 
-const setUp = (props={}) => shallow(<WorkoutTableIndex {...props}/>);
+const setUp = (props={}) => shallow(<WorkoutTable {...props}/>);
 
-describe("WorkoutTableIndex Component", () => {
+describe("WorkoutTable Component", () => {
     describe('Have Props', () => {
 
         let wrapper;
