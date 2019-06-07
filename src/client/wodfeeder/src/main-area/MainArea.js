@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {listWeekWorkouts} from '../logic/wod-api';
-import WorkoutTable from "../components/WorkoutTable/WorkoutTable";
+import WorkoutTableIndex from "../components/workout-table/workout-table.index";
 
 class MainArea extends Component {
 
@@ -10,7 +10,7 @@ class MainArea extends Component {
     }
 
     render() {
-        return (<WorkoutTable {...this.props}/>);
+        return (<WorkoutTableIndex {...this.props}/>);
     }
 }
 

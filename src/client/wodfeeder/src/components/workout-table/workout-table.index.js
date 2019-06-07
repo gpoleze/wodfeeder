@@ -1,8 +1,8 @@
 import React from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import './WokoutTable.styles.css'
+import './workout-table.styles.css'
 
-const WorkoutTable = props => {
+const WorkoutTableIndex = props => {
     return !props.workouts ?
         null :
         (
@@ -30,4 +30,4 @@ const WorkoutTable = props => {
         );
 };
 
-export default WorkoutTable;
+export default WorkoutTableIndex;
