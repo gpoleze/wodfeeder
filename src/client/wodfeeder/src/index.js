@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import App from './App';
-
-import './index.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
-import {store} from "./stores/store";
+
+import App from './containers/App';
 import Header from "./components/header/header.index";
+import {store} from "./store/store";
+
+import './index.css';
 
 ReactDOM.render(
     <Provider store={store}>
