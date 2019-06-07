@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import './App.css';
 
-import MainArea from "./main-area/MainArea";
+import Workouts from "./containers/workouts.index";
 
 class App extends Component {
     static contentTypes = {
@@ -14,7 +14,7 @@ class App extends Component {
         return (
             <div id="root">
                 <div className="main">
-                    <MainArea/>
+                    <Workouts/>
                 </div>
             </div>
         );

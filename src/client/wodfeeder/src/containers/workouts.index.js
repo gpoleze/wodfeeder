@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {listWeekWorkouts} from '../logic/wod-api';
 import WorkoutTableIndex from "../components/workout-table/workout-table.index";
 
-class MainArea extends Component {
+class WorkoutsIndex extends Component {
 
     componentDidMount() {
         this.props.listWeeksWorkouts();
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainArea);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutsIndex);
