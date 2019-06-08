@@ -10,6 +10,7 @@ const SelectInput = ({name, value, options, changeHandler}) => (
         onChange={event => changeHandler(event.target.value)}
     >
         {
+            options ?
             options.map(option => (
                 <option
                     value={option.value}
@@ -18,6 +19,7 @@ const SelectInput = ({name, value, options, changeHandler}) => (
                     {option.name}
                 </option>
             ))
+                : null
         }
     </Select>
 );
@@ -31,7 +33,7 @@ SelectInput.propTypes = {
 
 SelectInput.defaultProps = {
     name: null,
-    value: null,
+    value: '',
     options: [],
     changeHandler: event => console.info(event.target.value)
 };
