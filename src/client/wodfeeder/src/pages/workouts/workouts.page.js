@@ -4,30 +4,15 @@ import WeekSelectionForm from "../../components/week-selection-form/week-selecti
 
 export default class Workouts extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.listWeeksWorkouts();
+        this.props.getWorkoutFormAttributes()
     }
 
     render() {
-        const fakeProps = {
-            week: {
-                fieldName: 'week',
-                fieldValue: 23,
-                options: [...Array(52).keys()].map(key => ({name: key + 1, value: key + 1}))
-            },
-            year: {
-                ieldName: 'year',
-                fieldValue: 2019,
-                options: [
-                    {name: 2018, value: 2018},
-                    {name: 2019, value: 2019},
-                ]
-            }
-        };
-
         return (
             <div>
-                <WeekSelectionForm {...fakeProps}/>
+                <WeekSelectionForm {...this.props.weekForm}/>
                 <WorkoutTable {...this.props}/>
             </div>
         );
