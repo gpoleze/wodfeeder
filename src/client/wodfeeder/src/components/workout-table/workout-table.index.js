@@ -2,8 +2,8 @@ import React from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import './workout-table.styles.css'
 
-const WorkoutTable = props => {
-    return !props.workouts ?
+const WorkoutTable = ({workouts}) => {
+    return !workouts ?
         null :
         (
             <Table data-test="table">
@@ -15,7 +15,7 @@ const WorkoutTable = props => {
                 </TableHead>
                 <TableBody>
                     {
-                        props.workouts.map(
+                        workouts.map(
                             workout => (
                                 <TableRow key={`${workout.id}_${workout.date}`} data-test='row'>
                                     <TableCell align="left" className="date" data-test='date'>

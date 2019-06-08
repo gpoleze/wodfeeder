@@ -1,13 +1,8 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension/developmentOnly";
 
-import {
-    weekWorkouts,
-    weekFormReducer
-} from "./workouts/workouts.reducer.js";
+import workoutsReducers from "./workouts/workouts.reducer.js";
 
-const reducers = combineReducers({
-    weeksWorkouts: weekWorkouts,
-    weekFormValues: weekFormReducer,
-});
-export const store = createStore(reducers, applyMiddleware(thunk));
+const reducers = combineReducers({workouts: workoutsReducers});
+export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

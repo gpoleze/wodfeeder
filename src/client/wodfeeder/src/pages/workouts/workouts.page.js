@@ -12,7 +12,7 @@ export default class Workouts extends Component {
     render() {
         return (
             <div>
-                <WeekSelectionForm {...this.props.weekForm}/>
+                <WeekSelectionForm {...this.props.weekForm.view}/>
                 <WorkoutTable {...this.props}/>
             </div>
         );
