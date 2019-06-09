@@ -1,6 +1,7 @@
 package com.gabrielpf.wodfeeder.controller;
 
 import com.gabrielpf.wodfeeder.model.WOD;
+import com.gabrielpf.wodfeeder.service.ScheduledTasks;
 import com.gabrielpf.wodfeeder.vo.WodVO;
 import com.gabrielpf.wodfeeder.vo.WeeksAndYearsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,9 @@ import java.util.List;
 @RequestMapping(value = "/api/wod", produces = "application/json")
 public class WodController {
 
-	@Autowired
-	private WodVO wodVO;
-	@Autowired
-	private WeeksAndYearsVO weeksAndYearsVO;
+	@Autowired private WodVO wodVO;
+	@Autowired private WeeksAndYearsVO weeksAndYearsVO;
+	@Autowired private ScheduledTasks tasks;
 
 	@GetMapping("/{date}")
 	public WOD workoutOftheDay(@PathVariable("date") String stringDate) {
@@ -46,5 +46,11 @@ public class WodController {
 	@GetMapping(value = "/weeks")
 	public WeeksAndYearsVO getWeekAndYears() {
 		return weeksAndYearsVO;
+	}
+
+	@GetMapping("/reload")
+	public List<WOD> reloadWorkouts() {
+		tasks.scrapThisWeekWorkout();
+		return weeklyWorkouts();
 	}
 }
