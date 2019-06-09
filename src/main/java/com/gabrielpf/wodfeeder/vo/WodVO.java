@@ -2,6 +2,7 @@ package com.gabrielpf.wodfeeder.vo;
 
 import com.gabrielpf.wodfeeder.model.WOD;
 import com.gabrielpf.wodfeeder.repo.WodRepo;
+import com.gabrielpf.wodfeeder.utils.WeekUtil;
 import org.openqa.selenium.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.gabrielpf.wodfeeder.vo.WeekUtil.getWeekOfYear;
+import static com.gabrielpf.wodfeeder.utils.WeekUtil.getWeekOfYear;
 
 @Component
 public class WodVO {

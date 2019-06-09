@@ -1,5 +1,6 @@
 package com.gabrielpf.wodfeeder.vo;
 
+import com.gabrielpf.wodfeeder.utils.WeekUtil;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
