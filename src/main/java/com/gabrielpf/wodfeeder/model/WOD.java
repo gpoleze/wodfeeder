@@ -1,5 +1,6 @@
 package com.gabrielpf.wodfeeder.model;
 
+import com.gabrielpf.wodfeeder.utils.WeekUtil;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,15 +15,19 @@ public class WOD {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "date", nullable = false, unique = true)
+	@Column(name = "date")
 	private LocalDate date;
 
-	@Column(name = "exercises", nullable = false)
+	@Column(name = "week")
+	private int week;
+
+	@Column(name = "exercises")
 	private String exercises;
 
-//	@Column(name = "warmUp", nullable = true)
-//	private WarmUp warmUp;
-//
+	@ManyToOne(targetEntity = WarmUp.class)
+	@JoinColumn(name = "warmUpId")
+	private WarmUp warmUp;
+
 //	@Column(name = "weightlifting", nullable = true)
 //	private Weightlifting weightlifting;
 //
@@ -35,6 +40,7 @@ public class WOD {
 
 	public WOD(LocalDate date, String exercises) {
 		this.date = date;
+		this.week = WeekUtil.getWeekOfYear(date);
 		this.exercises = exercises;
 //		this.warmUp = null;
 //		this.weightlifting = null;
