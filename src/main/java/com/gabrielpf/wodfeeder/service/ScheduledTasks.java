@@ -50,7 +50,6 @@ public class ScheduledTasks {
             return;
         }
 
-	    updateWeeks();
         Map<LocalDate, String> localDateStringMap = getLocalDateStringMap(lastPostLink.get());
 
         saveToDatabase(localDateStringMap);
@@ -109,17 +108,4 @@ public class ScheduledTasks {
 
         return Optional.ofNullable(lastPostLink);
     }
-
-	private void updateWeeks() {
-		List<WOD> wods = repo.findAllByWeek(0);
-
-		log.info("Rows with zeroed week: " + wods);
-
-		wods.forEach(wod -> {
-			int week = WeekUtil.getWeekOfYear(wod.getDate());
-			wod.setWeek(week);
-			repo.save(wod);
-		});
-	}
-
 }
