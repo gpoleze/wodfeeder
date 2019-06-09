@@ -19,9 +19,11 @@ const WorkoutTable = ({workouts}) => {
                             workout => (
                                 <TableRow key={`${workout.id}_${workout.date}`} data-test='row'>
                                     <TableCell align="left" className="date" data-test='date'>
-                                        {`${workout.date.year}-${workout.date.month}-${workout.date.day}`}
+                                        {workout.date}
                                     </TableCell>
-                                    <TableCell align="left" data-test='exercise'>{workout.exercises}</TableCell>
+                                    <TableCell align="left" data-test='exercise'>
+                                            {workout.exercises}
+                                    </TableCell>
                                 </TableRow>)
                         )
                     }

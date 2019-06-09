@@ -27,7 +27,7 @@ export const getWorkoutFormAttributes = () => {
             options: [...Array(52).keys()].map(key => ({name: key + 1, value: key + 1}))
         },
         year: {
-            ieldName: 'year',
+            fieldName: 'year',
             fieldValue: 2019,
             options: [
                 {name: 2018, value: 2018},
