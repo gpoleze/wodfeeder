@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import WorkoutTable from './workout-table.index'
-import {findByTestAttrib} from "../../../utils/test-functions";
+import {findByTestAttrib} from "../../utils/test-functions";
 
 const setUp = (props={}) => shallow(<WorkoutTable {...props}/>);
 
@@ -15,12 +15,12 @@ describe("WorkoutTable Component", () => {
                 workouts: [
                     {
                         id: '1',
-                        date: {day: '01', month: '01', year: '2018'},
+                        date: '2018-01-01',
                         exercises: 'Test Text 1'
                     },
                     {
                         id: '2',
-                        date: {day: '02', month: '01', year: '2018'},
+                        date: '2018-01-02',
                         exercises: 'Test Text 2'
                     }
                 ]
@@ -38,7 +38,7 @@ describe("WorkoutTable Component", () => {
             expect(rows.length).toBe(2);
         });
 
-        it('Should render two date cells', () => {
+        it('Should render two date.js cells', () => {
             const dataCells = findByTestAttrib(wrapper, 'date');
             expect(dataCells.length).toBe(2);
             expect(dataCells.map(cell => cell.text())).toEqual(['2018-01-01', '2018-01-02']);
