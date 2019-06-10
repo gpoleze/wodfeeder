@@ -8,6 +8,10 @@ const weekSelectionFormStyles = makeStyles(theme => ({
     },
     formContainer:{
         textAlign:'center'
+    },
+    selectInput:{},
+    button:{
+        marginTop: theme.spacing(2)
     }
 }));
 

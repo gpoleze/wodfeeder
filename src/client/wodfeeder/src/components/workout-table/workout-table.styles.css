@@ -12,5 +12,6 @@ footer {
 .paper {
     z-index: 1;
     max-width: 90%;
+    max-height: 80%;
     margin: 0 auto;
 }
