@@ -1,4 +1,4 @@
-import {weeksAction, workoutFormAction} from './workouts.actions';
+import {weeksAction, workoutFormAction, workoutFormEditAction} from './workouts.actions';
 import React from "react";
 import {Redirect} from "react-router-dom";
 
@@ -7,11 +7,12 @@ const API = 'api/wod';
 export const listWeekWorkouts = (week, year) => {
     let url = API + '/week';
 
-    if (year)
-        if (week)
+    if (!!week){
+        if (!!year)
             url = `${url}/${week}/year/${year}`;
         else
             url = `${url}/${week}`;
+    }
 
     return dispatch => fetch(url)
         .then(response => response.text())
@@ -64,5 +65,10 @@ export const reloadWorkouts = () => {
     return <Redirect to='/'/>;
 };
 
-export const addFormChange = () => {
+export const addFormChange = (fieldName, fieldValue) => {
+    const inputChanged = {fieldName, fieldValue};
+    return dispatch => {
+        dispatch(workoutFormEditAction(inputChanged));
+        return inputChanged;
+    };
 };
