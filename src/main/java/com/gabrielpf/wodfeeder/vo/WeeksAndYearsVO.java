@@ -2,7 +2,6 @@ package com.gabrielpf.wodfeeder.vo;
 
 import com.gabrielpf.wodfeeder.repo.WodRepo;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -20,12 +19,12 @@ public class WeeksAndYearsVO implements Serializable {
 
 	public WeeksAndYearsVO(WodRepo repo) {
 
-		this.weeks = repo.getAllDistinctWeeks();
-		this.years = repo.getAllDistinctDates()
+		this.weeks = repo.findAllDistinctWeeks();
+		this.years = repo.findAllDistinctDates()
 				.stream()
 				.map(LocalDate::getYear)
 				.distinct()
 				.sorted()
-				.collect(toList());;
+				.collect(toList());
 	}
 }

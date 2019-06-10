@@ -14,10 +14,10 @@ public interface WodRepo extends CrudRepository<WOD, Long> {
     WOD findAllByDate(LocalDate date);
 
 	@Query("SELECT DISTINCT w.week FROM WOD w ORDER BY w.week ASC")
-    List<Integer> getAllDistinctWeeks();
+    List<Integer> findAllDistinctWeeks();
 
 	@Query("SELECT DISTINCT w.date FROM WOD w ORDER BY w.date ASC")
-	List<LocalDate> getAllDistinctDates();
+	List<LocalDate> findAllDistinctDates();
 
 	List<WOD> findAllByWeek(int week);
 }

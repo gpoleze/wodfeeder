@@ -2,6 +2,7 @@ package com.gabrielpf.wodfeeder.controller;
 
 import com.gabrielpf.wodfeeder.model.WOD;
 import com.gabrielpf.wodfeeder.service.ScheduledTasks;
+import com.gabrielpf.wodfeeder.utils.WeekUtil;
 import com.gabrielpf.wodfeeder.vo.WodVO;
 import com.gabrielpf.wodfeeder.vo.WeeksAndYearsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -44,8 +46,14 @@ public class WodController {
 	}
 
 	@GetMapping(value = "/weeks")
-	public WeeksAndYearsVO getWeekAndYears() {
-		return weeksAndYearsVO;
+	public HashMap<String, Object> getWeekAndYears() {
+		var map = new HashMap<String,Object>();
+		map.put("currentWeek", WeekUtil.getWeekOfYear(LocalDate.now()));
+		map.put("currentYear", LocalDate.now().getYear());
+		map.put("weeks", weeksAndYearsVO.getWeeks());
+		map.put("years", weeksAndYearsVO.getYears());
+
+		return map;
 	}
 
 	@GetMapping("/reload")
