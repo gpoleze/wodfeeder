@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import HeaderIndex from './header.index'
-import {findByTestAttrib} from "../../../utils/test-functions";
+import {findByTestAttrib} from "../../utils/test-functions";
 
 const setUp = (props = {}) => shallow(<HeaderIndex {...props}/>);
 

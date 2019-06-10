@@ -8,6 +8,8 @@ import Header from "./components/header/header.index";
 import {store} from "./store/store";
 
 import './index.css';
+import {reloadWorkouts} from "./store/workouts/workouts.thunk";
+
 
 ReactDOM.render(
     <Provider store={store}>
@@ -15,6 +17,8 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path='/' component={App}/>
+                <Route path='/week' component={App}/>
+                <Route path='/reload' component={reloadWorkouts}/>
                 <Route component={() => <div>'Page not Found 404'</div>}/>
             </Switch>
         </BrowserRouter>

@@ -1,7 +1,11 @@
 import {weeksAction, workoutFormAction} from './workouts.actions';
+import React from "react";
+import {Redirect} from "react-router-dom";
+
+const API = 'api/wod';
 
 export const listWeekWorkouts = (week, year) => {
-    let url = 'api/wod/week';
+    let url = API + '/week';
 
     if (year)
         if (week)
@@ -19,25 +23,46 @@ export const listWeekWorkouts = (week, year) => {
 };
 
 export const getWorkoutFormAttributes = () => {
-    //TODO - make the URL request to fetch the next group of values
+
     const weekFormValues = {
         week: {
             fieldName: 'week',
-            fieldValue: 23,
-            options: [...Array(52).keys()].map(key => ({name: key + 1, value: key + 1}))
+            fieldValue: '',
+            options: []
         },
         year: {
             fieldName: 'year',
-            fieldValue: 2019,
-            options: [
-                {name: 2018, value: 2018},
-                {name: 2019, value: 2019},
-            ]
+            fieldValue: '',
+            options: []
         }
     };
 
-    return dispatch => {
-        dispatch(workoutFormAction(weekFormValues));
-        return weekFormValues;
-    };
+    return dispatch => fetch(API + '/weeks')
+        .then(response => response.text())
+        .then(response => JSON.parse(response))
+        .then(weeksReturns => {
+            const {weeks, years, currentWeek, currentYear} = weeksReturns;
+
+            weekFormValues.week.fieldValue = currentWeek;
+            weekFormValues.week.options = weeks.map(key => ({name: key, value: key}));
+
+            weekFormValues.year.options = years.map(key => ({name: key, value: key}));
+            weekFormValues.year.fieldValue = currentYear;
+
+            return weekFormValues;
+
+        })
+        .then(weekFormValues => {
+            dispatch(workoutFormAction(weekFormValues));
+            return weekFormValues;
+        });
+
+};
+
+export const reloadWorkouts = () => {
+    fetch(API + '/reload');
+    return <Redirect to='/'/>;
+};
+
+export const addFormChange = () => {
 };
