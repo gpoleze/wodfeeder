@@ -31,13 +31,4 @@ public class HomeController {
 
         return "home";
     }
-
-    @RequestMapping("/reload")
-    public RedirectView reloadWorkouts(Model model, RedirectAttributes attributes) {
-        tasks.scrapThisWeekWorkout();
-
-        attributes.addFlashAttribute("flashAttribute", "reload");
-
-        return new RedirectView("/");
-    }
 }

@@ -4,6 +4,7 @@ import com.gabrielpf.wodfeeder.model.WOD;
 import com.gabrielpf.wodfeeder.repo.WodRepo;
 import com.gabrielpf.wodfeeder.scraper.pages.WeekWodPage;
 import com.gabrielpf.wodfeeder.scraper.pages.WorkoutPage;
+import com.gabrielpf.wodfeeder.utils.WeekUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -106,5 +108,4 @@ public class ScheduledTasks {
 
         return Optional.ofNullable(lastPostLink);
     }
-
 }

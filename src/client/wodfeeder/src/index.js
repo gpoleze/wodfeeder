@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import App from './App';
-
-import './index.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
-import {store} from "./stores/store";
-import Header from "./component/Header/Header";
+
+import App from './containers/App';
+import Header from "./components/header/header.index";
+import {store} from "./store/store";
+
+import './index.css';
+import {reloadWorkouts} from "./store/workouts/workouts.thunk";
+
 
 ReactDOM.render(
     <Provider store={store}>
@@ -14,6 +17,8 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path='/' component={App}/>
+                <Route path='/week' component={App}/>
+                <Route path='/reload' component={reloadWorkouts}/>
                 <Route component={() => <div>'Page not Found 404'</div>}/>
             </Switch>
         </BrowserRouter>

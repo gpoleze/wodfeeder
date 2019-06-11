@@ -1,4 +1,4 @@
-package com.gabrielpf.wodfeeder.vo;
+package com.gabrielpf.wodfeeder.utils;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
