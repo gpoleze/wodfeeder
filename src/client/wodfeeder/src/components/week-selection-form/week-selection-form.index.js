@@ -1,6 +1,6 @@
 import React from "react";
 import SelectInput from "../forms/select-input/select-input.index";
-import {Button, Input} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import {PropTypes} from "prop-types";
 
 import './week-selection-form.style';

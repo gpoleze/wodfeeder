@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
-import {addFormChange, getWorkoutFormAttributes, listWeekWorkouts} from '../store/workouts/workouts.thunk';
-import Workouts from '../pages/workouts/workouts.page';
-import {getEditWorkoutsForm, getViewWorkoutsForm, getWorkouts} from "../store/workouts/workouts.selector";
+import {addFormChange, getWorkoutFormAttributes, listWeekWorkouts} from '../../store/workouts/workouts.thunk';
+import {getEditWorkoutsForm, getViewWorkoutsForm, getWorkouts} from "../../store/workouts/workouts.selector";
+import Workouts from './workouts.page';
 
 const mapStateToProps = state => ({
     workouts: getWorkouts(state),
