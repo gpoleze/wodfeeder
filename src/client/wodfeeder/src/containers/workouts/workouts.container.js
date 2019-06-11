@@ -1,19 +1,15 @@
 import {connect} from "react-redux";
 import {addFormChange, getWorkoutFormAttributes, listWeekWorkouts} from '../../store/workouts/workouts.thunk';
 import {
-    getEditWorkoutsForm,
     getTransitionState,
-    getViewWorkoutsForm,
+    getWorkoutsForm,
     getWorkouts
 } from "../../store/workouts/workouts.selector";
 import Workouts from './workouts.page';
 
 const mapStateToProps = state => ({
     workouts: getWorkouts(state),
-    weekForm: {
-        view: getViewWorkoutsForm(state),
-        edit: getEditWorkoutsForm(state)
-    },
+    weekForm: getWorkoutsForm(state),
     transition: getTransitionState(state)
 });
 
