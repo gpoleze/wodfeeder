@@ -26,6 +26,7 @@ const weekFormReducer = (state = {}, action) => {
     if (action.type === WORKOUTS_FORM_EDIT) {
         const {fieldName, fieldValue} = action.payload;
         const newState = {...state};
+        newState[fieldName].fieldName = fieldName;
         newState[fieldName].fieldValue = Number(fieldValue);
         return newState;
     }

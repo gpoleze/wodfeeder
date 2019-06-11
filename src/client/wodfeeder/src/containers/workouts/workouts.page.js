@@ -12,9 +12,10 @@ export default class Workouts extends Component {
     render() {
         return (
             <div>
-                <WeekSelectionForm {...this.props.weekForm}
-                                   changeHandler={this.props.addFormChange}
-                                   submitHandler={this.props.listWeeksWorkouts}
+                <WeekSelectionForm
+                    {...this.props.weekForm}
+                    changeHandler={this.props.addFormChange}
+                    submitHandler={this.props.listWeeksWorkouts}
                 />
                 <WorkoutTable {...this.props}/>
             </div>

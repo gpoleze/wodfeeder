@@ -14,7 +14,6 @@ const SelectInput = ({name, value, options, changeHandler}) => {
                 native
                 name={name}
                 id={name}
-                value={value}
                 onChange={event => changeHandler(event.target.value)}
                 aria-describedby={name}
             >

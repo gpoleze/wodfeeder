@@ -37,13 +37,13 @@ export const getWorkoutFormAttributes = () => {
         .then(response => JSON.parse(response))
         .then(weeksReturns => {
             const {weeks, years, currentWeek, currentYear} = weeksReturns;
-            const weekFormValues = {week: {}, year: {}};
+            const weekFormValues = {...initialState.workouts.weekFormValues};
 
             weekFormValues.week.fieldValue = currentWeek;
             weekFormValues.week.options = weeks.map(key => ({name: key, value: key}));
 
-            weekFormValues.year.options = years.map(key => ({name: key, value: key}));
             weekFormValues.year.fieldValue = currentYear;
+            weekFormValues.year.options = years.map(key => ({name: key, value: key}));
 
             return weekFormValues;
 

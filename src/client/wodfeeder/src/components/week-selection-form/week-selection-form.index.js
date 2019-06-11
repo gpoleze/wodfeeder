@@ -32,7 +32,7 @@ const WeekSelectionForm = ({week, year, changeHandler, submitHandler}) => {
                     changeHandler={newValue => changeHandler('year', newValue)}
                     className={classes.selectInput}
                 />
-                <Button onClick={handleSubmit} variant="contained" className={classes.button}>Change Week</Button>
+                <Button onClick={handleSubmit} variant="contained" className={classes.button}>Submit</Button>
             </form>
         </div>
 );
