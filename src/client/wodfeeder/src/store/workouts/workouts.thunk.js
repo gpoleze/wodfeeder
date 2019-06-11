@@ -1,13 +1,15 @@
-import {weeksAction, workoutFormAction, workoutFormEditAction} from './workouts.actions';
-import React from "react";
+import React from 'react'
+import {transitionAction, weeksAction, workoutFormAction, workoutFormEditAction} from './workouts.actions';
 import {Redirect} from "react-router-dom";
+import {initialState} from "./initial-state";
+
 
 const API = 'api/wod';
 
 export const listWeekWorkouts = (week, year) => {
     let url = API + '/week';
 
-    if (!!week){
+    if (!!week) {
         if (!!year)
             url = `${url}/${week}/year/${year}`;
         else
@@ -18,31 +20,24 @@ export const listWeekWorkouts = (week, year) => {
         .then(response => response.text())
         .then(response => JSON.parse(response))
         .then(workouts => {
+            dispatch(transitionAction({checked: false}));
+            return workouts;
+        })
+        .then(workouts => new Promise((resolve, reject) => setTimeout(() => resolve(workouts), initialState.workouts.transition.timeout)))
+        .then(workouts => {
             dispatch(weeksAction(workouts));
+            dispatch(transitionAction({checked: true}));
             return workouts;
         });
 };
 
 export const getWorkoutFormAttributes = () => {
-
-    const weekFormValues = {
-        week: {
-            fieldName: 'week',
-            fieldValue: '',
-            options: []
-        },
-        year: {
-            fieldName: 'year',
-            fieldValue: '',
-            options: []
-        }
-    };
-
     return dispatch => fetch(API + '/weeks')
         .then(response => response.text())
         .then(response => JSON.parse(response))
         .then(weeksReturns => {
             const {weeks, years, currentWeek, currentYear} = weeksReturns;
+            const weekFormValues = {week: {}, year: {}};
 
             weekFormValues.week.fieldValue = currentWeek;
             weekFormValues.week.options = weeks.map(key => ({name: key, value: key}));

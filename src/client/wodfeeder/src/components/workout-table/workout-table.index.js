@@ -1,13 +1,13 @@
 import React from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import './workout-table.styles.css'
-import {Slide, Paper} from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
 
-const WorkoutTable = ({workouts}) => {
+const WorkoutTable = ({workouts, transition}) => {
     return !workouts ?
         null :
         (
-            <Slide direction="left" in={true} mountOnEnter unmountOnExit >
+            <Fade direction={transition.direction} in={transition.checked} >
                 <Paper elevation={2} className={'paper'}>
                     <Table data-test="table">
                         <TableHead>
@@ -27,13 +27,14 @@ const WorkoutTable = ({workouts}) => {
                                             <TableCell align="left" data-test='exercise'>
                                                 {workout.exercises}
                                             </TableCell>
-                                        </TableRow>)
+                                        </TableRow>
+                                    )
                                 )
                             }
                         </TableBody>
                     </Table>
                 </Paper>
-            </Slide>
+            </Fade>
         );
 };
 

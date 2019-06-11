@@ -1,15 +1,23 @@
 import {connect} from "react-redux";
 import {addFormChange, getWorkoutFormAttributes, listWeekWorkouts} from '../../store/workouts/workouts.thunk';
-import {getEditWorkoutsForm, getViewWorkoutsForm, getWorkouts} from "../../store/workouts/workouts.selector";
+import {
+    getEditWorkoutsForm,
+    getTransitionState,
+    getViewWorkoutsForm,
+    getWorkouts
+} from "../../store/workouts/workouts.selector";
 import Workouts from './workouts.page';
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+    console.log(state.transition);
+    return ({
     workouts: getWorkouts(state),
     weekForm: {
         view: getViewWorkoutsForm(state),
         edit: getEditWorkoutsForm(state)
-    }
-});
+    },
+    transition: getTransitionState(state)
+})};
 
 const mapDispatchToProps = dispatch => ({
     listWeeksWorkouts: (week,year) => dispatch(listWeekWorkouts(week,year)),

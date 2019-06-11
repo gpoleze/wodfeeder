@@ -5,3 +5,4 @@ export const getViewWorkoutsForm = state => state.workouts.weekFormValues;
 
 export const getEditWorkoutsForm = state => state.workouts.weekFormValues;
 
+export const getTransitionState = state => state.workouts.transition;
