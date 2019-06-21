@@ -1,6 +1,14 @@
 import React from 'react';
-import {AppBar, IconButton, Toolbar, Typography, makeStyles} from '@material-ui/core';
+import {
+    AppBar,
+    Button,
+    IconButton,
+    makeStyles,
+    Toolbar,
+    Typography
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import {login} from "../../store/app-bar/sign-in/login.thunk";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,6 +36,7 @@ const Header = props =>{
                     <Typography variant="h6" className={classes.title} data-test="headerText">
                         Wod Feeder
                     </Typography>
+                    <Button color="inherit" onClick={login}>Login</Button>
                 </Toolbar>
             </AppBar>
         </div>

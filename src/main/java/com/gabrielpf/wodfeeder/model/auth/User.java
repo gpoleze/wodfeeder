@@ -1,5 +1,6 @@
 package com.gabrielpf.wodfeeder.model.auth;
 
+import com.gabrielpf.wodfeeder.vo.SignUpUserVO;
 import com.gabrielpf.wodfeeder.vo.UserInVO;
 import lombok.Data;
 
@@ -45,11 +46,11 @@ public class User {
 
 	private User() {}
 
-	public User(UserInVO userInVO) {
-		this.username = userInVO.getUsername();
-		this.password = userInVO.getPassword();
-		this.firstName = userInVO.getFirstName();
-		this.lastName = userInVO.getLastName();
+	public User(SignUpUserVO signUpUserVO) {
+		this.username = signUpUserVO.getUsername();
+		this.password = signUpUserVO.getPassword();
+		this.firstName = signUpUserVO.getFirstName();
+		this.lastName = signUpUserVO.getLastName();
 
 		this.expired = false;
 		this.locked = false;

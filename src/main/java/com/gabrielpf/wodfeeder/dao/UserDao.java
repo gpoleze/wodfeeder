@@ -3,10 +3,12 @@ package com.gabrielpf.wodfeeder.dao;
 import com.gabrielpf.wodfeeder.model.auth.User;
 import com.gabrielpf.wodfeeder.repo.UserRepo;
 import com.gabrielpf.wodfeeder.vo.SignUpUserVO;
+import com.gabrielpf.wodfeeder.vo.UserInVO;
 import com.gabrielpf.wodfeeder.vo.UserOutVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +47,12 @@ public class UserDao {
 		var userIn = new User(signUpUserVO);
 
 		return saveUser(userIn);
+	}
+
+	public UserOutVO findByUserInVo(UserInVO userInVO) {
+		return repo
+				.findByUsername(userInVO.getUsername())
+				.map(UserOutVO::new)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with the username " + userInVO.getUsername()));
 	}
 }

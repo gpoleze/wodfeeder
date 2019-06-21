@@ -8,18 +8,22 @@ import com.gabrielpf.wodfeeder.vo.UserOutVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+
 @RestController
-@RequestMapping(value = "/api/user", produces = "application/json")
+@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_UTF8_VALUE)
 public class AuthenticationController {
 
 	protected static final Logger log = LoggerFactory.getLogger(UserDao.class.getName());
@@ -40,9 +44,11 @@ public class AuthenticationController {
 		return dao.saveUser(signUpUserVO);
 	}
 
-	@PostMapping("/signin")
-	public UserOutVO signIn(@Valid @RequestBody UserInVO userInVO) {
+	@PostMapping(value = "/signin", consumes = APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public UserOutVO signIn(@RequestBody @Valid UserInVO userInVO) {
 		log.info("Sign In process started");
-		return new UserOutVO(1, "gabriel");
+		System.out.println(userInVO);
+		return dao.findByUserInVo(userInVO);
 	}
 }
