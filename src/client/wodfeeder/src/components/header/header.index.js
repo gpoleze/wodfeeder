@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {
     AppBar,
     Button,
@@ -8,7 +9,6 @@ import {
     Typography
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import {login} from "../../store/app-bar/sign-in/login.thunk";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,21 +22,37 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
+    link: {
+        all: 'unset',
+        cursor: 'pointer',
+    }
 }));
 
-const Header = props =>{
+const navigateToLogin = React.forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
+const navigateToHome = () => <Link to={'/'}/>;
+
+const Header = props => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="fixed">
+            <AppBar position="fixed" onClick={(e) => console.log(e)}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" className={classes.title} data-test="headerText">
-                        Wod Feeder
+                        <Link to={'/'} className={classes.link}>
+                            Wod Feeder
+                        </Link>
                     </Typography>
-                    <Button color="inherit" onClick={login}>Login</Button>
+                    <Button
+                        variant={'outlined'}
+                        color={'inherit'}
+                        size={'small'}
+                        to={'/login'}
+                        component={navigateToLogin}>
+                        Login
+                    </Button>
                 </Toolbar>
             </AppBar>
         </div>
