@@ -1,13 +1,19 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunk from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension/developmentOnly";
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 
-import workoutsReducers from "./workouts/workouts.reducer.js";
-import {initialState} from "./workouts/initial-state";
+import workoutsReducers from './workouts/workouts.reducer.js';
+import formsReducer from './forms/forms.reducer.js';
+import {workoutsInitialState} from './workouts/workouts.initial-state';
 
 const reducers = combineReducers({
-    workouts: workoutsReducers
+    workouts: workoutsReducers,
+    forms: formsReducer
 });
+
+const initialState = {
+    ...workoutsInitialState,
+};
 
 export const store = createStore(
     reducers,

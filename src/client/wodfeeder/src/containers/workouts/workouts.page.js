@@ -13,7 +13,7 @@ export default class Workouts extends Component {
         return (
             <div>
                 <WeekSelectionForm
-                    {...this.props.weekForm}
+                    {...this.props.workoutsFormValues}
                     changeHandler={this.props.addFormChange}
                     submitHandler={this.props.listWeeksWorkouts}
                 />

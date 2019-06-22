@@ -1,7 +1,8 @@
 import React from 'react'
-import {transitionAction, weeksAction, workoutFormAction, workoutFormEditAction} from './workouts.actions';
+import {transitionAction, weeksAction} from './workouts.actions';
 import {Redirect} from "react-router-dom";
-import {initialState} from "./initial-state";
+import {workoutsInitialState} from "./workouts.initial-state";
+import {formViewAction} from "../forms/forms.actions";
 
 
 const API = 'api/wod';
@@ -23,7 +24,7 @@ export const listWeekWorkouts = (week, year) => {
             dispatch(transitionAction({checked: false}));
             return workouts;
         })
-        .then(workouts => new Promise((resolve, reject) => setTimeout(() => resolve(workouts), initialState.workouts.transition.timeout)))
+        .then(workouts => new Promise((resolve, reject) => setTimeout(() => resolve(workouts), workoutsInitialState.workouts.transition.timeout)))
         .then(workouts => {
             dispatch(weeksAction(workouts));
             dispatch(transitionAction({checked: true}));
@@ -37,20 +38,20 @@ export const getWorkoutFormAttributes = () => {
         .then(response => JSON.parse(response))
         .then(weeksReturns => {
             const {weeks, years, currentWeek, currentYear} = weeksReturns;
-            const weekFormValues = {...initialState.workouts.weekFormValues};
+            const workoutsForm = {...workoutsInitialState.forms.workoutsForm};
 
-            weekFormValues.week.fieldValue = currentWeek;
-            weekFormValues.week.options = weeks.map(key => ({name: key, value: key}));
+            workoutsForm.week.fieldValue = currentWeek;
+            workoutsForm.week.options = weeks.map(key => ({name: key, value: key}));
 
-            weekFormValues.year.fieldValue = currentYear;
-            weekFormValues.year.options = years.map(key => ({name: key, value: key}));
+            workoutsForm.year.fieldValue = currentYear;
+            workoutsForm.year.options = years.map(key => ({name: key, value: key}));
 
-            return weekFormValues;
+            return workoutsForm;
 
         })
-        .then(weekFormValues => {
-            dispatch(workoutFormAction(weekFormValues));
-            return weekFormValues;
+        .then(workoutsForm => {
+            dispatch(formViewAction({workoutsForm: workoutsForm}));
+            return workoutsForm;
         });
 
 };
@@ -58,12 +59,4 @@ export const getWorkoutFormAttributes = () => {
 export const reloadWorkouts = () => {
     fetch(API + '/reload');
     return <Redirect to='/'/>;
-};
-
-export const addFormChange = (fieldName, fieldValue) => {
-    const inputChanged = {fieldName, fieldValue};
-    return dispatch => {
-        dispatch(workoutFormEditAction(inputChanged));
-        return inputChanged;
-    };
 };

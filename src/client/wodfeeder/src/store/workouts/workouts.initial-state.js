@@ -1,10 +1,12 @@
-export const initialState = {
+export const workoutsInitialState = {
     workouts: {
         transition: {
             timeout: 400,
             checked: true
         },
-        weekFormValues: {
+    },
+    forms: {
+        workoutsForm: {
             week: {
                 fieldName: 'week',
                 fieldValue: '',
