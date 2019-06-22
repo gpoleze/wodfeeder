@@ -10,7 +10,7 @@ const formsReducer = (state = {}, action) => {
         const newState = {...action.payload.state};
 
         newState[form][fieldName].fieldName = fieldName;
-        newState[form][fieldName].fieldValue = Number(fieldValue);
+        newState[form][fieldName].fieldValue = fieldValue;
         return newState;
     }
     return state;
