@@ -1,38 +1,13 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {
-    AppBar,
-    Button,
-    IconButton,
-    makeStyles,
-    Toolbar,
-    Typography
-} from '@material-ui/core';
+import {AppBar, Button, IconButton, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        paddingBottom: theme.spacing(8)
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        display: 'none'
-    },
-    title: {
-        flexGrow: 1,
-    },
-    link: {
-        all: 'unset',
-        cursor: 'pointer',
-    }
-}));
+import headerStyles from "./header.style";
 
 const navigateToLogin = React.forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
-const navigateToHome = () => <Link to={'/'}/>;
 
 const Header = props => {
-    const classes = useStyles();
+    const classes = headerStyles();
     return (
         <div className={classes.root}>
             <AppBar position="fixed" onClick={(e) => console.log(e)}>
