@@ -10,7 +10,7 @@ const Header = props => {
     const classes = headerStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" onClick={(e) => console.log(e)}>
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon/>
