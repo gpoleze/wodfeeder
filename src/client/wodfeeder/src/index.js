@@ -4,12 +4,12 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
 
 import App from './containers/App';
+import Login from "./containers/login/login.container";
 import Header from "./components/header/header.index";
 import {store} from "./store/store";
 
 import './index.css';
 import {reloadWorkouts} from "./store/workouts/workouts.thunk";
-import Login from "./containers/login/login.page";
 
 ReactDOM.render(
     <Provider store={store}>
