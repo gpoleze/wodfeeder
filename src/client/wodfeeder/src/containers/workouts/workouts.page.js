@@ -6,7 +6,7 @@ export default class Workouts extends Component {
 
     componentWillMount() {
         this.props.listWeeksWorkouts();
-        this.props.getWorkoutFormAttributes()
+        this.props.getWorkoutFormAttributes();
     }
 
     render() {
