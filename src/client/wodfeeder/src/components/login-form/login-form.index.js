@@ -3,44 +3,29 @@ import {Button, Paper} from "@material-ui/core";
 
 import TextInput from "../forms/input-text/text-input.index";
 import loginFormStyle from "./login-form.style";
+import {InputVO} from "../forms/InputVO";
 
 const LoginForm = (
     {
         username,
         password,
-        changeHandler,
-        submitHandler,
+        handleChange,
+        handleSubmit,
         submitButtonDisabled
     }) => {
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        submitHandler(username.fieldValue, password.fieldValue);
-    };
-
     const classes = loginFormStyle();
     return (
         <Paper elevation={2} className={classes.paper}>
-            <form method={'POST'} className={classes.form}>
+            <form method={'POST'} className={classes.form} onSubmit={handleSubmit}>
                 <div className={classes.inputGroup}>
-                    <TextInput
-                        id={username.id}
-                        label={username.label}
-                        value={username.fieldValue}
-                        ariaHelperText={username.ariaHelperText}
-                        name={username.name}
-                        changeHandler={(value => changeHandler('username', value))}
-                    />
+                    <TextInput inputVo={InputVO.copy(username, {
+                        changeHandler: newValue => handleChange(username, newValue)
+                    })}/>
                 </div>
                 <div className={classes.inputGroup}>
-                    <TextInput
-                        id={password.id}
-                        label={password.label}
-                        value={password.fieldValue}
-                        ariaHelperText={password.ariaHelperText}
-                        name={password.name}
-                        changeHandler={(value => changeHandler('password', value))}
-                    />
+                    <TextInput inputVo={InputVO.copy(password, {
+                        changeHandler: newValue => handleChange(password, newValue)
+                    })}/>
                 </div>
                 <Button
                     variant="contained"

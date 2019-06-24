@@ -10,7 +10,6 @@ const formsReducer = (state = initialState.forms, action) => {
     if (action.type === FORM_EDIT) {
 
         const {form, inputVo, newValue} = action.payload;
-        console.log(newValue);
 
         const newState = {...state};
         newState[form][inputVo.name] = InputVO.copy(inputVo, {value: newValue});
