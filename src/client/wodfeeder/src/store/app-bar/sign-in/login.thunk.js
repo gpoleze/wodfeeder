@@ -9,10 +9,7 @@ function validateResponse(response) {
 }
 
 export const login = (username, password) => {
-    const data = {
-        username:'gabriel.poleze@gmail.com',
-        password:'123456789'
-    };
+    const data = {username,password};
 
     fetch(API + '/signin', {
         method: 'POST',
