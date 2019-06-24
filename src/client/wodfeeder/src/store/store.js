@@ -3,17 +3,13 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 
 import workoutsReducers from './workouts/workouts.reducer.js';
-import formsReducer from './forms/forms.reducer.js';
-import {workoutsInitialState} from './workouts/workouts.initial-state';
+import forms from './forms/forms.reducer'
+import {initialState} from './initial-state';
 
 const reducers = combineReducers({
     workouts: workoutsReducers,
-    forms: formsReducer
+    forms,
 });
-
-const initialState = {
-    ...workoutsInitialState,
-};
 
 export const store = createStore(
     reducers,
