@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-@AllArgsConstructor
 public class SignUpUserVO{
 
 	@Email(message = "field.email.invalid")

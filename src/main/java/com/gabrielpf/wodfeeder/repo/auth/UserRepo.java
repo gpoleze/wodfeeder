@@ -1,4 +1,4 @@
-package com.gabrielpf.wodfeeder.repo;
+package com.gabrielpf.wodfeeder.repo.auth;
 
 import com.gabrielpf.wodfeeder.model.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +11,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
 	Optional<User> findByUsername(String username);
 
+	boolean existsByUsername(String username);
 }

@@ -1,6 +1,7 @@
 package com.gabrielpf.wodfeeder.model.auth;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "auth_user_group")
 @Data
+@NoArgsConstructor
 public class AuthUserGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +29,9 @@ public class AuthUserGroup {
 	@ManyToOne(targetEntity = AuthGroup.class)
 	@JoinColumn(name = "auth_group_id", nullable = false)
 	private AuthGroup authGroup;
+
+	public AuthUserGroup(User user, AuthGroup authGroup) {
+		this.user = user;
+		this.authGroup = authGroup;
+	}
 }

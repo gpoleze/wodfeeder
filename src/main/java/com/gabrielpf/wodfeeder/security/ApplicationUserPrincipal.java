@@ -29,6 +29,7 @@ public class ApplicationUserPrincipal implements UserDetails {
 		return authGroups
 				.stream()
 				.map(AuthGroup::getName)
+				.map(Enum::toString)
 				.map(SimpleGrantedAuthority::new)
 				.collect(toSet());
 	}

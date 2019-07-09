@@ -1,7 +1,7 @@
 package com.gabrielpf.wodfeeder.dao;
 
 import com.gabrielpf.wodfeeder.model.auth.User;
-import com.gabrielpf.wodfeeder.repo.UserRepo;
+import com.gabrielpf.wodfeeder.repo.auth.UserRepo;
 import com.gabrielpf.wodfeeder.vo.SignUpUserVO;
 import com.gabrielpf.wodfeeder.vo.UserInVO;
 import com.gabrielpf.wodfeeder.vo.UserOutVO;
@@ -29,19 +29,18 @@ public class UserDao {
 		return BCrypt.hashpw(s, salt);
 	}
 
-	private UserOutVO saveUser(User userIn) {
+	private User saveUser(User userIn) {
 		log.info("Persisting user " + userIn.getUsername());
 		userIn.setPassword(hash(userIn.getPassword()));
-		var userOut = repo.save(userIn);
-		return new UserOutVO(userOut);
+		return repo.save(userIn);
 	}
 
-	public UserOutVO saveUser(SignUpUserVO signUpUserVO) {
+	public User saveUser(SignUpUserVO signUpUserVO) {
 		Optional<User> user = repo.findByUsername(signUpUserVO.getUsername());
 
 		if (user.isPresent()) {
 			log.info("User " + signUpUserVO.getUsername() + " already present in the database. Returning it.");
-			return new UserOutVO(user.get());
+			return user.get();
 		}
 
 		var userIn = new User(signUpUserVO);
@@ -54,5 +53,9 @@ public class UserDao {
 				.findByUsername(userInVO.getUsername())
 				.map(UserOutVO::new)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with the username " + userInVO.getUsername()));
+	}
+
+	public boolean existsByUsername(String username) {
+		return repo.existsByUsername(username);
 	}
 }

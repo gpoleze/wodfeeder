@@ -1,6 +1,6 @@
 CREATE TABLE "user"
 (
-    "id"                  serial       NOT NULL PRIMARY KEY,
+    "id"                  bigserial       NOT NULL PRIMARY KEY,
     "first_name"          VARCHAR(128) NOT NULL,
     "last_name"           VARCHAR(128),
     "username"            VARCHAR(128) NOT NULL UNIQUE,

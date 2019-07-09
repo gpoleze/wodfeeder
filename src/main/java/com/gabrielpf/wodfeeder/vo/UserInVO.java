@@ -1,15 +1,14 @@
 package com.gabrielpf.wodfeeder.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
+@NoArgsConstructor
 public class UserInVO {
 
 	@Email(message = "field.email.invalid")
@@ -20,4 +19,9 @@ public class UserInVO {
 	@NotBlank(message = "field.required")
 	@Size(min = 8, max = 128, message = "field.invalid.size")
 	private String password;
+
+	public UserInVO(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 }

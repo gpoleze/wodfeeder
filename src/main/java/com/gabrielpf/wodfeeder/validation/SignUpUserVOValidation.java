@@ -20,7 +20,10 @@ public class SignUpUserVOValidation implements Validator {
 
 		var signUpUserVO = (SignUpUserVO) target;
 
-		if (!signUpUserVO.getPassword().equals(signUpUserVO.getConfirmPassword())) {
+		final var password = signUpUserVO.getPassword();
+		final var confirmPassword = signUpUserVO.getConfirmPassword();
+
+		if (!password.equals(confirmPassword)) {
 			errors.reject("password", "field.password.mismatch");
 			errors.reject("confirmPassword", "field.password.mismatch");
 		}
