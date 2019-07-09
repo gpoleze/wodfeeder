@@ -1,7 +1,6 @@
-package com.gabrielpf.wodfeeder.auth;
+package com.gabrielpf.wodfeeder.security;
 
 import com.gabrielpf.wodfeeder.model.auth.AuthGroup;
-import com.gabrielpf.wodfeeder.model.auth.AuthUserGroup;
 import com.gabrielpf.wodfeeder.model.auth.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,28 +9,31 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class WodFeederUserPrincipal implements UserDetails {
+import static java.util.stream.Collectors.toSet;
 
-	private User user;
-	private List<AuthUserGroup> authUserGroups;
+public class ApplicationUserPrincipal implements UserDetails {
 
-	public WodFeederUserPrincipal(User user, List<AuthUserGroup> authUserGroups) {
+	private final User user;
+	private final List<AuthGroup> authGroups;
+
+	public ApplicationUserPrincipal(User user, List<AuthGroup> authGroups) {
 		this.user = user;
-		this.authUserGroups = authUserGroups;
+		this.authGroups = authGroups;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (authUserGroups.isEmpty()) return Collections.emptySet();
+		if (authGroups == null) return Collections.emptySet();
 
-		return authUserGroups.stream()
-				.map(AuthUserGroup::getAuthGroup)
+		return authGroups
+				.stream()
 				.map(AuthGroup::getName)
 				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toSet());
+				.collect(toSet());
 	}
+
+	public long getId() {return user.getId();}
 
 	@Override
 	public String getPassword() {
