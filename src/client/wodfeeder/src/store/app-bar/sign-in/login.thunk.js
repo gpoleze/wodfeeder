@@ -1,4 +1,4 @@
-const API = '/api/user';
+const API = '/api/auth';
 
 function validateResponse(response) {
     if (response.ok)
