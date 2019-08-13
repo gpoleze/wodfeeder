@@ -11,19 +11,6 @@ function validateResponse(response) {
 export const login = (username, password) => {
     const data = {username,password};
 
-    fetch(API + '/signin', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-        .then(response => validateResponse(response))
-        .then(response => JSON.parse(response))
-        .then(user => console.log(user));
-
-
     return dispatch => fetch(API + '/signin', {
         method: 'POST',
         body: JSON.stringify(data),
