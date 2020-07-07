@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_USER=gabriel
+      - POSTGRES_PASSWORD=not_empty
+      - POSTGRES_DB=wodfeeder
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
