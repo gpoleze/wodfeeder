@@ -11,7 +11,7 @@ public enum WorkoutTypeEnum {
 
     WorkoutTypeEnum(String type) {this.type = type;}
 
-    public String getType() {
-        return type;
+    public WorkoutType getType() {
+        return new WorkoutType(type);
     }
 }

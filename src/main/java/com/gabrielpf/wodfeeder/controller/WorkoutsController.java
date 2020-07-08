@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;

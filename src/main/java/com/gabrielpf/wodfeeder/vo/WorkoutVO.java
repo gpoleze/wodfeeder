@@ -2,6 +2,7 @@ package com.gabrielpf.wodfeeder.vo;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +11,7 @@ import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.model.WorkoutType;
 
 public class WorkoutVO {
+    @NotNull
     private final WorkoutType type;
 
     @NotNull
@@ -95,5 +97,28 @@ public class WorkoutVO {
 
     public String getObservations() {
         return observations;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkoutVO workoutVO = (WorkoutVO) o;
+        return position == workoutVO.position &&
+                Objects.equals(type, workoutVO.type) &&
+                Objects.equals(date, workoutVO.date) &&
+                Objects.equals(exercise, workoutVO.exercise) &&
+                Objects.equals(part, workoutVO.part) &&
+                Objects.equals(name, workoutVO.name) &&
+                Objects.equals(reps, workoutVO.reps) &&
+                Objects.equals(load, workoutVO.load) &&
+                Objects.equals(distance, workoutVO.distance) &&
+                Objects.equals(duration, workoutVO.duration) &&
+                Objects.equals(observations, workoutVO.observations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, date, exercise, position, part, name, reps, load, distance, duration, observations);
     }
 }

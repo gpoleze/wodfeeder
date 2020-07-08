@@ -13,10 +13,15 @@ public class WorkoutType {
     @Id
     private String type;
 
-    public WorkoutType() {}
 
     public String getType() {
         return type;
+    }
+
+    protected WorkoutType() {}
+
+    public WorkoutType(String type) {
+        this.type = type;
     }
 
     public void setType(String type) {

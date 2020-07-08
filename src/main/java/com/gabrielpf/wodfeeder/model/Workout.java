@@ -53,102 +53,114 @@ public class Workout {
     @Column
     private String observations;
 
-    protected Workout() {}
+    public Workout() {}
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Workout setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public Workout setDate(LocalDate date) {
         this.date = date;
+        return this;
     }
 
     public WorkoutType getType() {
         return type;
     }
 
-    public void setType(WorkoutType type) {
+    public Workout setType(WorkoutType type) {
         this.type = type;
+        return this;
     }
 
     public String getExercise() {
         return exercise;
     }
 
-    public void setExercise(String exercise) {
+    public Workout setExercise(String exercise) {
         this.exercise = exercise;
+        return this;
     }
 
     public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public Workout setPosition(Integer position) {
         this.position = position;
+        return this;
     }
 
     public String getPart() {
         return part;
     }
 
-    public void setPart(String part) {
+    public Workout setPart(String part) {
         this.part = part;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Workout setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getReps() {
         return reps;
     }
 
-    public void setReps(String reps) {
+    public Workout setReps(String reps) {
         this.reps = reps;
+        return this;
     }
 
     public String getLoad() {
         return load;
     }
 
-    public void setLoad(String load) {
+    public Workout setLoad(String load) {
         this.load = load;
+        return this;
     }
 
     public Integer getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public Workout setDistance(Integer distance) {
         this.distance = distance;
+        return this;
     }
 
     public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public Workout setDuration(Integer duration) {
         this.duration = duration;
+        return this;
     }
 
     public String getObservations() {
         return observations;
     }
 
-    public void setObservations(String observations) {
+    public Workout setObservations(String observations) {
         this.observations = observations;
+        return this;
     }
 
     @Override
