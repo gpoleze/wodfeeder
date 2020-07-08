@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
@@ -19,16 +20,13 @@ public class WorkoutService {
 
     public WorkoutService(WorkoutRepo repo) {this.repo = repo;}
 
-    public List<WorkoutVO> findAllWorkouts(){
-        final var workouts = repo.findAll();
+    public List<WorkoutVO> findAllWorkouts() {
         final var workoutsVO = new ArrayList<WorkoutVO>();
-        for(Workout workout: workouts){
-            workoutsVO.add(new WorkoutVO(workout));
-        }
+        repo.findAll().forEach(workout -> workoutsVO.add(new WorkoutVO(workout)));
         return workoutsVO;
     }
 
-    public List<WorkoutVO> findAllByDate(LocalDate date){
+    public List<WorkoutVO> findAllByDate(LocalDate date) {
         return repo.findByDate(date)
                 .orElse(Collections.emptyList())
                 .stream()
