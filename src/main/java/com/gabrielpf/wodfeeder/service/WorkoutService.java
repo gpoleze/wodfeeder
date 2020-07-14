@@ -1,15 +1,14 @@
 package com.gabrielpf.wodfeeder.service;
 
+import static java.util.stream.Collectors.toUnmodifiableList;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
@@ -20,17 +19,20 @@ public class WorkoutService {
 
     public WorkoutService(WorkoutRepo repo) {this.repo = repo;}
 
-    public List<WorkoutVO> findAllWorkouts() {
-        final var workoutsVO = new ArrayList<WorkoutVO>();
-        repo.findAll().forEach(workout -> workoutsVO.add(new WorkoutVO(workout)));
-        return workoutsVO;
-    }
-
     public List<WorkoutVO> findAllByDate(LocalDate date) {
         return repo.findByDate(date)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(WorkoutVO::new)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(toUnmodifiableList());
+    }
+
+    public List<WorkoutVO> findAll(Pageable pageable) {
+        return repo
+                .findAll(pageable)
+                .getContent()
+                .parallelStream()
+                .map(WorkoutVO::new)
+                .collect(toUnmodifiableList());
     }
 }

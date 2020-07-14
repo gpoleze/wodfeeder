@@ -15,6 +15,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.gabrielpf.wodfeeder.model.Workout;
@@ -59,9 +61,9 @@ class WorkoutServiceTest {
 
     @Test
     void checkAllResultsAreReturned() {
-        when(mockRepository.findAll()).thenReturn(expectedWorkouts);
+        when(mockRepository.findAll(Pageable.unpaged())).thenReturn(new PageImpl(expectedWorkouts));
 
-        final var actual = service.findAllWorkouts();
+        final var actual = service.findAll(Pageable.unpaged());
         assertEquals(
                 "Size expected was " + expectedWorkouts.size() + " while actual was " + actual.size(),
                 expectedWorkouts.size(),
