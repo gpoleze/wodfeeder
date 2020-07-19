@@ -34,4 +34,4 @@ out/
 .vscode/
 
 ### Developing ###
-postgres-data/
+postgres-data*/

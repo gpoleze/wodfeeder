@@ -1,22 +1,16 @@
 CREATE TABLE "workout_type"
 (
-    "type" VARCHAR PRIMARY KEY
+    "type" TEXT PRIMARY KEY
 );
 
 CREATE TABLE "workout"
 (
-    "id"           SERIAL PRIMARY KEY NOT NULL,
-    "date"         date               NOT NULL,
-    "type"         varchar            NOT NULL,
-    "position"     int                NOT NULL,
-    "exercise"     text               NOT NULL,
-    "part"         varchar(1),
-    "name"         varchar(50),
-    "reps"         varchar(50),
-    "load"         varchar(10),
-    "distance"     int,
-    "duration"     int,
-    "observations" text,
+    "id"       UUID PRIMARY KEY,
+    "date"     DATE NOT NULL,
+    "type"     TEXT NOT NULL,
+    "position" INT  NOT NULL,
+    "exercise" TEXT NOT NULL,
+    "notes"    TEXT,
     CONSTRAINT "workout_type_fk" FOREIGN KEY ("type") REFERENCES workout_type (type)
 );
 

@@ -13,7 +13,6 @@ public class WorkoutType {
     @Id
     private String type;
 
-
     public String getType() {
         return type;
     }

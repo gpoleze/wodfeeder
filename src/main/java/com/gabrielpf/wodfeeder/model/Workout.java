@@ -1,23 +1,17 @@
 package com.gabrielpf.wodfeeder.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "workout")
-public class Workout {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Workout extends EntityWithUuid{
 
     @Column(nullable = false)
     private LocalDate date;
@@ -32,35 +26,14 @@ public class Workout {
     @Column(nullable = false)
     private Integer position;
 
-    @Column(length = 1)
-    private String part;
-
-    @Column(length = 50)
-    private String name;
-
-    @Column(length = 50)
-    private String reps;
-
-    @Column(length = 10)
-    private String load;
-
     @Column
-    private Integer distance;
-
-    @Column
-    private Integer duration;
-
-    @Column
-    private String observations;
+    private String notes;
 
     public Workout() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public Workout setId(Long id) {
-        this.id = id;
+    @Override
+    public Workout setId(UUID id) {
+        super.setId(id);
         return this;
     }
 
@@ -100,90 +73,12 @@ public class Workout {
         return this;
     }
 
-    public String getPart() {
-        return part;
+    public String getNotes() {
+        return notes;
     }
 
-    public Workout setPart(String part) {
-        this.part = part;
+    public Workout setNotes(String notes) {
+        this.notes = notes;
         return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Workout setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getReps() {
-        return reps;
-    }
-
-    public Workout setReps(String reps) {
-        this.reps = reps;
-        return this;
-    }
-
-    public String getLoad() {
-        return load;
-    }
-
-    public Workout setLoad(String load) {
-        this.load = load;
-        return this;
-    }
-
-    public Integer getDistance() {
-        return distance;
-    }
-
-    public Workout setDistance(Integer distance) {
-        this.distance = distance;
-        return this;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public Workout setDuration(Integer duration) {
-        this.duration = duration;
-        return this;
-    }
-
-    public String getObservations() {
-        return observations;
-    }
-
-    public Workout setObservations(String observations) {
-        this.observations = observations;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Workout workout = (Workout) o;
-        return position == workout.position &&
-                distance == workout.distance &&
-                duration == workout.duration &&
-                Objects.equals(id, workout.id) &&
-                Objects.equals(date, workout.date) &&
-                type == workout.type &&
-                Objects.equals(exercise, workout.exercise) &&
-                Objects.equals(part, workout.part) &&
-                Objects.equals(name, workout.name) &&
-                Objects.equals(reps, workout.reps) &&
-                Objects.equals(load, workout.load) &&
-                Objects.equals(observations, workout.observations);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, type, exercise, position, part, name, reps, load, distance, duration, observations);
     }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -35,19 +36,19 @@ class WorkoutServiceTest {
     @BeforeAll
     static void init() {
         expectedWorkouts.add(new Workout()
-                .setId(1L)
+                .setId(UUID.randomUUID())
                 .setDate(LocalDate.now())
                 .setType(WorkoutTypeEnum.WARM_UP.getType())
                 .setExercise("Exercise 1")
                 .setPosition(1));
         expectedWorkouts.add(new Workout()
-                .setId(2L)
+                .setId(UUID.randomUUID())
                 .setDate(LocalDate.now().plusDays(1))
                 .setType(WorkoutTypeEnum.DEVELOPMENT.getType())
                 .setExercise("Exercise 2")
                 .setPosition(2));
         expectedWorkouts.add(new Workout()
-                .setId(3L)
+                .setId(UUID.randomUUID())
                 .setDate(LocalDate.now().plusDays(2))
                 .setType(WorkoutTypeEnum.DEVELOPMENT.getType())
                 .setExercise("Exercise 3")
