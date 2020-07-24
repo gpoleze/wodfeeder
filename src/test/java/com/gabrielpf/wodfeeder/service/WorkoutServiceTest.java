@@ -88,7 +88,7 @@ class WorkoutServiceTest {
 
         when(mockRepository.findByDate(now)).thenReturn(Optional.of(expected));
 
-        final var actual = service.findAllByDate(now);
+        final var actual = service.findByDate(now);
         assertEquals("Workouts are not the same", new WorkoutVO(expected.get(0)), actual.get(0));
     }
 
@@ -97,7 +97,7 @@ class WorkoutServiceTest {
         final var date = LocalDate.now().plusYears(1000);
         when(mockRepository.findByDate(date)).thenReturn(Optional.empty());
 
-        final var actual = service.findAllByDate(date);
+        final var actual = service.findByDate(date);
         assertTrue("List is not empty", actual.isEmpty());
     }
 }

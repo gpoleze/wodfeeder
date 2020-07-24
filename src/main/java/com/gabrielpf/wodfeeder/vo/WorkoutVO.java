@@ -3,30 +3,23 @@ package com.gabrielpf.wodfeeder.vo;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import com.gabrielpf.wodfeeder.model.Workout;
-import com.gabrielpf.wodfeeder.model.WorkoutType;
 
-public class WorkoutVO {
-    @NotNull
+public class WorkoutVO extends RepresentationModel<WorkoutVO> {
     private final String type;
 
-    @NotNull
+    private final UUID id;
     private final LocalDate date;
-
-    @NotNull
     private final String exercise;
-
-    @NotNull
-    @Min(1)
     private final int position;
-
     private final String notes;
 
     public WorkoutVO(Workout workout) {
+        this.id = workout.getId();
         this.date = workout.getDate();
         this.type = workout.getType().getType();
         this.exercise = workout.getExercise();
@@ -52,6 +45,10 @@ public class WorkoutVO {
 
     public String getNotes() {
         return notes;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     @Override
