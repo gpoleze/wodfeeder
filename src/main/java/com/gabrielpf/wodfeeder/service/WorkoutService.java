@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Service;
 
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
