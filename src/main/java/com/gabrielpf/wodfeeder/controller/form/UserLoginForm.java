@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public class UserLoginForm {
     @NotEmpty
@@ -27,5 +28,9 @@ public class UserLoginForm {
 
     public String getPassword() {
         return password;
+    }
+
+    public UsernamePasswordAuthenticationToken getAuthenticationToken() {
+        return new UsernamePasswordAuthenticationToken(username, password);
     }
 }
