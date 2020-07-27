@@ -39,7 +39,7 @@ public class WorkoutVO extends RepresentationModel<WorkoutVO> {
         return exercise;
     }
 
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 

@@ -24,12 +24,20 @@ public class Workout extends EntityWithUuid{
     private String exercise;
 
     @Column(nullable = false)
-    private Integer position;
+    private int position;
 
     @Column
     private String notes;
 
     public Workout() {}
+
+    public Workout(LocalDate date, int position, WorkoutType workoutType, String exercise, String notes) {
+        this.date = date;
+        this.position = position;
+        this.type = workoutType;
+        this.exercise = exercise;
+        this.notes = notes;
+    }
 
     @Override
     public Workout setId(UUID id) {
@@ -64,11 +72,11 @@ public class Workout extends EntityWithUuid{
         return this;
     }
 
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public Workout setPosition(Integer position) {
+    public Workout setPosition(int position) {
         this.position = position;
         return this;
     }

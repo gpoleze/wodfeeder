@@ -11,18 +11,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.gabrielpf.wodfeeder.controller.form.WorkoutForm;
+import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
+import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepository;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
 @Service
 public class WorkoutService {
 
-    private final WorkoutRepo repo;
+    private final WorkoutRepo workoutRepo;
+    private final WorkoutTypeRepository workoutTypeRepo;
 
-    public WorkoutService(WorkoutRepo repo) {this.repo = repo;}
+    public WorkoutService(WorkoutRepo workoutRepo, WorkoutTypeRepository workoutTypeRepo) {
+        this.workoutRepo = workoutRepo;
+        this.workoutTypeRepo = workoutTypeRepo;
+    }
 
     public List<WorkoutVO> findByDate(LocalDate date) {
-        return repo.findByDate(date)
+        return workoutRepo.findByDate(date)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(WorkoutVO::new)
@@ -30,7 +37,7 @@ public class WorkoutService {
     }
 
     public List<WorkoutVO> findAll(Pageable pageable) {
-        return repo
+        return workoutRepo
                 .findAll(pageable)
                 .getContent()
                 .parallelStream()
@@ -39,9 +46,19 @@ public class WorkoutService {
     }
 
     public WorkoutVO findById(UUID id) {
-        return repo
+        return workoutRepo
                 .findById(id)
                 .map(WorkoutVO::new)
                 .orElseThrow(ResourceNotFoundException::new);
+    }
+
+    public WorkoutVO save(WorkoutForm form) {
+        final var workoutType = workoutTypeRepo
+                .findById(form.getType())
+                .orElseThrow(() -> new RuntimeException("Workout Type not present in the Database"));
+
+        Workout workout = form.convert(workoutType);
+        workoutRepo.save(workout);
+        return new WorkoutVO(workout);
     }
 }

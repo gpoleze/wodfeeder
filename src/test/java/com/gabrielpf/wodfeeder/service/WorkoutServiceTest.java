@@ -23,6 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.model.WorkoutTypeEnum;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
+import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepository;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
 @SpringJUnitConfig
@@ -30,6 +31,10 @@ class WorkoutServiceTest {
 
     @MockBean
     private WorkoutRepo mockRepository;
+
+    @MockBean
+    private WorkoutTypeRepository mockWorkoutTypeRepo;
+
     private WorkoutService service;
     private static final List<Workout> expectedWorkouts = new ArrayList<>();
 
@@ -57,7 +62,7 @@ class WorkoutServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new WorkoutService(mockRepository);
+        service = new WorkoutService(mockRepository, mockWorkoutTypeRepo);
     }
 
     @Test
@@ -70,10 +75,14 @@ class WorkoutServiceTest {
                 expectedWorkouts.size(),
                 actual.size()
         );
-        expectedWorkouts.parallelStream().forEach(expected -> {
-            final var workoutVO = actual.stream().filter(vo -> vo.getPosition() == expected.getPosition()).findFirst().orElseThrow(NoSuchElementException::new);
+        expectedWorkouts.forEach(expected -> {
+            final var workoutVO = actual
+                    .stream()
+                    .filter(vo -> vo.getPosition() == expected.getPosition())
+                    .findFirst()
+                    .orElseThrow(NoSuchElementException::new);
             assertTrue("Dates are not the same", expected.getDate().equals(workoutVO.getDate()));
-            assertTrue("Types are not the same", expected.getType().equals(workoutVO.getType()));
+            assertTrue("Types are not the same", expected.getType().getType().equals(workoutVO.getType()));
             assertTrue("Exercise are not the same", expected.getExercise().equals(workoutVO.getExercise()));
         });
     }

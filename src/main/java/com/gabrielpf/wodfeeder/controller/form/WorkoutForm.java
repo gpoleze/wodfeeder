@@ -4,25 +4,26 @@ import java.time.LocalDate;
 import java.util.StringJoiner;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
+import com.gabrielpf.wodfeeder.model.Workout;
+import com.gabrielpf.wodfeeder.model.WorkoutType;
 
 public class WorkoutForm {
 
-    @NotEmpty
+    @NotNull
     private LocalDate date;
 
-    @NotEmpty
+    @NotNull
     @Min(1)
     private int position;
 
-    @NotEmpty
-    @Length(min = 1)
+    @NotBlank
     private String type;
 
-    @NotEmpty
-    @Length(min = 1)
+    @NotBlank
     private String exercise;
 
     private String notes;
@@ -66,5 +67,9 @@ public class WorkoutForm {
                 .add("exercise='" + exercise + "'")
                 .add("notes='" + notes + "'")
                 .toString();
+    }
+
+    public Workout convert(WorkoutType workoutType) {
+        return new Workout(date, position, workoutType, exercise, notes);
     }
 }
