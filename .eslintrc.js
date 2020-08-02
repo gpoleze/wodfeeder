@@ -34,16 +34,12 @@ module.exports = {
     "rules": {
         // Default ESLint Rules
         "complexity": ["error", 10],
-        "indent": ["warn", 4, {
-            "SwitchCase": 1
-        }
-        ],
+        "indent": ["warn", 4, { "SwitchCase": 1 }],
         "max-lines-per-function": ["error", {
             "max": 50,
             "skipBlankLines": true,
             "skipComments": true
-        }
-        ],
+        }],
         "max-nested-callbacks": ["error", 5],
 
         // Plugins - @typescript-eslint
@@ -57,7 +53,7 @@ module.exports = {
         "import/named": "error",
         "import/namespace": "error",
         "import/default": "error",
-        "import/export": "error",
+        "import/export": "off",
         "import/prefer-default-export": "warn",
         "import/order": ["error", {
             "groups": ["builtin", "external", "internal"],

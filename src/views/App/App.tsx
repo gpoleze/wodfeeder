@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Table from "@material-ui/core/Table";
+import Box from "@material-ui/core/Box";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Title from "components/Title";
+import ApplicationBar from "components/ApplicationBar";
+import ApplicationDrawer from "components/ApplicationDrawer";
+import Copyright from "components/Copyright";
+import Workouts from "views/Workouts";
 
-const App: React.FC = () => (
-    <div className="App">
-        <Title>WoodFeeder</Title>
-        <Table />
-        <header className="App-header">
-            <p>
-                Edit
-                <code>src/App.tsx</code>
-                and save to reload.
-            </p>
-            <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                Learn React
-            </a>
-        </header>
-    </div>
-);
+import useStyles from "./App.styles";
+
+const App: React.FC = () => {
+    const [open, setOpen] = useState(false);
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <ApplicationBar open={open} handleDrawer={(): void => setOpen(!open)} />
+            <ApplicationDrawer open={open} handleDrawer={(): void => setOpen(!open)} />
+            <main className={classes.content}>
+                <div className={classes.appBarSpacer}>
+                    <Workouts />
+                </div>
+            </main>
+            <footer className={classes.footer}>
+                <Box pt={4}>
+                    <Copyright />
+                </Box>
+            </footer>
+        </div>
+    );
+};
 
 export default App;
