@@ -1,4 +1,14 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import blueGrey from "@material-ui/core/colors/blueGrey";
+
+export const createTheme = (darkMode: boolean) =>
+    createMuiTheme({
+        palette: {
+            type: darkMode ? "dark" : "light",
+            primary: blueGrey,
+        },
+    });
 
 export default makeStyles((theme) => ({
     root: { display: "flex" },
