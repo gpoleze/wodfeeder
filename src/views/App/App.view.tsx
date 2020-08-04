@@ -11,6 +11,7 @@ import Copyright from "components/Copyright";
 import Workouts from "views/Workouts";
 
 import useStyles, { createTheme } from "./App.styles";
+import Hidden from "@material-ui/core/Hidden";
 
 export interface IAppProps {
     darkTheme?: boolean;
@@ -44,7 +45,7 @@ const App: React.FC<IAppProps> = ({
                     darkTheme={darkTheme}
                     handleTheme={toggleTheme}
                 />
-                <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} />
+                {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer}>
                         <Workouts />

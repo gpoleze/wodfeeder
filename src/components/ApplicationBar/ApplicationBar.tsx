@@ -30,7 +30,7 @@ const ApplicationBar: React.FC<IApplicationBarProps> = ({
     return (
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
             <Toolbar className={classes.toolbar}>
-                <IconButton
+                {/* <IconButton
                     edge="start"
                     color="inherit"
                     aria-label="open drawer"
@@ -38,16 +38,16 @@ const ApplicationBar: React.FC<IApplicationBarProps> = ({
                     className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                 >
                     <MenuIcon />
-                </IconButton>
+                </IconButton> TODO - Uncoment when you want to add more items to the menu */}
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     WodFeeder
                 </Typography>
                 <IconButton color="inherit" onClick={handleTheme}>
                     {darkTheme ? <LightThemeIcon /> : <DarkThemeIcon />}
                 </IconButton>
-                <IconButton color="inherit" onClick={(): void => console.log("Will execute the login in the future")}>
+                {/* <IconButton color="inherit" onClick={(): void => console.log("Will execute the login in the future")}>
                     <AccountCircle />
-                </IconButton>
+                </IconButton> TODO Uncomment when adding the login process */}
             </Toolbar>
         </AppBar>
     );
