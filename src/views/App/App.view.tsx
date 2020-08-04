@@ -8,10 +8,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
 import Copyright from "components/Copyright";
+import MainRouting from "components/MainRouting";
 import Workouts from "views/Workouts";
 
 import useStyles, { createTheme } from "./App.styles";
-import Hidden from "@material-ui/core/Hidden";
 
 export interface IAppProps {
     darkTheme?: boolean;
@@ -48,7 +48,7 @@ const App: React.FC<IAppProps> = ({
                 {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer}>
-                        <Workouts />
+                        <MainRouting />
                     </div>
                 </main>
                 <footer className={classes.footer}>
