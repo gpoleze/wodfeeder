@@ -7,7 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx ./src "
+    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx ./src ",
+    "api": "rm -rf gen/api && ./node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i http://localhost:8080/v3/api-docs --generator-name typescript-axios -o src/apiSpecs"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +38,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "axios": "^0.19.2",
     "clsx": "^1.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -49,6 +51,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^1.0.15-4.3.1",
     "@typescript-eslint/eslint-plugin": "^3.7.1",
     "@typescript-eslint/parser": "^3.7.1",
     "eslint": "^6.6.0",
