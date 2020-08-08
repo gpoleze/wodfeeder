@@ -1,2 +1,2 @@
-export * from "./Workouts.view";
-export { default } from "./Workouts.view";
+export * from "./Workouts.container";
+export { default } from "./Workouts.container";
