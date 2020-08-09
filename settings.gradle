@@ -1,0 +1,3 @@
+rootProject.name = 'wodfeeder'
+include 'web-server'
+include 'web-client'

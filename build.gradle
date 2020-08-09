@@ -1,0 +1,22 @@
+project("web-server") {
+    configurations {
+        openApiDocs
+    }
+
+    task apiDocs(type: Zip) {
+        dependsOn "generateOpenApiDocs"
+    }
+
+    artifacts {
+        openApiDocs apiDocs
+    }
+}
+project("web-client") {
+    apply plugin: "java"
+
+    dependencies {
+        implementation project(path: ":web-server", configuration: "openApiDocs")
+    }
+
+    task listDeps { doLast { println configurations.runtime.files } }
+}

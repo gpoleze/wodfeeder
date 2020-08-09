@@ -1,0 +1,49 @@
+class Npm extends Exec {
+
+    String group = 'Npm'
+    private List<String> newCommandLine = ["npm"]
+    private String runScript = ""
+
+    @Option(option = "run-script", description = "Configures the NPM scrip to be run.")
+    public void setRunScript(String script) {
+        this.runScript = script;
+    }
+
+    @Input
+    public String getRunScript() {
+        return runScript;
+    }
+
+    @Override
+    protected void exec() {
+        if (runScript != null && !runScript.isBlank()) {
+            newCommandLine.add "run-script"
+            newCommandLine.add runScript
+        }
+
+        newCommandLine.addAll commandLine
+        newCommandLine.removeAll([null])
+        commandLine = newCommandLine
+        println commandLine
+
+        super.exec()
+    }
+}
+
+task npmInstall(type: Npm) {
+    commandLine "install"
+}
+
+task npmBuild(type: Npm) {
+    commandLine "run-script", "build"
+}
+
+
+task npmTest(type: Npm) {
+    commandLine "run-script", "test"
+}
+
+task npm(type: Npm)
+
+build.dependsOn "npmBuild"
+test.dependsOn "npmTest"

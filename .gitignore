@@ -35,3 +35,6 @@ out/
 
 ### Developing ###
 postgres-data*/
+
+# Ignore Gradle build output directory
+build
