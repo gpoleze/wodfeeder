@@ -1,10 +1,18 @@
 package com.gabrielpf.wodfeeder.model.auth;
 
+import java.security.Provider;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+
 import com.gabrielpf.wodfeeder.model.EntityWithUuid;
+import com.gabrielpf.wodfeeder.security.oauth2.user.OAuth2UserInfo;
 
 @Entity
 @Table(name = "user")
@@ -34,7 +42,18 @@ public class User extends EntityWithUuid {
     @Column
     private boolean enabled = true;
 
-    protected User() {}
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+    protected User(){}
+
+    public User(OAuth2UserInfo oAuth2UserInfo, OAuth2UserRequest userRequest) {
+        this.firstName = oAuth2UserInfo.getFirstName();
+        this.lastName = oAuth2UserInfo.getLastName();
+        this.username = oAuth2UserInfo.getEmail();
+        this.provider = AuthProvider.valueOf(userRequest.getClientRegistration().getRegistrationId());
+    }
 
     public String getFirstName() {
         return firstName;
@@ -98,5 +117,13 @@ public class User extends EntityWithUuid {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public AuthProvider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
     }
 }

@@ -11,6 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 
 import useStyles from "./ApplicationBar.styles";
+import GoogleLoginButton from "components/GoogleLoginButton/GoogleLoginButton";
 
 export interface IApplicationBarProps {
     open?: boolean;
@@ -48,6 +49,7 @@ const ApplicationBar: React.FC<IApplicationBarProps> = ({
                 {/* <IconButton color="inherit" onClick={(): void => console.log("Will execute the login in the future")}>
                     <AccountCircle />
                 </IconButton> TODO Uncomment when adding the login process */}
+                <GoogleLoginButton />
             </Toolbar>
         </AppBar>
     );

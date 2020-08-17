@@ -18,7 +18,7 @@ const Workouts: React.FC<IWorkoutsProps> = ({ workouts, loadWorkouts }) => {
 
     useEffect(() => {
         loadWorkouts();
-    }, []);
+    }, [loadWorkouts]);
 
     return (
         <Container maxWidth="lg" className={classes.container}>

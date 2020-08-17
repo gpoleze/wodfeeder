@@ -17,6 +17,10 @@ public class AuthGroup extends EntityWithUuid implements GrantedAuthority {
 
     protected AuthGroup() {}
 
+    public AuthGroup(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

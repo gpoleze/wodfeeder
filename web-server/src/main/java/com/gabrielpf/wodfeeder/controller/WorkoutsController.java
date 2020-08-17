@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class WorkoutsController {
     }
 
     @PostMapping
+    @RolesAllowed("admin")
     public ResponseEntity<WorkoutVO> save(@Valid @RequestBody WorkoutForm form, UriComponentsBuilder uriBuilder) {
         final WorkoutVO vo = workoutService.save(form);
         final var uri = uriBuilder.path("/api/workouts/{id}").buildAndExpand(vo.getId()).toUri();
