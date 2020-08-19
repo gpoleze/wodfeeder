@@ -10,6 +10,10 @@ import * as serviceWorker from "./serviceWorker";
 
 const store = getConfiguredStore();
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+window.VERSION = process.env.REACT_APP_VERSION;
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
