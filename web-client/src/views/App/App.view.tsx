@@ -12,19 +12,24 @@ import MainRouting from "components/MainRouting";
 import Workouts from "views/Workouts";
 
 import useStyles, { createTheme } from "./App.styles";
+import { BrowserRouter as Router } from "react-router-dom";
 
 export interface IAppProps {
     darkTheme?: boolean;
     slideOpen?: boolean;
+    isLoggedIn?: boolean;
     toggleTheme?: () => void;
     toggleSlide?: () => void;
+    toggleLogin?: () => void;
 }
 
 const App: React.FC<IAppProps> = ({
     darkTheme = false,
     slideOpen = false,
+    isLoggedIn = false,
     toggleTheme = (): void => {},
     toggleSlide = (): void => {},
+    toggleLogin = (): void => {},
 }) => {
     const classes = useStyles();
     const theme = useMemo(() => createTheme(darkTheme), [darkTheme]);
@@ -39,23 +44,27 @@ const App: React.FC<IAppProps> = ({
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
-                <ApplicationBar
-                    open={slideOpen}
-                    handleDrawer={toggleSlide}
-                    darkTheme={darkTheme}
-                    handleTheme={toggleTheme}
-                />
-                {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer}>
-                        <MainRouting />
-                    </div>
-                </main>
-                <footer className={classes.footer}>
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
-                </footer>
+                <Router>
+                    <ApplicationBar
+                        open={slideOpen}
+                        handleDrawer={toggleSlide}
+                        darkTheme={darkTheme}
+                        handleTheme={toggleTheme}
+                        isLoggedIn={isLoggedIn}
+                        handleLogin={toggleLogin}
+                    />
+                    {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
+                    <main className={classes.content}>
+                        <div className={classes.appBarSpacer}>
+                            <MainRouting />
+                        </div>
+                    </main>
+                    <footer className={classes.footer}>
+                        <Box pt={4}>
+                            <Copyright />
+                        </Box>
+                    </footer>
+                </Router>
             </div>
         </ThemeProvider>
     );
