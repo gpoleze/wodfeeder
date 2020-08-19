@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
+import { WorkoutVO } from "apiSpecs";
 import DisplayBox from "components/DisplayBox";
 
 import useStyles from "./Workouts.styles";
-import { WorkoutVO } from "apiSpecs";
 
 export interface IWorkoutsProps {
     workouts: WorkoutVO[];
@@ -18,7 +18,7 @@ const Workouts: React.FC<IWorkoutsProps> = ({ workouts, loadWorkouts }) => {
 
     useEffect(() => {
         loadWorkouts();
-    }, []);
+    }, [loadWorkouts]);
 
     return (
         <Container maxWidth="lg" className={classes.container}>

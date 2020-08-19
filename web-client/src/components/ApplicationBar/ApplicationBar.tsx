@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import DarkThemeIcon from "@material-ui/icons/Brightness4";
 import LightThemeIcon from "@material-ui/icons/Brightness7";
+import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 
 import useStyles from "./ApplicationBar.styles";
@@ -34,15 +35,19 @@ const ApplicationBar: React.FC<IApplicationBarProps> = ({
     return (
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
             <Toolbar className={classes.toolbar}>
-                {/* <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawer}
-                    className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                >
-                    <MenuIcon />
-                </IconButton> TODO - Uncoment when you want to add more items to the menu */}
+                {isLoggedIn ? (
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawer}
+                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                ) : (
+                    ""
+                )}
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     <Link to="/" className={classes.link}>
                         WodFeeder

@@ -1,9 +1,9 @@
 import React from "react";
 
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import Workouts from "views/Workouts";
 import Login from "views/Login";
+import Workouts from "views/Workouts";
 
 const MainRouting: React.FC = () => (
     <Switch>

@@ -4,15 +4,14 @@ import { useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
 import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
-import Workouts from "views/Workouts";
 
 import useStyles, { createTheme } from "./App.styles";
-import { BrowserRouter as Router } from "react-router-dom";
 
 export interface IAppProps {
     darkTheme?: boolean;
@@ -53,7 +52,7 @@ const App: React.FC<IAppProps> = ({
                         isLoggedIn={isLoggedIn}
                         handleLogin={toggleLogin}
                     />
-                    {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
+                    {isLoggedIn ? <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> : ""}
                     <main className={classes.content}>
                         <div className={classes.appBarSpacer}>
                             <MainRouting />

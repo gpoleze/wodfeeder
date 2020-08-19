@@ -7,13 +7,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 import { drawerWidth } from "components/contants";
 
@@ -57,37 +56,25 @@ const useStyles = makeStyles((theme) => ({
 
 const mainListItems = (
     <div>
-        <ListItem button>
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Orders" />
-        </ListItem>
+        <Link to="/workouts" style={{ textDecoration: "none", color: "inherit" }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Workouts" />
+            </ListItem>
+        </Link>
+        <Link to="/workout/new" style={{ textDecoration: "none", color: "inherit" }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="New Workout" />
+            </ListItem>
+        </Link>
     </div>
 );
-const secondaryListItems = (
-    <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Current month" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Last quarter" />
-        </ListItem>
-    </div>
-);
+const secondaryListItems = "";
 
 const ApplicationDrawer: React.FC<IApplicationDrawerProps> = ({ open = false, handleDrawer }) => {
     const classes = useStyles();
