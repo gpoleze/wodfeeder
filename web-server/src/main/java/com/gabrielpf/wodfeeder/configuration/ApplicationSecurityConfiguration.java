@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.gabrielpf.wodfeeder.configuration.security.TokenAuthenticationFilter;
 import com.gabrielpf.wodfeeder.configuration.security.TokenAuthenticationService;
@@ -21,6 +23,8 @@ import com.gabrielpf.wodfeeder.security.AuthenticationService;
 @EnableWebSecurity
 @Configuration
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private static final long MAX_AGE_SECS = 3600;
 
     @Autowired
     private AuthenticationService authenticationService;
@@ -41,7 +45,20 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**");
+        web.ignoring().antMatchers("/v3/api-docs*","/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**");
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+                        .maxAge(MAX_AGE_SECS);;
+            }
+        };
     }
 
     @Override
@@ -50,6 +67,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 .anyRequest().authenticated()
+                .and().cors()
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
