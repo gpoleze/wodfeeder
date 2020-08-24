@@ -33,16 +33,11 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> login(@Valid @RequestBody UserLoginForm form) {
-        try {
-            final var authenticationToken = form.getAuthenticationToken();
-            final var authentication = authManager.authenticate(authenticationToken);
-            final var token = tokenService.generateToken(authentication);
-            return ResponseEntity.ok(new TokenVO(token, AuthenticationTokenType.BEARER));
-        } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().body("Username or password is invalid");
-            // TODO - throw as error to have the same scheme as the invalid form
-        }
+    public ResponseEntity<TokenVO> login(@Valid @RequestBody UserLoginForm form) {
+        final var authenticationToken = form.getAuthenticationToken();
+        final var authentication = authManager.authenticate(authenticationToken);
+        final var token = tokenService.generateToken(authentication);
+        return ResponseEntity.ok(new TokenVO(token, AuthenticationTokenType.BEARER));
     }
 
     @PostMapping(value = "/signUp", consumes = MediaType.APPLICATION_JSON_VALUE)
