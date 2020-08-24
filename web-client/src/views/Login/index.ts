@@ -1,2 +1,2 @@
-export * from "./Login.view";
-export { default } from "./Login.view";
+export * from "./Login.container";
+export { default } from "./Login.container";

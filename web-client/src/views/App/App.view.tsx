@@ -13,23 +13,20 @@ import MainRouting from "components/MainRouting";
 
 import useStyles, { createTheme } from "./App.styles";
 
-export interface IAppProps {
-    darkTheme?: boolean;
-    slideOpen?: boolean;
-    isLoggedIn?: boolean;
-    toggleTheme?: () => void;
-    toggleSlide?: () => void;
-    toggleLogin?: () => void;
+export interface IAppStateProps {
+    darkTheme: boolean;
+    slideOpen: boolean;
+    isLoggedIn: boolean;
 }
 
-const App: React.FC<IAppProps> = ({
-    darkTheme = false,
-    slideOpen = false,
-    isLoggedIn = false,
-    toggleTheme = (): void => {},
-    toggleSlide = (): void => {},
-    toggleLogin = (): void => {},
-}) => {
+export interface IAppDispatchProps {
+    toggleTheme: () => void;
+    toggleSlide: () => void;
+}
+
+export interface IAppProps extends IAppStateProps, IAppDispatchProps {}
+
+const App: React.FC<IAppProps> = ({ darkTheme, slideOpen, isLoggedIn, toggleTheme, toggleSlide }) => {
     const classes = useStyles();
     const theme = useMemo(() => createTheme(darkTheme), [darkTheme]);
 
@@ -50,7 +47,6 @@ const App: React.FC<IAppProps> = ({
                         darkTheme={darkTheme}
                         handleTheme={toggleTheme}
                         isLoggedIn={isLoggedIn}
-                        handleLogin={toggleLogin}
                     />
                     {isLoggedIn ? <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> : ""}
                     <main className={classes.content}>

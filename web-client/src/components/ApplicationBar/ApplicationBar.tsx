@@ -8,10 +8,11 @@ import DarkThemeIcon from "@material-ui/icons/Brightness4";
 import LightThemeIcon from "@material-ui/icons/Brightness7";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
+
+import LoginButton from "components/LoginButton/LoginButton";
 
 import useStyles from "./ApplicationBar.styles";
-import LoginButton from "components/LoginButton/LoginButton";
-import { Link } from "react-router-dom";
 
 export interface IApplicationBarProps {
     open?: boolean;
@@ -19,7 +20,6 @@ export interface IApplicationBarProps {
     isLoggedIn?: boolean;
     handleDrawer: () => void;
     handleTheme: () => void;
-    handleLogin: () => void;
 }
 
 const ApplicationBar: React.FC<IApplicationBarProps> = ({
@@ -28,7 +28,6 @@ const ApplicationBar: React.FC<IApplicationBarProps> = ({
     isLoggedIn = false,
     handleDrawer,
     handleTheme,
-    handleLogin,
 }) => {
     const classes = useStyles();
 

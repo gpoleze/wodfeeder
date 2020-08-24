@@ -22,15 +22,33 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface GrantedAuthority
+ * @interface CreateUserForm
  */
-export interface GrantedAuthority {
+export interface CreateUserForm {
     /**
      * 
      * @type {string}
-     * @memberof GrantedAuthority
+     * @memberof CreateUserForm
      */
-    authority?: string;
+    firstName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserForm
+     */
+    lastName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserForm
+     */
+    username: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserForm
+     */
+    password: string;
 }
 /**
  * 
@@ -172,13 +190,13 @@ export interface TokenVO {
      * @type {string}
      * @memberof TokenVO
      */
-    token?: string;
+    token: string;
     /**
      * 
      * @type {string}
      * @memberof TokenVO
      */
-    type?: string;
+    type: string;
 }
 /**
  * 
@@ -198,55 +216,6 @@ export interface UserLoginForm {
      * @memberof UserLoginForm
      */
     password: string;
-    /**
-     * 
-     * @type {UsernamePasswordAuthenticationToken}
-     * @memberof UserLoginForm
-     */
-    authenticationToken?: UsernamePasswordAuthenticationToken;
-}
-/**
- * 
- * @export
- * @interface UsernamePasswordAuthenticationToken
- */
-export interface UsernamePasswordAuthenticationToken {
-    /**
-     * 
-     * @type {Array<GrantedAuthority>}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    authorities?: Array<GrantedAuthority>;
-    /**
-     * 
-     * @type {object}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    details?: object;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    authenticated?: boolean;
-    /**
-     * 
-     * @type {object}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    principal?: object;
-    /**
-     * 
-     * @type {object}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    credentials?: object;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsernamePasswordAuthenticationToken
-     */
-    name?: string;
 }
 /**
  * 
@@ -379,6 +348,44 @@ export const AuthControllerApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUp: async (createUserForm: CreateUserForm, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createUserForm' is not null or undefined
+            if (createUserForm === null || createUserForm === undefined) {
+                throw new RequiredError('createUserForm','Required parameter createUserForm was null or undefined when calling signUp.');
+            }
+            const localVarPath = `/api/auth/signUp`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof createUserForm !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(createUserForm !== undefined ? createUserForm : {}) : (createUserForm || "");
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -396,6 +403,19 @@ export const AuthControllerApiFp = function(configuration?: Configuration) {
          */
         async login(userLoginForm: UserLoginForm, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenVO>> {
             const localVarAxiosArgs = await AuthControllerApiAxiosParamCreator(configuration).login(userLoginForm, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async signUp(createUserForm: CreateUserForm, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await AuthControllerApiAxiosParamCreator(configuration).signUp(createUserForm, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -419,6 +439,15 @@ export const AuthControllerApiFactory = function (configuration?: Configuration,
         login(userLoginForm: UserLoginForm, options?: any): AxiosPromise<TokenVO> {
             return AuthControllerApiFp(configuration).login(userLoginForm, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUp(createUserForm: CreateUserForm, options?: any): AxiosPromise<object> {
+            return AuthControllerApiFp(configuration).signUp(createUserForm, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -438,6 +467,125 @@ export class AuthControllerApi extends BaseAPI {
      */
     public login(userLoginForm: UserLoginForm, options?: any) {
         return AuthControllerApiFp(this.configuration).login(userLoginForm, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateUserForm} createUserForm 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApi
+     */
+    public signUp(createUserForm: CreateUserForm, options?: any) {
+        return AuthControllerApiFp(this.configuration).signUp(createUserForm, options).then((request) => request(this.axios, this.basePath));
+    }
+
+}
+
+
+/**
+ * UserControllerApi - axios parameter creator
+ * @export
+ */
+export const UserControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createUser: async (createUserForm: CreateUserForm, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createUserForm' is not null or undefined
+            if (createUserForm === null || createUserForm === undefined) {
+                throw new RequiredError('createUserForm','Required parameter createUserForm was null or undefined when calling createUser.');
+            }
+            const localVarPath = `/api/users`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof createUserForm !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(createUserForm !== undefined ? createUserForm : {}) : (createUserForm || "");
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserControllerApi - functional programming interface
+ * @export
+ */
+export const UserControllerApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createUser(createUserForm: CreateUserForm, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await UserControllerApiAxiosParamCreator(configuration).createUser(createUserForm, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+    }
+};
+
+/**
+ * UserControllerApi - factory interface
+ * @export
+ */
+export const UserControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    return {
+        /**
+         * 
+         * @param {CreateUserForm} createUserForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createUser(createUserForm: CreateUserForm, options?: any): AxiosPromise<object> {
+            return UserControllerApiFp(configuration).createUser(createUserForm, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UserControllerApi - object-oriented interface
+ * @export
+ * @class UserControllerApi
+ * @extends {BaseAPI}
+ */
+export class UserControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateUserForm} createUserForm 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserControllerApi
+     */
+    public createUser(createUserForm: CreateUserForm, options?: any) {
+        return UserControllerApiFp(this.configuration).createUser(createUserForm, options).then((request) => request(this.axios, this.basePath));
     }
 
 }

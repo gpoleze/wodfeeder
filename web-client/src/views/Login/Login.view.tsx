@@ -1,50 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
+import { Redirect } from "react-router";
 
 import GoogleLoginButton from "components/GoogleLoginButton/GoogleLoginButton";
+import useInputDebounce from "utils/hook/useInputDebounce";
 
 import useStyles from "./Login.styles";
 
-export interface ILoginProps {
+export interface ILoginStateProps {
     isLoggedIn: boolean;
-    redirect_uri: string;
+    redirect_uri?: string;
     error?: {
         username: boolean;
     };
-    handleSubmit: () => void;
 }
+
+export interface ILoginDispatchProps {
+    handleSubmit: (username: string, password: string) => void;
+}
+
+export interface ILoginProps extends ILoginStateProps, ILoginDispatchProps {}
 
 const Login: React.FC<ILoginProps> = ({
     isLoggedIn,
-    redirect_uri,
+    redirect_uri = "/",
     error = { username: false },
-    handleSubmit = () => {
-        console.log("you're logging in!!");
-    },
+    handleSubmit,
 }) => {
     const classes = useStyles();
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
 
-    const submitHandler = (event: React.MouseEvent) => {
+    const submitHandler = (event: React.MouseEvent): void => {
         event.preventDefault();
-        handleSubmit();
+        handleSubmit(username, password);
     };
 
-    const keyPressHandler = (event: React.KeyboardEvent) => {
-        if (event.keyCode === 13) handleSubmit();
+    const handleUsername = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setUsername(event.target.value);
+    };
+
+    const handlePassword = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setPassword(event.target.value);
     };
 
     return (
         <div className={classes.root}>
+            {isLoggedIn ? <Redirect to={redirect_uri} /> : ""}
             <GoogleLoginButton
                 isLoggedIn={isLoggedIn}
                 redirect_uri={window.location.href}
                 className={classes.boxItem}
             />
             <Divider />
-            <form autoComplete="off">
+            <form autoComplete="off" className={classes.boxItem}>
                 <TextField
                     className={classes.item}
                     id="username"
@@ -54,6 +66,7 @@ const Login: React.FC<ILoginProps> = ({
                     error={error.username}
                     required
                     fullWidth
+                    onChange={useInputDebounce(handleUsername)}
                 />
                 <TextField
                     className={classes.item}
@@ -63,6 +76,7 @@ const Login: React.FC<ILoginProps> = ({
                     type="password"
                     required
                     fullWidth
+                    onChange={useInputDebounce(handlePassword)}
                 />
                 <Button
                     type="submit"
@@ -70,7 +84,6 @@ const Login: React.FC<ILoginProps> = ({
                     color="primary"
                     className={classes.button}
                     onClick={submitHandler}
-                    onKeyPress={keyPressHandler}
                 >
                     Login
                 </Button>
