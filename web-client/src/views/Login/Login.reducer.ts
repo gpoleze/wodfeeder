@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign,@typescript-eslint/ban-ts-comment */
 import { CaseReducer, createSlice, Draft, PayloadAction } from "@reduxjs/toolkit";
 
+import { submitLoginThunk } from "views/Login/Login.thunk";
 import { IFormInputChangedPayload, ILoginFormState } from "views/Login/Login.types";
 
 export const LoginFormInitialState: ILoginFormState = {
@@ -46,16 +47,25 @@ export const clearLoginFormErrorsReducer = (draft: Draft<ILoginFormState>): ILog
     return draft;
 };
 
+const submitLoginThunkRejectedReducer: CaseReducer<ILoginFormState, PayloadAction<IFormInputChangedPayload[]>> = (
+    draft,
+    { type, payload },
+) => {
+    clearLoginFormErrorsReducer(draft);
+    payload.forEach((error) => loginFormErrorReducer(draft, { type, payload: error }));
+};
+
 const FormLoginSlice = createSlice({
     name: "formLogin",
     initialState: LoginFormInitialState,
     reducers: {
         formInputChanged: formInputChangedReducer,
-        loginFormError: loginFormErrorReducer,
-        clearLoginFormErrors: clearLoginFormErrorsReducer,
+    },
+    extraReducers: {
+        [submitLoginThunk.rejected as any]: submitLoginThunkRejectedReducer,
     },
 });
 
-export const { loginFormError, formInputChanged, clearLoginFormErrors } = FormLoginSlice.actions;
+export const { formInputChanged } = FormLoginSlice.actions;
 
 export default FormLoginSlice.reducer;

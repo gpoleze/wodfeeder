@@ -3,11 +3,10 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
     clearLoginFormErrorsReducer,
     formInputChangedReducer,
-    ILoginFormState,
     loginFormErrorReducer,
     LoginFormInitialState,
 } from "views/Login/Login.reducer";
-import { IFormInputChangedPayload } from "views/Login/Login.types";
+import { ILoginFormState, IFormInputChangedPayload } from "views/Login/Login.types";
 
 // eslint-disable-next-line max-lines-per-function
 describe("Login.reducer", () => {
@@ -16,6 +15,7 @@ describe("Login.reducer", () => {
             initialValue | value
             ${""}        | ${"a"}
             ${""}        | ${""}
+            ${"     "}   | ${""}
             ${"a"}       | ${""}
             ${"a"}       | ${"aa"}
         `(

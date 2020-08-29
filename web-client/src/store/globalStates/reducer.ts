@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { submitLoginThunk } from "views/Login/Login.thunk";
 
 export interface IGlobalState {
     isLoggedIn: boolean;
@@ -24,11 +25,14 @@ const slice = createSlice({
     name: "global",
     initialState: globalInitialState,
     reducers: {
-        updateLoginStatus: updateLoginStatusReducer,
+        // updateLoginStatus: updateLoginStatusReducer,
         updateToken: changeTokenReducer,
+    },
+    extraReducers: {
+        [submitLoginThunk.fulfilled as any]: updateLoginStatusReducer,
     },
 });
 
-export const { updateLoginStatus, updateToken } = slice.actions;
+export const { updateToken } = slice.actions;
 
 export default slice.reducer;
