@@ -6,6 +6,8 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 public class UserLoginForm {
     @NotEmpty
     @Email
@@ -30,6 +32,7 @@ public class UserLoginForm {
         return password;
     }
 
+    @Hidden
     public UsernamePasswordAuthenticationToken getAuthenticationToken() {
         return new UsernamePasswordAuthenticationToken(username, password);
     }

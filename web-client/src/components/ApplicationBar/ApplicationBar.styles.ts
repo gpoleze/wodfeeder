@@ -31,4 +31,8 @@ export default makeStyles((theme) => ({
     toolbar: {
         paddingRight: 24,
     },
+    link: {
+        textDecoration: "none",
+        color: "inherit",
+    },
 }));

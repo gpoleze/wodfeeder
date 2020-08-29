@@ -21,6 +21,11 @@ public class AuthUserGroup extends EntityWithUuid {
 
     protected AuthUserGroup() {}
 
+    public AuthUserGroup(User user, AuthGroup authGroup) {
+        this.user = user;
+        this.authGroup = authGroup;
+    }
+
     public User getUser() {
         return user;
     }

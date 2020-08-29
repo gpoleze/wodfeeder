@@ -4,28 +4,29 @@ import { useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
 import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
-import Workouts from "views/Workouts";
 
 import useStyles, { createTheme } from "./App.styles";
 
-export interface IAppProps {
-    darkTheme?: boolean;
-    slideOpen?: boolean;
-    toggleTheme?: () => void;
-    toggleSlide?: () => void;
+export interface IAppStateProps {
+    darkTheme: boolean;
+    slideOpen: boolean;
+    isLoggedIn: boolean;
 }
 
-const App: React.FC<IAppProps> = ({
-    darkTheme = false,
-    slideOpen = false,
-    toggleTheme = (): void => {},
-    toggleSlide = (): void => {},
-}) => {
+export interface IAppDispatchProps {
+    toggleTheme: () => void;
+    toggleSlide: () => void;
+}
+
+export interface IAppProps extends IAppStateProps, IAppDispatchProps {}
+
+const App: React.FC<IAppProps> = ({ darkTheme, slideOpen, isLoggedIn, toggleTheme, toggleSlide }) => {
     const classes = useStyles();
     const theme = useMemo(() => createTheme(darkTheme), [darkTheme]);
 
@@ -39,23 +40,26 @@ const App: React.FC<IAppProps> = ({
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
-                <ApplicationBar
-                    open={slideOpen}
-                    handleDrawer={toggleSlide}
-                    darkTheme={darkTheme}
-                    handleTheme={toggleTheme}
-                />
-                {/* <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> TODO - Uncoment this when you want to add more items to the menu */}
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer}>
-                        <MainRouting />
-                    </div>
-                </main>
-                <footer className={classes.footer}>
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
-                </footer>
+                <Router>
+                    <ApplicationBar
+                        open={slideOpen}
+                        handleDrawer={toggleSlide}
+                        darkTheme={darkTheme}
+                        handleTheme={toggleTheme}
+                        isLoggedIn={isLoggedIn}
+                    />
+                    {isLoggedIn ? <ApplicationDrawer open={slideOpen} handleDrawer={toggleSlide} /> : ""}
+                    <main className={classes.content}>
+                        <div className={classes.appBarSpacer}>
+                            <MainRouting />
+                        </div>
+                    </main>
+                    <footer className={classes.footer}>
+                        <Box pt={4}>
+                            <Copyright />
+                        </Box>
+                    </footer>
+                </Router>
             </div>
         </ThemeProvider>
     );

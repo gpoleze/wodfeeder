@@ -34,7 +34,7 @@ module.exports = {
     "rules": {
         // Default ESLint Rules
         "complexity": ["error", 10],
-        "indent": ["warn", 4, { "SwitchCase": 1 }],
+        "indent": "off",
         "max-lines-per-function": ["error", {
             "max": 50,
             "skipBlankLines": true,
@@ -45,7 +45,7 @@ module.exports = {
         // Plugins - @typescript-eslint
         "@typescript-eslint/explicit-function-return-type": ["warn"],
         "@typescript-eslint/no-empty-interface": ["off"],
-        "@typescript-eslint/indent": ["warn", 4],
+        "@typescript-eslint/indent": "off",
         "@typescript-eslint/quotes": "off",
 
         // Plugins - eslint-plugin-import

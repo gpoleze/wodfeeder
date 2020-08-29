@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
+    "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx ./src ",
@@ -33,6 +33,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
+    "@types/lodash": "^4.14.159",
     "@types/node": "^12.12.53",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
@@ -40,8 +41,10 @@
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
     "clsx": "^1.1.1",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.1.21",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -66,5 +69,6 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "prettier": "^2.0.5",
     "redux-devtools": "^3.6.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
