@@ -1,7 +1,4 @@
-name: Deploy $APP_NAME to Heroku
-
-env:
-  APP_NAME: web-server
+name: Deploy web-server to Heroku
 
 on:
   push:
@@ -9,7 +6,7 @@ on:
       - master
     paths:
       - "webserver/**"
-      - ".github/workflows/$APP_NAME.yml"
+      - ".github/workflows/web-server.yml"
 
 jobs:
   deploy:
@@ -23,3 +20,5 @@ jobs:
         run: git remote add heroku-$APP_NAME https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
       - name: Deploy $APP_NAME to Heroku
         run: git push heroku-$APP_NAME `git subtree split --prefix $APP_NAME master`:refs/heads/master --force
+  env:
+    APP_NAME: web-server
