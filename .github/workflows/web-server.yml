@@ -16,9 +16,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '14'
-      - name: Add $APP_NAME remote origin
-        run: git remote add heroku-$APP_NAME https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
-      - name: Deploy $APP_NAME to Heroku
-        run: git push heroku-$APP_NAME `git subtree split --prefix $APP_NAME master`:refs/heads/master --force
-  env:
-    APP_NAME: web-server
+      - name: Add web-server remote origin
+        run: git remote add heroku-web-server https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+      - name: Deploy web-server to Heroku
+        run: git push heroku-web-server `git subtree split --prefix web-server master`:refs/heads/master --force
