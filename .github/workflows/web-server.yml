@@ -22,5 +22,6 @@ jobs:
 
       - name: Add web-server remote origin
         run: git remote add heroku-web-server https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+
       - name: Deploy web-server to Heroku
         run: git push heroku-web-server `git subtree split --prefix web-server master`:refs/heads/master --force
