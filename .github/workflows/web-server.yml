@@ -19,7 +19,7 @@ jobs:
           java-version: '14'
 
       - name: Run Tests
-        run: ./gradlew test
+        run: ./gradlew test -x generateOpenApiDocs
 
   deploy:
     runs-on: ubuntu-latest
