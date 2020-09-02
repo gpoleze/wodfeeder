@@ -3,7 +3,7 @@ name: Deploy web-client to Heroku
 on:
   push:
     paths:
-      - "webclient/**"
+      - "web-client/**"
       - ".github/workflows/web-client.yml"
 
 jobs:
