@@ -30,7 +30,7 @@ jobs:
           java-version: '14'
 
       - name: Run Tests
-        run: ./gradlew test -x generateOpenApiDocs
+        run: ./gradlew webserver:test -x generateOpenApiDocs
         env:
           JWT_SECRET: "${{ secrets.JWT_SECRET_TEST }}"
           DATABASE_URL: "jdbc:postgresql://localhost:5432/${{ secrets.DATABASE_TEST }}"
