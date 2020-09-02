@@ -35,7 +35,7 @@ jobs:
           JWT_SECRET: "${{ secrets.JWT_SECRET_TEST }}"
           DATABASE_URL: "jdbc:postgresql://localhost:5432/${{ secrets.DATABASE_TEST }}"
           DATABaSE_USERNAME: "${{ secrets.DATABASE_USERNAME_TEST }}"
-          DATABASE_PASSWORD: "$ {{secrets.DATABASE_PASSWORD_TEST }}"
+          DATABASE_PASSWORD: "${{secrets.DATABASE_PASSWORD_TEST }}"
 
   deploy:
     runs-on: ubuntu-latest
