@@ -1,0 +1,46 @@
+name: Deploy web-client to Heroku
+
+on:
+  push:
+    paths:
+      - "web-client/**"
+      - ".github/workflows/web-client.yml"
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Java Versiion
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: '14'
+
+      - name: Set Node Versiion
+        uses: actions/setup-node@v1.4.3
+        with: 
+          node-version: '14.5.0'
+
+      - name: Run Tests
+        run: ./gradlew web-client:test -x generateOpenApiDocs
+        env:
+          JWT_SECRET: "${{ secrets.JWT_SECRET_TEST }}"
+          DATABASE_URL: "jdbc:postgresql://localhost:5432/${{ secrets.DATABASE_TEST }}"
+          DATABaSE_USERNAME: "${{ secrets.DATABASE_USERNAME_TEST }}"
+          DATABASE_PASSWORD: "${{secrets.DATABASE_PASSWORD_TEST }}"
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add web-client remote origin
+        run: git remote add heroku-web-client https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+
+      - name: Deploy web-client to Heroku
+        run: git push heroku-web-client `git subtree split --prefix web-client master`:refs/heads/master --force

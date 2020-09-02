@@ -47,3 +47,4 @@ task npm(type: Npm)
 
 build.dependsOn "npmBuild"
 test.dependsOn "npmTest"
+npmTest.dependsOn "npmInstall"
