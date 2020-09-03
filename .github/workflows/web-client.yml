@@ -18,18 +18,13 @@ jobs:
         with:
           java-version: '14'
 
-      - name: Set Node Versiion
+      - name: Set Node Version
         uses: actions/setup-node@v1.4.3
         with: 
           node-version: '14.5.0'
 
       - name: Run Tests
         run: ./gradlew web-client:test -x generateOpenApiDocs
-        env:
-          JWT_SECRET: "${{ secrets.JWT_SECRET_TEST }}"
-          DATABASE_URL: "jdbc:postgresql://localhost:5432/${{ secrets.DATABASE_TEST }}"
-          DATABaSE_USERNAME: "${{ secrets.DATABASE_USERNAME_TEST }}"
-          DATABASE_PASSWORD: "${{secrets.DATABASE_PASSWORD_TEST }}"
 
   deploy:
     runs-on: ubuntu-latest
