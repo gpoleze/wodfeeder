@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { AuthControllerApiFactory, UserLoginForm } from "apiSpecs";
+import config from "Constants";
 import { IFormInputChangedPayload } from "views/Login/Login.types";
 
 export const submitLoginThunk = createAsyncThunk<string, UserLoginForm, { rejectValue: IFormInputChangedPayload[] }>(
     "login/submitLogin",
     async (userLoginForm, { rejectWithValue }) => {
         try {
-            const response = await AuthControllerApiFactory({}).login(userLoginForm);
+            const response = await AuthControllerApiFactory({ basePath: config.url.API_URL }).login(userLoginForm);
             return response.data.token;
         } catch (err) {
             if (err.message === "Network Error")
