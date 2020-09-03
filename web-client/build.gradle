@@ -1,5 +1,5 @@
 plugins {
-    id 'base'
+    id 'java'
 }
 
 class Npm extends Exec {
@@ -48,10 +48,6 @@ task npmTest(type: Npm) {
 }
 
 task npm(type: Npm)
-
-if (!tasks.findByName("test")){
-    task test
-}
 
 build.dependsOn "npmBuild"
 test.dependsOn "npmTest"
