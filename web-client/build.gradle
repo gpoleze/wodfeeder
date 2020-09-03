@@ -1,3 +1,7 @@
+plugins {
+    id 'base'
+}
+
 class Npm extends Exec {
 
     String group = 'Npm'
