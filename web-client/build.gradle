@@ -49,6 +49,10 @@ task npmTest(type: Npm) {
 
 task npm(type: Npm)
 
+if (!tasks.findByName("test")){
+    task test
+}
+
 build.dependsOn "npmBuild"
 test.dependsOn "npmTest"
 npmTest.dependsOn "npmInstall"
