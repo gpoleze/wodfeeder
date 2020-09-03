@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Add web-client remote origin
-        run: git remote add heroku-web-client https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+        run: git remote add heroku-web-client https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_WEB_CLIENT_APP_NAME }}.git
 
       - name: Deploy web-client to Heroku
         run: git push heroku-web-client `git subtree split --prefix web-client master`:refs/heads/master --force
