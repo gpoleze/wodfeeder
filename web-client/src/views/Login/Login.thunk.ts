@@ -8,7 +8,7 @@ export const submitLoginThunk = createAsyncThunk<string, UserLoginForm, { reject
     "login/submitLogin",
     async (userLoginForm, { rejectWithValue }) => {
         try {
-            const response = await AuthControllerApiFactory({ basePath: config.url.API_URL }).login(userLoginForm);
+            const response = await AuthControllerApiFactory({}, config.url.API_URL).login(userLoginForm);
             return response.data.token;
         } catch (err) {
             if (err.message === "Network Error")
@@ -30,7 +30,7 @@ export const submitLoginThunk = createAsyncThunk<string, UserLoginForm, { reject
                 );
             }
             if (err.response.status === 403) {
-                return rejectWithValue([{ field: "username", value: "Username not exist or wrong password" }]);
+                return rejectWithValue([{ field: "username", value: "Username does not exist or the wrong is password" }]);
             }
             return rejectWithValue([
                 {
