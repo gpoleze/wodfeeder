@@ -29,7 +29,7 @@ services:
       - DATABASE_URL=jdbc:postgresql://postgres:5432/wodfeeder
       - DATABASE_USERNAME=gabriel
       - DATABASE_PASSWORD=not_empty
-      - JWT_SECRET='$$2a$$10$$VnFanN15YhC6KM6QB5c34OpbvTFXsKmOPQ:73XZ91nfqtordGX1rK$$2a$$10$$ytTkky8n0lclk0yUFbYshu9ML6ZnYKDk1EHq4ezNr3D7IYPIZH/h:$$2a$$10$$mgJq:z2Azej7xO94oc3hhuYI53NY95StQ9GCKH2FH16jbK3sUoNMq$$2a$$10$$riGDrNX/bbv:EVkjuW0Ax:lfcBpGuLBSuA/Z8G2LI3Ek:aUYAbQTu$$2a$$10$$HMEY1SWmBkK09v4h7J3ale3vP1VKmjXUpSuodMqA8WXtUizpU/DL:$$2a$$10$$m1u3:1LO8vJRpb/PoZm7m:0d1xZ85s4f3U60wMXWtX2BP:ImrNHhG$$2a$$10$$2tUSY1xf2wBcsT6WTiDKPuzSfYY:SDjkzasuGlT3zEHKk:vgJtvWW$$2a$$10$$AkNydcq4XFXLlq3zlcur2eNJnC7DrMjuTgqg06CB/vCp9LVblu7K6$$2a$$10$$w30O2zUGXA66j96WBdMln:DieBcAOtTnTUjCGzKBHjnxqTj:Ku506$$2a$$10$$pwJdDN3bYgGKW9ZVOpZIJuiKVmZIbu:ju9tY5An5sjWQSir3dndUS:'
+      - JWT_SECRET='dev-super-duper-secret'
     networks:
       - local_network
 
