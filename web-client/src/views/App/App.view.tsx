@@ -8,11 +8,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
+import ApplicationInfo from "components/ApplicationInfo";
 import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
 
 import useStyles, { createTheme } from "./App.styles";
-import ApplicationInfo from "components/ApplicationInfo";
 
 export interface IAppStateProps {
     darkTheme: boolean;
