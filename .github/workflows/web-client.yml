@@ -24,19 +24,16 @@ jobs:
           node-version: '14.5.0'
 
       - name: Install dependencies
-        run:
-          shell: npm install
-          working-directory: web-client
+        run: npm install
+        working-directory: ./web-client
 
       - name: Run Lint
-        run:
-          shell: npm run lint
-          working-directory: web-client
+        run: npm run lint
+        working-directory: ./web-client
 
       - name: Run Tests
-        run:
-          shell: npm run test
-          working-directory: web-client
+        run: npm run test
+        working-directory: ./web-client
 
   deploy:
     runs-on: ubuntu-latest
