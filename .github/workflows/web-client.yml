@@ -23,8 +23,11 @@ jobs:
         with: 
           node-version: '14.5.0'
 
+      - name: Install dependencies
+        run: cd web-client && npm install
+
       - name: Run Lint
-        run: cd web-client && npm run lint
+        run: npm run lint
 
       - name: Run Tests
         run: npm run test
