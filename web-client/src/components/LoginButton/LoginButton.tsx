@@ -23,12 +23,7 @@ const LoginButton: React.FC<ILoginButtonProps> = ({ isLoggedIn, userImageUrl, us
             </Button>
         );
     // if (userImageUrl)
-    return (
-        <Avatar
-            alt={userName}
-            src="https://www.gravatar.com/avatar/65df17cba0f5e1b7fe8e2c2928911153?s=328&d=identicon&r=PG"
-        />
-    );
+    return <Avatar alt={userName} src={userImageUrl} />;
     // return (
     //     <Avatar>
     //         <AccountCircle />
