@@ -12,6 +12,7 @@ import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
 
 import useStyles, { createTheme } from "./App.styles";
+import ApplicationInfo from "components/ApplicationInfo";
 
 export interface IAppStateProps {
     darkTheme: boolean;
@@ -40,6 +41,7 @@ const App: React.FC<IAppProps> = ({ darkTheme, slideOpen, isLoggedIn, toggleThem
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
+                <ApplicationInfo />
                 <Router>
                     <ApplicationBar
                         open={slideOpen}
