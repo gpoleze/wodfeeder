@@ -1,6 +1,6 @@
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import blueGrey from "@material-ui/core/colors/blueGrey";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const createTheme = (darkMode: boolean) =>
     createMuiTheme({

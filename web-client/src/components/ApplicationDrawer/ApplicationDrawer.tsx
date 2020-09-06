@@ -14,7 +14,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-import { drawerWidth } from "components/contants";
+import { drawerWidth } from "components/sharedVariables";
 
 export interface IApplicationDrawerProps {
     open?: boolean;

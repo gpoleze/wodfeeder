@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
         margin: "0 auto",
         padding: 10,
     },
-    button:{
+    button: {
         width: 50,
         margin: "0 auto",
         padding: 10,

@@ -6,8 +6,8 @@ import { IState } from "store/rootReducer";
 import { selectErrors, selectPassword, selectUsername } from "views/Login/Login.selector";
 import { submitLoginThunk } from "views/Login/Login.thunk";
 
-import Login, { ILoginDispatchProps, ILoginStateProps } from "./Login.view";
 import { formInputChanged } from "./Login.reducer";
+import Login, { ILoginDispatchProps, ILoginStateProps } from "./Login.view";
 
 const mapStateToProps = (state: IState): ILoginStateProps => ({
     isLoggedIn: selectIsLoggedIn(state),
