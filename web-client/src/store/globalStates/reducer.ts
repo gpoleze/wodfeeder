@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { submitLoginThunk } from "views/Login/Login.thunk";
 
 export interface IGlobalState {

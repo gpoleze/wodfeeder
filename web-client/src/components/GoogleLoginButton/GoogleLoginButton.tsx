@@ -1,4 +1,5 @@
 import React from "react";
+
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline, GoogleLogout } from "react-google-login";
 
 const CLIENT_ID = "993603213209-9cur29do2unitei5612mje0mi1rqp0la.apps.googleusercontent.com";
@@ -41,7 +42,7 @@ const GoogleLoginButton: React.FC<IGoogleLoginButtonProps> = ({ isLoggedIn, redi
                     buttonText="Login in with Google"
                     onSuccess={login}
                     onFailure={loginFailureHandler}
-                    cookiePolicy={"single_host_origin"}
+                    cookiePolicy="single_host_origin"
                     responseType="id_token"
                 />
             )}

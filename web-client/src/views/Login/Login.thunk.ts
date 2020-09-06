@@ -30,7 +30,9 @@ export const submitLoginThunk = createAsyncThunk<string, UserLoginForm, { reject
                 );
             }
             if (err.response.status === 403) {
-                return rejectWithValue([{ field: "username", value: "Username does not exist or the wrong is password" }]);
+                return rejectWithValue([
+                    { field: "username", value: "Username does not exist or the wrong is password" },
+                ]);
             }
             return rejectWithValue([
                 {
