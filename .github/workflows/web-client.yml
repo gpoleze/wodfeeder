@@ -5,6 +5,7 @@ on:
     paths:
       - "web-client/**"
       - ".github/workflows/web-client/**"
+      - ".github/workflows/web-client.yml"
 
 jobs:
 
