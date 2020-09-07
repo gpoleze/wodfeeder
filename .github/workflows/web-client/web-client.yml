@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "web-client/**"
-      - ".github/workflows/web-client.yml"
+      - ".github/workflows/web-client/**"
 
 jobs:
 
