@@ -3,7 +3,7 @@ name: Deploy web-server to Heroku
 on:
   push:
     paths:
-      - "webserver/**"
+      - "web-server/**"
       - ".github/workflows/web-server.yml"
 
 jobs:
