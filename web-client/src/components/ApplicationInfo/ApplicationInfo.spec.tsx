@@ -4,11 +4,6 @@ import { render } from "@testing-library/react";
 
 import ApplicationInfo from "./ApplicationInfo";
 
-const getStyle = (element: HTMLElement, selector: string): CSSStyleDeclaration => {
-    const node = element.querySelector(selector) || element;
-    return window.getComputedStyle(node);
-};
-
 describe("ApplicationInfo Component", () => {
     let container: HTMLElement;
     beforeEach(() => {
@@ -29,7 +24,7 @@ describe("ApplicationInfo Component", () => {
     });
 
     it("should render the component with hidden visibility", () => {
-        const style = getStyle(container, "div[data-key='applicationInfo']");
-        expect(style.display).toBe("hidden");
+        const element = container.querySelector("*[data-key='applicationInfo']");
+        expect(element).toHaveStyle("display: hidden");
     });
 });
