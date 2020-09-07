@@ -2,7 +2,7 @@
 
 sha="$(git rev-parse --short HEAD)"
 timestamp="$(date --utc +%FT%TZ)"
-dotEnv="$(pwd)/../../web-client/.env"
+dotEnv="$(pwd | awk -F '.github' '{print $1}')web-client/.env"
 
 appVersion="$timestamp-$sha"
 
