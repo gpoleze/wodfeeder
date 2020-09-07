@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
+import ApplicationInfo from "components/ApplicationInfo";
 import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
 
@@ -40,6 +41,7 @@ const App: React.FC<IAppProps> = ({ darkTheme, slideOpen, isLoggedIn, toggleThem
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
+                <ApplicationInfo />
                 <Router>
                     <ApplicationBar
                         open={slideOpen}
