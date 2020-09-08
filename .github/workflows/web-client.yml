@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Replace App Version
+      - name: Setting the App Version on Heroku
         run: ./web-client-version.sh
         working-directory: ./.github/workflows/web-client
 
