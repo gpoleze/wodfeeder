@@ -46,7 +46,7 @@ jobs:
 
       - name: Setting the App Version on Heroku
         run: ./web-client-version.sh
-        working-directory: TOKEN=${{ secrets.HEROKU_API_TOKEN }}; ./.github/workflows/web-client
+        working-directory: ./.github/workflows/web-client
 
       - name: Add web-client remote origin
         run: git remote add heroku-web-client https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_WEB_CLIENT_APP_NAME }}.git
