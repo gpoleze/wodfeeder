@@ -5,6 +5,9 @@ import { render } from "@testing-library/react";
 import ApplicationInfo from "./ApplicationInfo";
 
 describe("ApplicationInfo Component", () => {
+    const appVersionValue = "appVersion";
+    process.env.REACT_APP_WEB_CLIENT_VERSION = appVersionValue;
+
     let container: HTMLElement;
     beforeEach(() => {
         const renderedComponent = render(<ApplicationInfo />);
@@ -17,10 +20,10 @@ describe("ApplicationInfo Component", () => {
         expect(nodeEnv?.textContent).toBe("test");
     });
 
-    it("shoud render the application version with the placeholder value", () => {
+    it("should render the application version with the placeholder value", () => {
         const appVersion = container.querySelector("#appVersion");
         expect(appVersion).not.toBeNull();
-        expect(appVersion?.textContent).toBe("%WEB_CLIENT_VERSION%");
+        expect(appVersion?.textContent).toBe(appVersionValue);
     });
 
     it("should render the component with hidden visibility", () => {
