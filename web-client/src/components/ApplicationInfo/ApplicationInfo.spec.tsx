@@ -28,6 +28,7 @@ describe("ApplicationInfo Component", () => {
 
     it("should render the component with hidden visibility", () => {
         const element = container.querySelector("*[data-key='applicationInfo']");
-        expect(element).toHaveStyle("display: hidden");
+        expect(element).toHaveStyle("visibility: hidden");
+        expect(element).toHaveStyle("display: none");
     });
 });
