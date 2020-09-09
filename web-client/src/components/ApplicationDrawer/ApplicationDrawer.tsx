@@ -64,7 +64,7 @@ const mainListItems = (
                 <ListItemText primary="Workouts" />
             </ListItem>
         </Link>
-        <Link to="/workout/new" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/workouts/new" style={{ textDecoration: "none", color: "inherit" }}>
             <ListItem button>
                 <ListItemIcon>
                     <AssignmentIcon />
