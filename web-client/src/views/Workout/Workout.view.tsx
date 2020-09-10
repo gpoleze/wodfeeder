@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 
 import CustomNativeDateInput from "components/CustomNativeDateInput";
 import CustomNativeSelect from "components/CustomNativeSelect";
+import CustomTextInput from "components/CustomTextInput";
 
 import useStyles from "./Workout.styles";
 
@@ -23,6 +24,7 @@ const menuItems: WorkoutType[] = [
 const Workout: React.FC<WorkoutProps> = () => {
     const [workoutType, setWorkoutType] = useState<string>();
     const [workoutDate, setWorkoutDate] = useState<string>("");
+    const [workoutName, setWorkoutName] = useState<string>("");
 
     const classes = useStyles();
     return (
@@ -31,6 +33,9 @@ const Workout: React.FC<WorkoutProps> = () => {
                 Create New Workout
             </Typography>
             <form>
+                <div className={classes.formControl}>
+                    <CustomTextInput id="workoutName" onChange={setWorkoutName} label="Name" value={workoutName} />
+                </div>
                 <div className={classes.formControl}>
                     <CustomNativeSelect
                         id="workoutType"
