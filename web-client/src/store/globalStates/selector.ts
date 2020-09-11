@@ -1,4 +1,4 @@
-import { IState } from "store/rootReducer";
+import { State } from "./type";
 
-export const selectIsLoggedIn = (state: IState): boolean => state.global.isLoggedIn;
-export const selectToken = (state: IState): string => state.global.token;
+export const selectIsLoggedIn = (state: State): boolean => state.global.isLoggedIn;
+export const selectToken = (state: State): string => state.global.token;

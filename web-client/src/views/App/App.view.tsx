@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 
 import { useMediaQuery } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -9,7 +8,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import ApplicationBar from "components/ApplicationBar";
 import ApplicationDrawer from "components/ApplicationDrawer";
 import ApplicationInfo from "components/ApplicationInfo";
-import Copyright from "components/Copyright";
 import MainRouting from "components/MainRouting";
 
 import useStyles, { createTheme } from "./App.styles";

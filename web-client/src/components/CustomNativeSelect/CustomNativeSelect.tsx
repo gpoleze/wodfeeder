@@ -2,15 +2,7 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-export interface CustomNativeSelectProps<T = any> {
-    id: string;
-    label: string;
-    firstOptionText?: string;
-    value?: T;
-    onChange: (value: T) => void;
-    options: { key: string; name: string; value: T }[];
-    required?: boolean;
-}
+import { CustomNativeSelectProps } from "components/CustomNativeSelect/CustomNativeSelect.types";
 
 const CustomNativeSelect: React.FC<CustomNativeSelectProps> = ({
     id,

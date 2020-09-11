@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { selectIsLoggedIn } from "store/globalStates/selector";
-import { IState } from "store/rootReducer";
+import { State } from "store/globalStates/type";
 
 import { toggleSlide, toggleTheme } from "./App.reducer";
 import App, { IAppDispatchProps, IAppStateProps } from "./App.view";
 
-const mapStateToProps = (state: IState): IAppStateProps => ({
+const mapStateToProps = (state: State): IAppStateProps => ({
     darkTheme: state.themeAndSlider.darkMode,
     slideOpen: state.themeAndSlider.isSlideOpen,
     isLoggedIn: selectIsLoggedIn(state),

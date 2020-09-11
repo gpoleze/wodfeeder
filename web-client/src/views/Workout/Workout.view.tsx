@@ -7,25 +7,19 @@ import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
 import CustomNativeDateInput from "components/CustomNativeDateInput";
-import CustomNativeSelect from "components/CustomNativeSelect";
+import CustomNativeSelect, { SelectOption } from "components/CustomNativeSelect";
 import CustomTextInput from "components/CustomTextArea";
 import CustomTextArea from "components/CustomTextInput";
 
 import useStyles from "./Workout.styles";
+import { WorkoutProps } from "./Workout.types";
 
-export interface WorkoutProps {}
-export interface WorkoutType {
-    name: string;
-    value: string;
-    key: string;
-}
-
-const menuItems: WorkoutType[] = [
+const menuItems: SelectOption<string>[] = [
     { name: "Warm Up", value: "warm_up", key: "warm_up" },
     { name: "WOD", value: "wod", key: "wod" },
 ];
 
-const scoreItems: WorkoutType[] = [
+const scoreItems: SelectOption<string>[] = [
     { name: "AMRAP", value: "amrap", key: "amrap" },
     { name: "RFT", value: "rft", key: "rft" },
 ];
@@ -42,7 +36,7 @@ const WorkoutName: React.FC<{
     setWorkoutName: (value: string) => void;
 }> = ({ classes, workoutName, setWorkoutName }) => (
     <div className={classes.formControl}>
-        <CustomTextInput id="workoutName" onChange={setWorkoutName} label="Name" value={workoutName} required />
+        <CustomTextInput id="workoutName" onChange={setWorkoutName} label="Name" defaultValue={workoutName} required />
     </div>
 );
 
@@ -50,7 +44,7 @@ const WorkoutType: React.FC<{
     classes: ClassNameMap;
     workoutType: string;
     setWorkoutType: (value: string) => void;
-    options: WorkoutType[];
+    options: SelectOption<string>[];
 }> = ({ classes, workoutType, setWorkoutType, options }) => (
     <div className={classes.formControl}>
         <CustomNativeSelect
@@ -68,7 +62,7 @@ const WorkoutScore: React.FC<{
     classes: ClassNameMap;
     workoutScore: string;
     setWorkoutScore: (value: string) => void;
-    options: WorkoutType[];
+    options: SelectOption<string>[];
 }> = ({ classes, workoutScore, setWorkoutScore, options }) => (
     <div className={classes.formControl}>
         <CustomNativeSelect
@@ -146,20 +140,24 @@ const WorkoutButtons: React.FC<{
     </div>
 );
 
-const Workout: React.FC<WorkoutProps> = () => {
+const Workout: React.FC<WorkoutProps> = ({ workoutName, setWorkoutName }) => {
     const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
     const [workoutDate, setWorkoutDate] = useState<string>();
     const [workoutDescription, setWorkoutDescription] = useState<string>("");
-    const [workoutName, setWorkoutName] = useState<string>("");
     const [workoutObservations, setWorkoutObservations] = useState<string>("");
 
+    const handleNameChange = (name: string): void => {
+        console.log(name);
+        setWorkoutName(name);
+    };
     const classes = useStyles();
+    classes.paper = "gabriel";
     return (
         <Paper className={classes.paper}>
             <Header />
             <form>
-                <WorkoutName classes={classes} workoutName={workoutName} setWorkoutName={setWorkoutName} />
+                <WorkoutName classes={classes} workoutName={workoutName} setWorkoutName={handleNameChange} />
                 <WorkoutDate classes={classes} workoutDate={workoutDate} setWorkoutDate={setWorkoutDate} />
                 <WorkoutType
                     classes={classes}

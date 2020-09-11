@@ -1,21 +1,15 @@
 import { combineReducers } from "redux";
 
-import globalReducers, { IGlobalState } from "store/globalStates/reducer";
-import appReducer, { IAppInitialState } from "views/App/App.reducer";
+import globalReducers from "store/globalStates/reducer";
+import appReducer from "views/App/App.reducer";
 import loginFormReducer from "views/Login/Login.reducer";
-import { ILoginFormState } from "views/Login/Login.types";
-import workoutsReducer, { IWorkoutsInitialState } from "views/Workouts/Workouts.reducer";
-
-export interface IState {
-    themeAndSlider: IAppInitialState;
-    workouts: IWorkoutsInitialState;
-    login: ILoginFormState;
-    global: IGlobalState;
-}
+import { reducer as workoutReducer } from "views/Workout";
+import workoutsReducer from "views/Workouts/Workouts.reducer";
 
 const rootReducer = combineReducers({
     themeAndSlider: appReducer,
     workouts: workoutsReducer,
+    workout: workoutReducer,
     login: loginFormReducer,
     global: globalReducers,
 });

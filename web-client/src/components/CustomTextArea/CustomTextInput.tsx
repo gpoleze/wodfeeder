@@ -1,11 +1,13 @@
-import React from "react";
+import React, { ChangeEvent, SyntheticEvent } from "react";
 
 import TextField from "@material-ui/core/TextField";
+
+import useInputDebounce from "utils/hook/useInputDebounce";
 
 export interface CustomTextInputProps {
     id: string;
     label: string;
-    value: string;
+    defaultValue?: string;
     onChange: (value: string) => void;
     required?: boolean;
     placeholder?: string;
@@ -14,21 +16,24 @@ export interface CustomTextInputProps {
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
     id,
     label,
-    value,
+    defaultValue,
     onChange,
     required = false,
     placeholder = "",
-}) => (
-    <TextField
-        id={id}
-        label={label}
-        value={value}
-        fullWidth
-        variant="outlined"
-        required={required}
-        placeholder={placeholder}
-        onChange={(event): void => onChange(event.target.value)}
-    />
-);
+}) => {
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => onChange(event.target.value);
+    return (
+        <TextField
+            id={id}
+            label={label}
+            defaultValue={defaultValue}
+            fullWidth
+            variant="outlined"
+            required={required}
+            placeholder={placeholder}
+            onChange={useInputDebounce(onChangeHandler)}
+        />
+    );
+};
 
 export default CustomTextInput;

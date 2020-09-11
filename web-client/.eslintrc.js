@@ -13,7 +13,7 @@ module.exports = {
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
-            tsx: true,
+            tsx: true
         },
         ecmaVersion: 2020,
         sourceType: "module",
@@ -24,12 +24,12 @@ module.exports = {
         "react",
         "prettier",
         "react-hooks",
-        "import",
+        "import"
     ],
     settings: {
         "import/resolver": {
             typescript: {}
-        },
+        }
     },
     "rules": {
         // Default ESLint Rules
@@ -41,6 +41,7 @@ module.exports = {
             "skipComments": true
         }],
         "max-nested-callbacks": ["error", 5],
+        "no-param-reassign": ["error", { props: true, ignorePropertyModificationsForRegex: ["^draft$"] }],
 
         // Plugins - @typescript-eslint
         "@typescript-eslint/explicit-function-return-type": ["warn"],
@@ -55,33 +56,42 @@ module.exports = {
         "import/default": "error",
         "import/export": "off",
         "import/prefer-default-export": "warn",
-        "import/order": ["error", {
-            "groups": ["builtin", "external", "internal"],
-            "pathGroups": [{
-                "pattern": "react",
-                "group": "external",
-                "position": "before"
-            }, {
-                "pattern": "[components]/**",
-                "group": "external",
-                "position": "after"
-            },
-            ],
-            "pathGroupsExcludedImportTypes": ["react"],
-            "newlines-between": "always",
-            "alphabetize": {
-                "order": "asc",
-                "caseInsensitive": true
+        "import/no-cycle": "off",
+        "import/order": [
+            "error",
+            {
+                groups: ["builtin", "external", "internal"],
+                pathGroups: [
+                    {
+                        pattern: "react",
+                        group: "external",
+                        position: "before"
+                    },
+                    {
+                        pattern: "[components]/**",
+                        group: "external",
+                        position: "after"
+                    }
+                ],
+                pathGroupsExcludedImportTypes: ["react"],
+                "newlines-between": "always",
+                alphabetize: {
+                    order: "asc",
+                    caseInsensitive: true
+                }
             }
-        }],
+        ],
 
         // Plugins - Prettier
         "prettier/prettier": ["error"],
 
         // Plugins - React
-        "react/jsx-filename-extension": [1, {
-            "extensions": [".jsx", ".tsx"]
-        }],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                extensions: [".jsx", ".tsx"]
+            }
+        ],
         "react/jsx-indent": ["warn", 4],
         "react/jsx-indent-props": ["warn", 4],
         "react-hooks/rules-of-hooks": "error",
@@ -89,4 +99,4 @@ module.exports = {
         "react/button-has-type": ["off"],
         "react/prop-types": ["off"]
     }
-}
+};

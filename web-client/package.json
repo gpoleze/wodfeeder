@@ -9,6 +9,7 @@
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx ./src ",
+    "lintFix": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx ./src --fix",
     "api": "rm -rf gen/api && ./node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator generate -i http://localhost:8080/v3/api-docs --generator-name typescript-axios -o src/apiSpecs",
     "heroku-postbuild": "npm run build"
   },

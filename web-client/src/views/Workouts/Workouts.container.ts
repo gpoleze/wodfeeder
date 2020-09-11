@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
-import { IState } from "store/rootReducer";
+import { State } from "store/globalStates/type";
 import { loadWorkouts } from "views/Workouts/Workouts.thunk";
 import Workouts from "views/Workouts/Workouts.view";
 
-const mapStateToProps = (state: IState) => ({
+const mapStateToProps = (state: State) => ({
     workouts: state.workouts.workouts,
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<IState, any, any>) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<State, any, any>) => ({
     loadWorkouts: () => dispatch(loadWorkouts()),
 });
 

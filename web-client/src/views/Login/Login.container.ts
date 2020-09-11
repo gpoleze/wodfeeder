@@ -2,14 +2,14 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { selectIsLoggedIn } from "store/globalStates/selector";
-import { IState } from "store/rootReducer";
+import { State } from "store/globalStates/type";
 import { selectErrors, selectPassword, selectUsername } from "views/Login/Login.selector";
 import { submitLoginThunk } from "views/Login/Login.thunk";
 
 import { formInputChanged } from "./Login.reducer";
 import Login, { ILoginDispatchProps, ILoginStateProps } from "./Login.view";
 
-const mapStateToProps = (state: IState): ILoginStateProps => ({
+const mapStateToProps = (state: State): ILoginStateProps => ({
     isLoggedIn: selectIsLoggedIn(state),
     redirect_uri: "/",
     username: selectUsername(state),
