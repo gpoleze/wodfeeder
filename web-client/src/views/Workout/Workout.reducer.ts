@@ -3,7 +3,7 @@ import moment from "moment";
 
 import { WorkoutState } from "./Workout.types";
 
-const WorkoutInicialState: WorkoutState = {
+export const WorkoutInitialState: WorkoutState = {
     name: "",
     date: moment().format("yyyy-MM-DD"),
     type: "",
@@ -12,14 +12,14 @@ const WorkoutInicialState: WorkoutState = {
     observations: "",
 };
 
-const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
+export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
     draft.name = payload;
     return draft;
 };
 
 const WorkoutSlice = createSlice({
     name: "workout",
-    initialState: WorkoutInicialState,
+    initialState: WorkoutInitialState,
     reducers: {
         nameChanged: nameChangedReducer,
     },
