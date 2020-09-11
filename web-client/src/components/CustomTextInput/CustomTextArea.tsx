@@ -2,33 +2,35 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-export interface CustomTextInputProps {
+export interface CustomTextAreaProps {
     id: string;
     label: string;
     value: string;
     onChange: (value: string) => void;
-    defaultValue?: string;
     required?: boolean;
+    placeholder?: string;
+    rows?: number;
 }
 
-const CustomTextInput: React.FC<CustomTextInputProps> = ({
+const CustomTextArea: React.FC<CustomTextAreaProps> = ({
     id,
     label,
     value,
     onChange,
-    defaultValue = "",
     required = false,
+    rows = 2,
 }) => (
     <TextField
         id={id}
         label={label}
-        value={value || defaultValue}
+        value={value}
+        multiline
+        rows={rows}
         fullWidth
         variant="outlined"
         required={required}
-        defaultValue={defaultValue}
         onChange={(event): void => onChange(event.target.value)}
     />
 );
 
-export default CustomTextInput;
+export default CustomTextArea;

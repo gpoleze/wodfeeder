@@ -1,37 +1,34 @@
 import React from "react";
 
 import TextField from "@material-ui/core/TextField";
-import moment from "moment";
 
-export interface CustomNativeSelectProps {
+export interface CustomTextInputProps {
     id: string;
     label: string;
-    value?: string;
+    value: string;
     onChange: (value: string) => void;
-    defaultValue?: string;
     required?: boolean;
+    placeholder?: string;
 }
 
-const CustomNativeDateInput: React.FC<CustomNativeSelectProps> = ({
+const CustomTextInput: React.FC<CustomTextInputProps> = ({
     id,
     label,
+    value,
     onChange,
-    value = moment().format("yyyy-MM-DD"),
     required = false,
+    placeholder = "",
 }) => (
     <TextField
         id={id}
         label={label}
-        type="date"
         value={value}
         fullWidth
         variant="outlined"
         required={required}
+        placeholder={placeholder}
         onChange={(event): void => onChange(event.target.value)}
-        InputLabelProps={{
-            shrink: true,
-        }}
     />
 );
 
-export default CustomNativeDateInput;
+export default CustomTextInput;

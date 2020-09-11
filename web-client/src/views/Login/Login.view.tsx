@@ -93,6 +93,7 @@ const Login: React.FC<ILoginProps> = ({
                     color="primary"
                     className={classes.button}
                     onClick={submitHandler}
+                    fullWidth
                 >
                     Login
                 </Button>
