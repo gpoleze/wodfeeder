@@ -25,6 +25,11 @@ const menuItems: WorkoutType[] = [
     { name: "WOD", value: "wod", key: "wod" },
 ];
 
+const scoreItems: WorkoutType[] = [
+    { name: "AMRAP", value: "amrap", key: "amrap" },
+    { name: "RFT", value: "rft", key: "rft" },
+];
+
 const Header: React.FC = () => (
     <Typography variant="h6" align="center">
         Create New Workout
@@ -59,9 +64,27 @@ const WorkoutType: React.FC<{
     </div>
 );
 
+const WorkoutScore: React.FC<{
+    classes: ClassNameMap;
+    workoutScore: string;
+    setWorkoutScore: (value: string) => void;
+    options: WorkoutType[];
+}> = ({ classes, workoutScore, setWorkoutScore, options }) => (
+    <div className={classes.formControl}>
+        <CustomNativeSelect
+            id="workoutScore"
+            onChange={setWorkoutScore}
+            label="Score Type"
+            options={options}
+            value={workoutScore}
+            required
+        />
+    </div>
+);
+
 const WorkoutDate: React.FC<{
     classes: ClassNameMap;
-    workoutDate: string;
+    workoutDate: string | undefined;
     setWorkoutDate: (value: string) => void;
 }> = ({ classes, workoutDate, setWorkoutDate }) => (
     <div className={classes.formControl}>
@@ -125,24 +148,31 @@ const WorkoutButtons: React.FC<{
 
 const Workout: React.FC<WorkoutProps> = () => {
     const [workoutType, setWorkoutType] = useState<string>("");
-    const [workoutDate, setWorkoutDate] = useState<string>("");
+    const [workoutScore, setWorkoutScore] = useState<string>("");
+    const [workoutDate, setWorkoutDate] = useState<string>();
     const [workoutDescription, setWorkoutDescription] = useState<string>("");
     const [workoutName, setWorkoutName] = useState<string>("");
     const [workoutObservations, setWorkoutObservations] = useState<string>("");
 
     const classes = useStyles();
     return (
-        <Paper>
+        <Paper className={classes.paper}>
             <Header />
             <form>
                 <WorkoutName classes={classes} workoutName={workoutName} setWorkoutName={setWorkoutName} />
+                <WorkoutDate classes={classes} workoutDate={workoutDate} setWorkoutDate={setWorkoutDate} />
                 <WorkoutType
                     classes={classes}
                     workoutType={workoutType}
                     setWorkoutType={setWorkoutType}
                     options={menuItems}
                 />
-                <WorkoutDate classes={classes} workoutDate={workoutDate} setWorkoutDate={setWorkoutDate} />
+                <WorkoutScore
+                    classes={classes}
+                    workoutScore={workoutScore}
+                    setWorkoutScore={setWorkoutScore}
+                    options={scoreItems}
+                />
                 <WorkoutDescription
                     classes={classes}
                     workoutDescription={workoutDescription}

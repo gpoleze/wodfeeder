@@ -56,11 +56,6 @@ const App: React.FC<IAppProps> = ({ darkTheme, slideOpen, isLoggedIn, toggleThem
                             <MainRouting />
                         </div>
                     </main>
-                    <footer className={classes.footer}>
-                        <Box pt={4}>
-                            <Copyright />
-                        </Box>
-                    </footer>
                 </Router>
             </div>
         </ThemeProvider>

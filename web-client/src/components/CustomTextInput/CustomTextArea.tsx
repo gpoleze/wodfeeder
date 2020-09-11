@@ -12,14 +12,7 @@ export interface CustomTextAreaProps {
     rows?: number;
 }
 
-const CustomTextArea: React.FC<CustomTextAreaProps> = ({
-    id,
-    label,
-    value,
-    onChange,
-    required = false,
-    rows = 2,
-}) => (
+const CustomTextArea: React.FC<CustomTextAreaProps> = ({ id, label, value, onChange, required = false, rows = 2 }) => (
     <TextField
         id={id}
         label={label}
