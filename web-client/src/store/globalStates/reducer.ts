@@ -8,6 +8,7 @@ export interface IGlobalState {
 }
 
 export const globalInitialState: IGlobalState = {
+    // isLoggedIn: true,
     isLoggedIn: false,
     token: "",
 };

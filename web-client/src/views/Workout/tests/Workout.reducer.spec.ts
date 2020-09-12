@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { WorkoutState } from "views/Workout/Workout.types";
+
 import { nameChangedReducer, WorkoutInitialState } from "views/Workout/Workout.reducer";
+import { WorkoutState } from "views/Workout/Workout.types";
 
 describe("Workout.reducer", () => {
     describe("nameChanged", () => {
