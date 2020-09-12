@@ -1,4 +1,4 @@
-import React, { ChangeEvent, SyntheticEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 import TextField from "@material-ui/core/TextField";
 

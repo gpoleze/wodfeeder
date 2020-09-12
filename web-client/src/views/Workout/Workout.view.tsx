@@ -95,7 +95,7 @@ const WorkoutDescription: React.FC<{
         <CustomTextArea
             id="workoutDescription"
             label="Workout"
-            value={workoutDescription}
+            defaultValue={workoutDescription}
             onChange={setWorkoutDescription}
             required
             rows={10}
@@ -112,7 +112,7 @@ const WorkoutObservations: React.FC<{
         <CustomTextArea
             id="workoutObservation"
             label="Observations"
-            value={workoutObservations}
+            defaultValue={workoutObservations}
             onChange={setWorkoutObservations}
             rows={1}
         />
@@ -140,24 +140,23 @@ const WorkoutButtons: React.FC<{
     </div>
 );
 
-const Workout: React.FC<WorkoutProps> = ({ workoutName, setWorkoutName }) => {
+const Workout: React.FC<WorkoutProps> = ({
+    workoutName,
+    setWorkoutName,
+    workoutDescription,
+    setWorkoutDescription,
+}) => {
     const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
     const [workoutDate, setWorkoutDate] = useState<string>();
-    const [workoutDescription, setWorkoutDescription] = useState<string>("");
     const [workoutObservations, setWorkoutObservations] = useState<string>("");
 
-    const handleNameChange = (name: string): void => {
-        console.log(name);
-        setWorkoutName(name);
-    };
     const classes = useStyles();
-    classes.paper = "gabriel";
     return (
         <Paper className={classes.paper}>
             <Header />
             <form>
-                <WorkoutName classes={classes} workoutName={workoutName} setWorkoutName={handleNameChange} />
+                <WorkoutName classes={classes} workoutName={workoutName} setWorkoutName={setWorkoutName} />
                 <WorkoutDate classes={classes} workoutDate={workoutDate} setWorkoutDate={setWorkoutDate} />
                 <WorkoutType
                     classes={classes}
