@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
     descriptionChangedReducer,
     nameChangedReducer,
-    observationsChangedReducer,
+    notesChangedReducer,
     WorkoutInitialState,
 } from "views/Workout/Workout.reducer";
 import { WorkoutState } from "views/Workout/Workout.types";
@@ -85,13 +85,13 @@ describe("Workout.reducer - observationChanged", () => {
     `(
         "should change the workout's name state from $initialValue to $expected",
         ({ initialValue, newValue, expected }: { initialValue: string; newValue: string; expected: string }) => {
-            const initialState: WorkoutState = { ...WorkoutInitialState, observations: initialValue };
+            const initialState: WorkoutState = { ...WorkoutInitialState, notes: initialValue };
 
             const action: PayloadAction<string> = { payload: newValue, type: "" };
 
-            const newState = observationsChangedReducer(initialState, action) as WorkoutState;
+            const newState = notesChangedReducer(initialState, action) as WorkoutState;
 
-            expect(newState.observations).toBe(expected);
+            expect(newState.notes).toBe(expected);
         },
     );
 });

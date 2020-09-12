@@ -105,14 +105,14 @@ const WorkoutDescription: React.FC<{
 
 const WorkoutObservations: React.FC<{
     classes: ClassNameMap;
-    workoutObservations: string;
+    workoutNotes: string;
     setWorkoutObservations: (value: string) => void;
-}> = ({ classes, workoutObservations, setWorkoutObservations }) => (
+}> = ({ classes, workoutNotes, setWorkoutObservations }) => (
     <div className={classes.formControl}>
         <CustomTextArea
             id="workoutObservation"
             label="Observations"
-            defaultValue={workoutObservations}
+            defaultValue={workoutNotes}
             onChange={setWorkoutObservations}
             rows={1}
         />
@@ -145,8 +145,8 @@ const Workout: React.FC<WorkoutProps> = ({
     setWorkoutName,
     workoutDescription,
     setWorkoutDescription,
-    workoutObservations,
-    setWorkoutObservations,
+    workoutNotes,
+    setWorkoutNotes,
 }) => {
     const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
@@ -178,8 +178,8 @@ const Workout: React.FC<WorkoutProps> = ({
                 />
                 <WorkoutObservations
                     classes={classes}
-                    workoutObservations={workoutObservations}
-                    setWorkoutObservations={setWorkoutObservations}
+                    workoutNotes={workoutNotes}
+                    setWorkoutObservations={setWorkoutNotes}
                 />
                 <WorkoutButtons
                     classes={classes}

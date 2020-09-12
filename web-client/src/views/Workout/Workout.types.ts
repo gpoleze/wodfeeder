@@ -4,7 +4,7 @@ export interface WorkoutState {
     type: string;
     scoreType: string;
     description: string;
-    observations: string;
+    notes: string;
 }
 
 export interface WorkoutStateProps {
@@ -13,7 +13,7 @@ export interface WorkoutStateProps {
     // workoutDate: string;
     workoutDescription: string;
     workoutName: string;
-    workoutObservations: string;
+    workoutNotes: string;
 }
 
 export interface WorkoutDispatchProps {
@@ -22,7 +22,7 @@ export interface WorkoutDispatchProps {
     // setWorkoutDate: (name: string) => void;
     setWorkoutName: (name: string) => void;
     setWorkoutDescription: (description: string) => void;
-    setWorkoutObservations: (description: string) => void;
+    setWorkoutNotes: (description: string) => void;
 }
 
 export interface WorkoutProps extends WorkoutStateProps, WorkoutDispatchProps {}

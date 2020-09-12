@@ -9,7 +9,7 @@ export const WorkoutInitialState: WorkoutState = {
     type: "",
     scoreType: "",
     description: "",
-    observations: "",
+    notes: "",
 };
 
 export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
@@ -22,8 +22,8 @@ export const descriptionChangedReducer: CaseReducer<WorkoutState, PayloadAction<
     return draft;
 };
 
-export const observationsChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.observations = payload.trim();
+export const notesChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
+    draft.notes = payload.trim();
     return draft;
 };
 
@@ -33,10 +33,10 @@ const WorkoutSlice = createSlice({
     reducers: {
         nameChanged: nameChangedReducer,
         descriptionChanged: descriptionChangedReducer,
-        observationsChanged: observationsChangedReducer,
+        notesChanged: notesChangedReducer,
     },
 });
 
-export const { nameChanged, descriptionChanged, observationsChanged } = WorkoutSlice.actions;
+export const { nameChanged, descriptionChanged, notesChanged } = WorkoutSlice.actions;
 
 export const { reducer } = WorkoutSlice;
