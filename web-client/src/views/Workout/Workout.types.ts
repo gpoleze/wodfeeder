@@ -13,7 +13,7 @@ export interface WorkoutStateProps {
     // workoutDate: string;
     workoutDescription: string;
     workoutName: string;
-    // workoutObservations: string;
+    workoutObservations: string;
 }
 
 export interface WorkoutDispatchProps {
@@ -22,7 +22,7 @@ export interface WorkoutDispatchProps {
     // setWorkoutDate: (name: string) => void;
     setWorkoutName: (name: string) => void;
     setWorkoutDescription: (description: string) => void;
-    // setWorkoutObservations: (description: string) => void;
+    setWorkoutObservations: (description: string) => void;
 }
 
 export interface WorkoutProps extends WorkoutStateProps, WorkoutDispatchProps {}

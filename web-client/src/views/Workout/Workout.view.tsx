@@ -145,11 +145,12 @@ const Workout: React.FC<WorkoutProps> = ({
     setWorkoutName,
     workoutDescription,
     setWorkoutDescription,
+    workoutObservations,
+    setWorkoutObservations,
 }) => {
     const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
     const [workoutDate, setWorkoutDate] = useState<string>();
-    const [workoutObservations, setWorkoutObservations] = useState<string>("");
 
     const classes = useStyles();
     return (
