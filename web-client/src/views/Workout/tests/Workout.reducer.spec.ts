@@ -5,16 +5,27 @@ import { WorkoutState } from "views/Workout/Workout.types";
 
 describe("Workout.reducer", () => {
     describe("nameChanged", () => {
-        it("should change the workout's name state", () => {
-            const newValue = "new value";
+        it.each`
+            initialValue | newValue      | expected
+            ${""}        | ${"new"}      | ${"new"}
+            ${""}        | ${"\tnew"}    | ${"new"}
+            ${""}        | ${"  new   "} | ${"new"}
+            ${""}        | ${"     "}    | ${""}
+            ${"old"}     | ${"new"}      | ${"new"}
+            ${"old"}     | ${"  new   "} | ${"new"}
+            ${"old"}     | ${"     "}    | ${""}
+            ${"old"}     | ${""}         | ${""}
+        `(
+            "should change the workout's name state from $initialValue to $expected",
+            ({ initialValue, newValue, expected }: { initialValue: string; newValue: string; expected: string }) => {
+                const initialState: WorkoutState = { ...WorkoutInitialState, name: initialValue };
 
-            const initialState: WorkoutState = WorkoutInitialState;
+                const action: PayloadAction<string> = { payload: newValue, type: "" };
 
-            const action: PayloadAction<string> = { payload: newValue, type: "" };
+                const newState = nameChangedReducer(initialState, action) as WorkoutState;
 
-            const newState = nameChangedReducer(initialState, action);
-
-            expect(newState).toEqual({ ...initialState, name: newValue });
-        });
+                expect(newState.name).toBe(expected);
+            },
+        );
     });
 });

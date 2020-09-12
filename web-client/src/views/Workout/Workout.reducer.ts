@@ -13,7 +13,7 @@ export const WorkoutInitialState: WorkoutState = {
 };
 
 export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.name = payload;
+    draft.name = payload.trim();
     return draft;
 };
 
