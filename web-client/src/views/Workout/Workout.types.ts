@@ -10,7 +10,7 @@ export interface WorkoutState {
 export interface WorkoutStateProps {
     // workoutType: string;
     // workoutScore: string;
-    // workoutDate: string;
+    workoutDate: string;
     workoutDescription: string;
     workoutName: string;
     workoutNotes: string;
@@ -19,7 +19,7 @@ export interface WorkoutStateProps {
 export interface WorkoutDispatchProps {
     // setWorkoutType: (name: string) => void;
     // setWorkoutScore: (name: string) => void;
-    // setWorkoutDate: (name: string) => void;
+    setWorkoutDate: (name: string) => void;
     setWorkoutName: (name: string) => void;
     setWorkoutDescription: (description: string) => void;
     setWorkoutNotes: (description: string) => void;

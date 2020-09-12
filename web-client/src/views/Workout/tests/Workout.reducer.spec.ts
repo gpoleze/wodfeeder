@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 
 import {
+    dateChangedReducer,
     descriptionChangedReducer,
     nameChangedReducer,
     notesChangedReducer,
@@ -32,6 +33,7 @@ describe("Workout.reducer - nameChanged", () => {
         },
     );
 });
+
 describe("Workout.reducer - descriptionChanged", () => {
     it.each`
         initialValue        | newValue                         | expected
@@ -64,7 +66,7 @@ describe("Workout.reducer - descriptionChanged", () => {
     );
 });
 
-describe("Workout.reducer - observationChanged", () => {
+describe("Workout.reducer - notesChanged", () => {
     it.each`
         initialValue        | newValue                         | expected
         ${""}               | ${"new"}                         | ${"new"}
@@ -92,6 +94,32 @@ describe("Workout.reducer - observationChanged", () => {
             const newState = notesChangedReducer(initialState, action) as WorkoutState;
 
             expect(newState.notes).toBe(expected);
+        },
+    );
+});
+
+describe("Workout.reducer - dateChanged", () => {
+    it.each`
+        initialValue    | newValue             | expected
+        ${""}           | ${"2020-09-11"}      | ${"2020-09-11"}
+        ${""}           | ${"\t2020-09-11"}    | ${"2020-09-11"}
+        ${""}           | ${"\t2020-09-11\n"}  | ${"2020-09-11"}
+        ${""}           | ${"  2020-09-11   "} | ${"2020-09-11"}
+        ${""}           | ${"     "}           | ${""}
+        ${"2020-09-10"} | ${"2020-09-11"}      | ${"2020-09-11"}
+        ${"2020-09-10"} | ${"  2020-09-11   "} | ${"2020-09-11"}
+        ${"2020-09-10"} | ${"     "}           | ${""}
+        ${"2020-09-10"} | ${""}                | ${""}
+    `(
+        "should change the workout's name state from $initialValue to $expected",
+        ({ initialValue, newValue, expected }: { initialValue: string; newValue: string; expected: string }) => {
+            const initialState: WorkoutState = { ...WorkoutInitialState, date: initialValue };
+
+            const action: PayloadAction<string> = { payload: newValue, type: "" };
+
+            const newState = dateChangedReducer(initialState, action) as WorkoutState;
+
+            expect(newState.date).toBe(expected);
         },
     );
 });

@@ -27,6 +27,11 @@ export const notesChangedReducer: CaseReducer<WorkoutState, PayloadAction<string
     return draft;
 };
 
+export const dateChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
+    draft.date = payload.trim();
+    return draft;
+};
+
 const WorkoutSlice = createSlice({
     name: "workout",
     initialState: WorkoutInitialState,
@@ -34,9 +39,10 @@ const WorkoutSlice = createSlice({
         nameChanged: nameChangedReducer,
         descriptionChanged: descriptionChangedReducer,
         notesChanged: notesChangedReducer,
+        dateChanged: dateChangedReducer,
     },
 });
 
-export const { nameChanged, descriptionChanged, notesChanged } = WorkoutSlice.actions;
+export const { nameChanged, descriptionChanged, notesChanged, dateChanged } = WorkoutSlice.actions;
 
 export const { reducer } = WorkoutSlice;

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import moment from "moment";
 
+import useInputDebounce from "utils/hook/useInputDebounce";
+
 export interface CustomNativeSelectProps {
     id: string;
     label: string;
-    value?: string;
+    defaultalue?: string;
     onChange: (value: string) => void;
     defaultValue?: string;
     required?: boolean;
@@ -16,22 +18,26 @@ const CustomNativeDateInput: React.FC<CustomNativeSelectProps> = ({
     id,
     label,
     onChange,
-    value = moment().format("yyyy-MM-DD"),
+    defaultValue = moment().format("yyyy-MM-DD"),
     required = false,
-}) => (
-    <TextField
-        id={id}
-        label={label}
-        type="date"
-        value={value}
-        fullWidth
-        variant="outlined"
-        required={required}
-        onChange={(event): void => onChange(event.target.value)}
-        InputLabelProps={{
-            shrink: true,
-        }}
-    />
-);
+}) => {
+    const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLInputElement>): void =>
+        onChange(event.target.value);
+    return (
+        <TextField
+            id={id}
+            label={label}
+            type="date"
+            defaultValue={defaultValue}
+            fullWidth
+            variant="outlined"
+            required={required}
+            onChange={useInputDebounce(changeHandler)}
+            InputLabelProps={{
+                shrink: true,
+            }}
+        />
+    );
+};
 
 export default CustomNativeDateInput;

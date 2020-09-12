@@ -82,7 +82,13 @@ const WorkoutDate: React.FC<{
     setWorkoutDate: (value: string) => void;
 }> = ({ classes, workoutDate, setWorkoutDate }) => (
     <div className={classes.formControl}>
-        <CustomNativeDateInput id="workoutDate" label="Date" value={workoutDate} onChange={setWorkoutDate} required />
+        <CustomNativeDateInput
+            id="workoutDate"
+            label="Date"
+            defaultValue={workoutDate}
+            onChange={setWorkoutDate}
+            required
+        />
     </div>
 );
 
@@ -147,10 +153,11 @@ const Workout: React.FC<WorkoutProps> = ({
     setWorkoutDescription,
     workoutNotes,
     setWorkoutNotes,
+    workoutDate,
+    setWorkoutDate,
 }) => {
     const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
-    const [workoutDate, setWorkoutDate] = useState<string>();
 
     const classes = useStyles();
     return (
