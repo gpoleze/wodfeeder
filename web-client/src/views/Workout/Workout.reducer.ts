@@ -1,6 +1,8 @@
 import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 
+import { WorkoutTypeVO } from "apiSpecs/api";
+
 import { WorkoutState } from "./Workout.types";
 
 export const WorkoutInitialState: WorkoutState = {
@@ -10,6 +12,7 @@ export const WorkoutInitialState: WorkoutState = {
     scoreType: "",
     description: "",
     notes: "",
+    types: [],
 };
 
 export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
@@ -32,6 +35,16 @@ export const dateChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>
     return draft;
 };
 
+export const typeChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
+    draft.type = payload.trim();
+    return draft;
+};
+
+export const typesLoadedReducer: CaseReducer<WorkoutState, PayloadAction<WorkoutTypeVO[]>> = (draft, { payload }) => {
+    draft.types = payload;
+    return draft;
+};
+
 const WorkoutSlice = createSlice({
     name: "workout",
     initialState: WorkoutInitialState,
@@ -40,9 +53,18 @@ const WorkoutSlice = createSlice({
         descriptionChanged: descriptionChangedReducer,
         notesChanged: notesChangedReducer,
         dateChanged: dateChangedReducer,
+        typeChanged: typeChangedReducer,
+        typesLoaded: typesLoadedReducer,
     },
 });
 
-export const { nameChanged, descriptionChanged, notesChanged, dateChanged } = WorkoutSlice.actions;
+export const {
+    nameChanged,
+    descriptionChanged,
+    notesChanged,
+    dateChanged,
+    typeChanged,
+    typesLoaded,
+} = WorkoutSlice.actions;
 
 export const { reducer } = WorkoutSlice;

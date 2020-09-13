@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
+import { WorkoutTypeVO } from "apiSpecs";
 import CustomNativeDateInput from "components/CustomNativeDateInput";
 import CustomNativeSelect, { SelectOption } from "components/CustomNativeSelect";
 import CustomTextInput from "components/CustomTextArea";
@@ -13,11 +14,6 @@ import CustomTextArea from "components/CustomTextInput";
 
 import useStyles from "./Workout.styles";
 import { WorkoutProps } from "./Workout.types";
-
-const menuItems: SelectOption<string>[] = [
-    { name: "Warm Up", value: "warm_up", key: "warm_up" },
-    { name: "WOD", value: "wod", key: "wod" },
-];
 
 const scoreItems: SelectOption<string>[] = [
     { name: "AMRAP", value: "amrap", key: "amrap" },
@@ -44,15 +40,19 @@ const WorkoutType: React.FC<{
     classes: ClassNameMap;
     workoutType: string;
     setWorkoutType: (value: string) => void;
-    options: SelectOption<string>[];
+    options: WorkoutTypeVO[];
 }> = ({ classes, workoutType, setWorkoutType, options }) => (
     <div className={classes.formControl}>
         <CustomNativeSelect
             id="workoutType"
             onChange={setWorkoutType}
             label="Type"
-            options={options}
-            value={workoutType}
+            options={options.map((type) => ({
+                key: type.id,
+                name: type.type,
+                value: type.id,
+            }))}
+            defaultValue={workoutType}
             required
         />
     </div>
@@ -70,7 +70,7 @@ const WorkoutScore: React.FC<{
             onChange={setWorkoutScore}
             label="Score Type"
             options={options}
-            value={workoutScore}
+            defaultValue={workoutScore}
             required
         />
     </div>
@@ -155,9 +155,16 @@ const Workout: React.FC<WorkoutProps> = ({
     setWorkoutNotes,
     workoutDate,
     setWorkoutDate,
+    loadWorkoutTypes,
+    types,
+    workoutType,
+    setWorkoutType,
 }) => {
-    const [workoutType, setWorkoutType] = useState<string>("");
     const [workoutScore, setWorkoutScore] = useState<string>("");
+
+    useEffect(() => {
+        loadWorkoutTypes();
+    }, [loadWorkoutTypes]);
 
     const classes = useStyles();
     return (
@@ -170,7 +177,7 @@ const Workout: React.FC<WorkoutProps> = ({
                     classes={classes}
                     workoutType={workoutType}
                     setWorkoutType={setWorkoutType}
-                    options={menuItems}
+                    options={types}
                 />
                 <WorkoutScore
                     classes={classes}

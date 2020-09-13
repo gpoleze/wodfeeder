@@ -7,7 +7,7 @@ import { CustomNativeSelectProps } from "components/CustomNativeSelect/CustomNat
 const CustomNativeSelect: React.FC<CustomNativeSelectProps> = ({
     id,
     label,
-    value = "",
+    defaultValue = "",
     onChange,
     options,
     firstOptionText = "",
@@ -20,7 +20,7 @@ const CustomNativeSelect: React.FC<CustomNativeSelectProps> = ({
             native: true,
         }}
         select
-        value={value}
+        defaultValue={defaultValue}
         fullWidth
         onChange={(event): void => onChange(event.target.value)}
         variant="outlined"

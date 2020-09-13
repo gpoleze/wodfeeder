@@ -36,19 +36,20 @@ module.exports = {
         "complexity": ["error", 10],
         "indent": "off",
         "max-lines-per-function": ["error", {
-            "max": 50,
+            "max": 60,
             "skipBlankLines": true,
             "skipComments": true
         }],
         "max-nested-callbacks": ["error", 5],
         "no-param-reassign": ["error", { props: true, ignorePropertyModificationsForRegex: ["^draft$"] }],
-
+        "no-console": ["warn", { allow: ["warn", "error"] }],
+        
         // Plugins - @typescript-eslint
         "@typescript-eslint/explicit-function-return-type": ["warn"],
         "@typescript-eslint/no-empty-interface": ["off"],
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/quotes": "off",
-
+        
         // Plugins - eslint-plugin-import
         "import/no-unresolved": "error",
         "import/named": "error",
@@ -81,10 +82,10 @@ module.exports = {
                 }
             }
         ],
-
+        
         // Plugins - Prettier
         "prettier/prettier": ["error"],
-
+        
         // Plugins - React
         "react/jsx-filename-extension": [
             1,
