@@ -23,7 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.model.WorkoutTypeEnum;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
-import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepository;
+import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
 @SpringJUnitConfig
@@ -33,7 +33,7 @@ class WorkoutServiceTest {
     private WorkoutRepo mockRepository;
 
     @MockBean
-    private WorkoutTypeRepository mockWorkoutTypeRepo;
+    private WorkoutTypeRepo mockWorkoutTypeRepo;
 
     private WorkoutService service;
     private static final List<Workout> expectedWorkouts = new ArrayList<>();

@@ -8,5 +8,5 @@ import com.gabrielpf.wodfeeder.model.WorkoutType;
 
 @Repository
 @RestResource(exported = false)
-public interface WorkoutTypeRepository extends JpaRepository<WorkoutType, String> {
+public interface WorkoutTypeRepo extends JpaRepository<WorkoutType, String> {
 }

@@ -2,15 +2,16 @@ package com.gabrielpf.wodfeeder.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "workout_type")
-public class WorkoutType {
+public class WorkoutType extends EntityWithUuid {
 
-    @Id
+    @Column(nullable = false)
     private String type;
 
     public String getType() {

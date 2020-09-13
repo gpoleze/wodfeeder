@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 import com.gabrielpf.wodfeeder.controller.form.WorkoutForm;
 import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
-import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepository;
+import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
 @Service
 public class WorkoutService {
 
     private final WorkoutRepo workoutRepo;
-    private final WorkoutTypeRepository workoutTypeRepo;
+    private final WorkoutTypeRepo workoutTypeRepo;
 
-    public WorkoutService(WorkoutRepo workoutRepo, WorkoutTypeRepository workoutTypeRepo) {
+    public WorkoutService(WorkoutRepo workoutRepo, WorkoutTypeRepo workoutTypeRepo) {
         this.workoutRepo = workoutRepo;
         this.workoutTypeRepo = workoutTypeRepo;
     }
