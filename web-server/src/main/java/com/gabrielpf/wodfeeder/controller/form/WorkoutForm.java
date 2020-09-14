@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.gabrielpf.wodfeeder.model.Workout;
+import com.gabrielpf.wodfeeder.model.WorkoutScoring;
 import com.gabrielpf.wodfeeder.model.WorkoutType;
 
 public class WorkoutForm {
@@ -28,14 +29,18 @@ public class WorkoutForm {
 
     private String notes;
 
+    @NotBlank
+    private String scoring;
+
     protected WorkoutForm() {}
 
-    public WorkoutForm(LocalDate date, int position, String type, String exercise, String notes) {
+    public WorkoutForm(LocalDate date, int position, String type, String exercise, String notes, String scoring) {
         this.date = date;
         this.position = position;
         this.type = type;
         this.exercise = exercise;
         this.notes = notes;
+        this.scoring = scoring;
     }
 
     public LocalDate getDate() {
@@ -58,6 +63,10 @@ public class WorkoutForm {
         return notes;
     }
 
+    public String getScoring() {
+        return scoring;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", WorkoutForm.class.getSimpleName() + "[", "]")
@@ -69,7 +78,7 @@ public class WorkoutForm {
                 .toString();
     }
 
-    public Workout convert(WorkoutType workoutType) {
-        return new Workout(date, position, workoutType, exercise, notes);
+    public Workout convert(WorkoutType workoutType, WorkoutScoring workoutScoring) {
+        return new Workout(date, position, workoutType, exercise, notes, workoutScoring);
     }
 }

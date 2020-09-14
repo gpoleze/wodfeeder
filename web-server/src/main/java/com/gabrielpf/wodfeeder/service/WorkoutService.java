@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.gabrielpf.wodfeeder.controller.form.WorkoutForm;
 import com.gabrielpf.wodfeeder.model.Workout;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
+import com.gabrielpf.wodfeeder.repo.WorkoutScoringRepo;
 import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
@@ -22,10 +23,12 @@ public class WorkoutService {
 
     private final WorkoutRepo workoutRepo;
     private final WorkoutTypeRepo workoutTypeRepo;
+    private final WorkoutScoringRepo workoutScoringRepo;
 
-    public WorkoutService(WorkoutRepo workoutRepo, WorkoutTypeRepo workoutTypeRepo) {
+    public WorkoutService(WorkoutRepo workoutRepo, WorkoutTypeRepo workoutTypeRepo, WorkoutScoringRepo workoutScoringRepo) {
         this.workoutRepo = workoutRepo;
         this.workoutTypeRepo = workoutTypeRepo;
+        this.workoutScoringRepo = workoutScoringRepo;
     }
 
     public List<WorkoutVO> findByDate(LocalDate date) {
@@ -54,10 +57,14 @@ public class WorkoutService {
 
     public WorkoutVO save(WorkoutForm form) {
         final var workoutType = workoutTypeRepo
-                .findById(form.getType())
+                .findByType(form.getType())
                 .orElseThrow(() -> new RuntimeException("Workout Type not present in the Database"));
 
-        Workout workout = form.convert(workoutType);
+        final var workoutScoring = workoutScoringRepo
+                .findByScoring(form.getScoring())
+                .orElseThrow(() -> new RuntimeException("Workout Scoring not present in the Database"));
+
+        Workout workout = form.convert(workoutType, workoutScoring);
         workoutRepo.save(workout);
         return new WorkoutVO(workout);
     }

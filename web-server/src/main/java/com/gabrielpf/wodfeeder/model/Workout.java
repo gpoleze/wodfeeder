@@ -20,6 +20,10 @@ public class Workout extends EntityWithUuid{
     @JoinColumn(name = "type", nullable = false)
     private WorkoutType type;
 
+    @OneToOne(targetEntity = WorkoutScoring.class)
+    @JoinColumn(name = "scoring", nullable = false)
+    private WorkoutScoring scoring;
+
     @Column(nullable = false)
     private String exercise;
 
@@ -31,12 +35,13 @@ public class Workout extends EntityWithUuid{
 
     public Workout() {}
 
-    public Workout(LocalDate date, int position, WorkoutType workoutType, String exercise, String notes) {
+    public Workout(LocalDate date, int position, WorkoutType workoutType, String exercise, String notes, WorkoutScoring scoring) {
         this.date = date;
         this.position = position;
         this.type = workoutType;
         this.exercise = exercise;
         this.notes = notes;
+        this.scoring = scoring;
     }
 
     @Override
@@ -87,6 +92,15 @@ public class Workout extends EntityWithUuid{
 
     public Workout setNotes(String notes) {
         this.notes = notes;
+        return this;
+    }
+
+    public WorkoutScoring getScoring() {
+        return scoring;
+    }
+
+    public Workout setScoring(WorkoutScoring scoring) {
+        this.scoring = scoring;
         return this;
     }
 }

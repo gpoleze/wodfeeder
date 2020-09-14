@@ -21,8 +21,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.gabrielpf.wodfeeder.model.Workout;
-import com.gabrielpf.wodfeeder.model.WorkoutTypeEnum;
+import com.gabrielpf.wodfeeder.model.WorkoutScoring;
+import com.gabrielpf.wodfeeder.model.WorkoutType;
 import com.gabrielpf.wodfeeder.repo.WorkoutRepo;
+import com.gabrielpf.wodfeeder.repo.WorkoutScoringRepo;
 import com.gabrielpf.wodfeeder.repo.WorkoutTypeRepo;
 import com.gabrielpf.wodfeeder.vo.WorkoutVO;
 
@@ -35,6 +37,9 @@ class WorkoutServiceTest {
     @MockBean
     private WorkoutTypeRepo mockWorkoutTypeRepo;
 
+    @MockBean
+    private WorkoutScoringRepo workoutScoringRepo;
+
     private WorkoutService service;
     private static final List<Workout> expectedWorkouts = new ArrayList<>();
 
@@ -43,26 +48,29 @@ class WorkoutServiceTest {
         expectedWorkouts.add(new Workout()
                 .setId(UUID.randomUUID())
                 .setDate(LocalDate.now())
-                .setType(WorkoutTypeEnum.WARM_UP.getType())
+                .setType(new WorkoutType("warm_up"))
+                .setScoring(new WorkoutScoring("RFT"))
                 .setExercise("Exercise 1")
                 .setPosition(1));
         expectedWorkouts.add(new Workout()
                 .setId(UUID.randomUUID())
                 .setDate(LocalDate.now().plusDays(1))
-                .setType(WorkoutTypeEnum.DEVELOPMENT.getType())
+                .setType(new WorkoutType("development"))
+                .setScoring(new WorkoutScoring("AMRAP"))
                 .setExercise("Exercise 2")
                 .setPosition(2));
         expectedWorkouts.add(new Workout()
                 .setId(UUID.randomUUID())
                 .setDate(LocalDate.now().plusDays(2))
-                .setType(WorkoutTypeEnum.DEVELOPMENT.getType())
+                .setType(new WorkoutType("development"))
+                .setScoring(new WorkoutScoring("AMRAP"))
                 .setExercise("Exercise 3")
                 .setPosition(3));
     }
 
     @BeforeEach
     void setUp() {
-        service = new WorkoutService(mockRepository, mockWorkoutTypeRepo);
+        service = new WorkoutService(mockRepository, mockWorkoutTypeRepo, workoutScoringRepo);
     }
 
     @Test

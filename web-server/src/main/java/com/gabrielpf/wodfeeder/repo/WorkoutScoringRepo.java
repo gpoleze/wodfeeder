@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 
-import com.gabrielpf.wodfeeder.model.WorkoutType;
+import com.gabrielpf.wodfeeder.model.WorkoutScoring;
 
 @Repository
 @RestResource(exported = false)
-public interface WorkoutTypeRepo extends JpaRepository<WorkoutType, UUID> {
-    Optional<WorkoutType> findByType(String tyoe);
+public interface WorkoutScoringRepo extends JpaRepository<WorkoutScoring, UUID> {
+    Optional<WorkoutScoring> findByScoring(String scoring);
 }
