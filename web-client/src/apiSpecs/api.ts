@@ -146,13 +146,13 @@ export interface Pageable {
      * @type {boolean}
      * @memberof Pageable
      */
-    unpaged?: boolean;
+    paged?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Pageable
      */
-    paged?: boolean;
+    unpaged?: boolean;
 }
 /**
  * 
@@ -253,6 +253,31 @@ export interface WorkoutForm {
      * @memberof WorkoutForm
      */
     notes?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkoutForm
+     */
+    scoring: string;
+}
+/**
+ * 
+ * @export
+ * @interface WorkoutScoringVO
+ */
+export interface WorkoutScoringVO {
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkoutScoringVO
+     */
+    scoring: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkoutScoringVO
+     */
+    id: string;
 }
 /**
  * 
@@ -611,6 +636,102 @@ export class UserControllerApi extends BaseAPI {
 
 
 /**
+ * WorkoutScoringControllerApi - axios parameter creator
+ * @export
+ */
+export const WorkoutScoringControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workoutScorings: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/workout-scoring`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * WorkoutScoringControllerApi - functional programming interface
+ * @export
+ */
+export const WorkoutScoringControllerApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workoutScorings(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkoutScoringVO>>> {
+            const localVarAxiosArgs = await WorkoutScoringControllerApiAxiosParamCreator(configuration).workoutScorings(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+    }
+};
+
+/**
+ * WorkoutScoringControllerApi - factory interface
+ * @export
+ */
+export const WorkoutScoringControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workoutScorings(options?: any): AxiosPromise<Array<WorkoutScoringVO>> {
+            return WorkoutScoringControllerApiFp(configuration).workoutScorings(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * WorkoutScoringControllerApi - object-oriented interface
+ * @export
+ * @class WorkoutScoringControllerApi
+ * @extends {BaseAPI}
+ */
+export class WorkoutScoringControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkoutScoringControllerApi
+     */
+    public workoutScorings(options?: any) {
+        return WorkoutScoringControllerApiFp(this.configuration).workoutScorings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+}
+
+
+/**
  * WorkoutTypeControllerApi - axios parameter creator
  * @export
  */
@@ -621,7 +742,7 @@ export const WorkoutTypeControllerApiAxiosParamCreator = function (configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workouts: async (options: any = {}): Promise<RequestArgs> => {
+        workoutTypes: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/workout-types`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
             let baseOptions;
@@ -659,8 +780,8 @@ export const WorkoutTypeControllerApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async workouts(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkoutTypeVO>>> {
-            const localVarAxiosArgs = await WorkoutTypeControllerApiAxiosParamCreator(configuration).workouts(options);
+        async workoutTypes(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkoutTypeVO>>> {
+            const localVarAxiosArgs = await WorkoutTypeControllerApiAxiosParamCreator(configuration).workoutTypes(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -680,8 +801,8 @@ export const WorkoutTypeControllerApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workouts(options?: any): AxiosPromise<Array<WorkoutTypeVO>> {
-            return WorkoutTypeControllerApiFp(configuration).workouts(options).then((request) => request(axios, basePath));
+        workoutTypes(options?: any): AxiosPromise<Array<WorkoutTypeVO>> {
+            return WorkoutTypeControllerApiFp(configuration).workoutTypes(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -699,8 +820,8 @@ export class WorkoutTypeControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkoutTypeControllerApi
      */
-    public workouts(options?: any) {
-        return WorkoutTypeControllerApiFp(this.configuration).workouts(options).then((request) => request(this.axios, this.basePath));
+    public workoutTypes(options?: any) {
+        return WorkoutTypeControllerApiFp(this.configuration).workoutTypes(options).then((request) => request(this.axios, this.basePath));
     }
 
 }
@@ -752,19 +873,54 @@ export const WorkoutsControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workouts1: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling workouts1.');
+            }
+            const localVarPath = `/api/workouts/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {Pageable} pageable 
          * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workouts11: async (pageable: Pageable, date: string, options: any = {}): Promise<RequestArgs> => {
+        workouts2: async (pageable: Pageable, date: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'pageable' is not null or undefined
             if (pageable === null || pageable === undefined) {
-                throw new RequiredError('pageable','Required parameter pageable was null or undefined when calling workouts11.');
+                throw new RequiredError('pageable','Required parameter pageable was null or undefined when calling workouts2.');
             }
             // verify required parameter 'date' is not null or undefined
             if (date === null || date === undefined) {
-                throw new RequiredError('date','Required parameter date was null or undefined when calling workouts11.');
+                throw new RequiredError('date','Required parameter date was null or undefined when calling workouts2.');
             }
             const localVarPath = `/api/workouts`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
@@ -785,41 +941,6 @@ export const WorkoutsControllerApiAxiosParamCreator = function (configuration?: 
                     (date as any).toISOString().substr(0,10) :
                     date;
             }
-
-
-    
-            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            delete localVarUrlObj.search;
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: globalImportUrl.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workouts2: async (id: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling workouts2.');
-            }
-            const localVarPath = `/api/workouts/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
 
     
@@ -858,13 +979,12 @@ export const WorkoutsControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {Pageable} pageable 
-         * @param {string} date 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async workouts11(pageable: Pageable, date: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkoutVO>>> {
-            const localVarAxiosArgs = await WorkoutsControllerApiAxiosParamCreator(configuration).workouts11(pageable, date, options);
+        async workouts1(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkoutVO>> {
+            const localVarAxiosArgs = await WorkoutsControllerApiAxiosParamCreator(configuration).workouts1(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -872,12 +992,13 @@ export const WorkoutsControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} id 
+         * @param {Pageable} pageable 
+         * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async workouts2(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkoutVO>> {
-            const localVarAxiosArgs = await WorkoutsControllerApiAxiosParamCreator(configuration).workouts2(id, options);
+        async workouts2(pageable: Pageable, date: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkoutVO>>> {
+            const localVarAxiosArgs = await WorkoutsControllerApiAxiosParamCreator(configuration).workouts2(pageable, date, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -903,22 +1024,22 @@ export const WorkoutsControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workouts1(id: string, options?: any): AxiosPromise<WorkoutVO> {
+            return WorkoutsControllerApiFp(configuration).workouts1(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {Pageable} pageable 
          * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workouts11(pageable: Pageable, date: string, options?: any): AxiosPromise<Array<WorkoutVO>> {
-            return WorkoutsControllerApiFp(configuration).workouts11(pageable, date, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workouts2(id: string, options?: any): AxiosPromise<WorkoutVO> {
-            return WorkoutsControllerApiFp(configuration).workouts2(id, options).then((request) => request(axios, basePath));
+        workouts2(pageable: Pageable, date: string, options?: any): AxiosPromise<Array<WorkoutVO>> {
+            return WorkoutsControllerApiFp(configuration).workouts2(pageable, date, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -943,25 +1064,25 @@ export class WorkoutsControllerApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkoutsControllerApi
+     */
+    public workouts1(id: string, options?: any) {
+        return WorkoutsControllerApiFp(this.configuration).workouts1(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {Pageable} pageable 
      * @param {string} date 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkoutsControllerApi
      */
-    public workouts11(pageable: Pageable, date: string, options?: any) {
-        return WorkoutsControllerApiFp(this.configuration).workouts11(pageable, date, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkoutsControllerApi
-     */
-    public workouts2(id: string, options?: any) {
-        return WorkoutsControllerApiFp(this.configuration).workouts2(id, options).then((request) => request(this.axios, this.basePath));
+    public workouts2(pageable: Pageable, date: string, options?: any) {
+        return WorkoutsControllerApiFp(this.configuration).workouts2(pageable, date, options).then((request) => request(this.axios, this.basePath));
     }
 
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
-import { WorkoutTypeVO } from "apiSpecs";
+import { WorkoutScoringVO, WorkoutTypeVO } from "apiSpecs";
 import CustomNativeDateInput from "components/CustomNativeDateInput";
 import CustomNativeSelect, { SelectOption } from "components/CustomNativeSelect";
 import CustomTextInput from "components/CustomTextArea";
@@ -14,11 +14,6 @@ import CustomTextArea from "components/CustomTextInput";
 
 import useStyles from "./Workout.styles";
 import { WorkoutProps } from "./Workout.types";
-
-const scoreItems: SelectOption<string>[] = [
-    { name: "AMRAP", value: "amrap", key: "amrap" },
-    { name: "RFT", value: "rft", key: "rft" },
-];
 
 const Header: React.FC = () => (
     <Typography variant="h6" align="center">
@@ -62,14 +57,16 @@ const WorkoutScore: React.FC<{
     classes: ClassNameMap;
     workoutScore: string;
     setWorkoutScore: (value: string) => void;
-    options: SelectOption<string>[];
+    options: WorkoutScoringVO[];
 }> = ({ classes, workoutScore, setWorkoutScore, options }) => (
     <div className={classes.formControl}>
         <CustomNativeSelect
             id="workoutScore"
             onChange={setWorkoutScore}
             label="Score Type"
-            options={options}
+            options={options.map(
+                (scoring): SelectOption<string> => ({ key: scoring.id, value: scoring.id, name: scoring.scoring }),
+            )}
             defaultValue={workoutScore}
             required
         />
@@ -155,16 +152,19 @@ const Workout: React.FC<WorkoutProps> = ({
     setWorkoutNotes,
     workoutDate,
     setWorkoutDate,
-    loadWorkoutTypes,
-    types,
     workoutType,
     setWorkoutType,
+    types,
+    loadWorkoutTypes,
+    scorings,
+    loadWorkoutScorings,
+    workoutScoring,
+    setWorkoutScoring,
 }) => {
-    const [workoutScore, setWorkoutScore] = useState<string>("");
-
     useEffect(() => {
         loadWorkoutTypes();
-    }, [loadWorkoutTypes]);
+        loadWorkoutScorings();
+    }, [loadWorkoutTypes, loadWorkoutScorings]);
 
     const classes = useStyles();
     return (
@@ -181,9 +181,9 @@ const Workout: React.FC<WorkoutProps> = ({
                 />
                 <WorkoutScore
                     classes={classes}
-                    workoutScore={workoutScore}
-                    setWorkoutScore={setWorkoutScore}
-                    options={scoreItems}
+                    workoutScore={workoutScoring}
+                    setWorkoutScore={setWorkoutScoring}
+                    options={scorings}
                 />
                 <WorkoutDescription
                     classes={classes}
