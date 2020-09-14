@@ -2,6 +2,7 @@ import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 
 import { WorkoutTypeVO } from "apiSpecs/api";
+import { loadWorkoutTypesThunk } from "views/Workout/Workout.thunk";
 
 import { WorkoutState } from "./Workout.types";
 
@@ -54,17 +55,12 @@ const WorkoutSlice = createSlice({
         notesChanged: notesChangedReducer,
         dateChanged: dateChangedReducer,
         typeChanged: typeChangedReducer,
-        typesLoaded: typesLoadedReducer,
+    },
+    extraReducers: {
+        [loadWorkoutTypesThunk.fulfilled as any]: typesLoadedReducer,
     },
 });
 
-export const {
-    nameChanged,
-    descriptionChanged,
-    notesChanged,
-    dateChanged,
-    typeChanged,
-    typesLoaded,
-} = WorkoutSlice.actions;
+export const { nameChanged, descriptionChanged, notesChanged, dateChanged, typeChanged } = WorkoutSlice.actions;
 
 export const { reducer } = WorkoutSlice;

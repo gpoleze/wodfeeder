@@ -18,7 +18,7 @@ public class WorkoutTypeController {
     public WorkoutTypeController(WorkoutTypeService workoutTypeService) {this.workoutTypeService = workoutTypeService;}
 
     @GetMapping
-    public List<WorkoutTypeVO> workouts() {
+    public List<WorkoutTypeVO> workoutTypes() {
         return workoutTypeService.findAll();
     }
 

@@ -17,7 +17,7 @@ import {
     WorkoutDispatchProps,
     WorkoutStateProps,
 } from "views/Workout";
-import { loadWorkoutsThunk } from "views/Workout/Workout.thunk";
+import { loadWorkoutTypesThunk } from "views/Workout/Workout.thunk";
 import Workout from "views/Workout/Workout.view";
 
 const mapStateToProps = (state: State): WorkoutStateProps => ({
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>): WorkoutDisp
     setWorkoutNotes: (notes: string): PayloadAction<string> => dispatch(notesChanged(notes)),
     setWorkoutDate: (date: string): PayloadAction<string> => dispatch(dateChanged(date)),
     setWorkoutType: (type: string): PayloadAction<string> => dispatch(typeChanged(type)),
-    loadWorkoutTypes: () => dispatch(loadWorkoutsThunk()),
+    loadWorkoutTypes: () => dispatch(loadWorkoutTypesThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workout);

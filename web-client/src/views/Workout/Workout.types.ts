@@ -1,4 +1,4 @@
-import { Dispatch } from "redux";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
 
 import { WorkoutTypeVO } from "apiSpecs";
 
@@ -29,7 +29,7 @@ export interface WorkoutDispatchProps {
     setWorkoutName: (name: string) => void;
     setWorkoutDescription: (description: string) => void;
     setWorkoutNotes: (description: string) => void;
-    loadWorkoutTypes: () => (dispatch: Dispatch) => void;
+    loadWorkoutTypes: () => AsyncThunkAction<WorkoutTypeVO[], never, { rejectValue: string }>;
 }
 
 export interface WorkoutProps extends WorkoutStateProps, WorkoutDispatchProps {}
