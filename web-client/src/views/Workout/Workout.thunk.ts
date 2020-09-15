@@ -4,7 +4,7 @@ import {
     WorkoutScoringControllerApiFactory,
     WorkoutScoringVO,
     WorkoutTypeControllerApiFactory,
-    WorkoutTypeVO
+    WorkoutTypeVO,
 } from "apiSpecs";
 import config from "Constants";
 
