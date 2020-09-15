@@ -1,13 +1,15 @@
-import { AsyncThunkAction, PayloadAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { Action, AsyncThunkAction, PayloadAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 
 import { WorkoutScoringVO, WorkoutTypeVO } from "apiSpecs";
 import { State } from "store/globalStates/type";
 import {
+    cancelButtonAction,
     dateChanged,
     descriptionChanged,
     nameChanged,
     notesChanged,
+    scoringChanged,
     selectWorkoutDate,
     selectWorkoutDescription,
     selectWorkoutName,
@@ -19,7 +21,6 @@ import {
     typeChanged,
     WorkoutDispatchProps,
     WorkoutStateProps,
-    scoringChanged,
 } from "views/Workout";
 import { loadWorkoutScoringsThunk, loadWorkoutTypesThunk } from "views/Workout/Workout.thunk";
 import Workout from "views/Workout/Workout.view";
@@ -46,6 +47,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<State, any, any>): WorkoutDi
         dispatch(loadWorkoutTypesThunk()),
     loadWorkoutScorings: (): AsyncThunkAction<WorkoutScoringVO[], never, { rejectValue: string }> =>
         dispatch(loadWorkoutScoringsThunk()),
+    cancelButtonHandler: (): Action<string> => dispatch(cancelButtonAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workout);

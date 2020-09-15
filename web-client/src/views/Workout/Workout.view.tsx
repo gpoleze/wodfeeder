@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { WorkoutScoringVO, WorkoutTypeVO } from "apiSpecs";
 import CustomNativeDateInput from "components/CustomNativeDateInput";
 import CustomNativeSelect, { SelectOption } from "components/CustomNativeSelect";
-import CustomTextInput from "components/CustomTextArea";
-import CustomTextArea from "components/CustomTextInput";
+import CustomTextArea from "components/CustomTextArea";
+import CustomTextInput from "components/CustomTextInput";
 
 import useStyles from "./Workout.styles";
 import { WorkoutProps } from "./Workout.types";
@@ -27,7 +27,7 @@ const WorkoutName: React.FC<{
     setWorkoutName: (value: string) => void;
 }> = ({ classes, workoutName, setWorkoutName }) => (
     <div className={classes.formControl}>
-        <CustomTextInput id="workoutName" onChange={setWorkoutName} label="Name" defaultValue={workoutName} required />
+        <CustomTextInput id="workoutName" onChange={setWorkoutName} label="Name" value={workoutName} required />
     </div>
 );
 
@@ -47,7 +47,7 @@ const WorkoutType: React.FC<{
                 name: type.type,
                 value: type.id,
             }))}
-            defaultValue={workoutType}
+            value={workoutType}
             required
         />
     </div>
@@ -67,7 +67,7 @@ const WorkoutScore: React.FC<{
             options={options.map(
                 (scoring): SelectOption<string> => ({ key: scoring.id, value: scoring.id, name: scoring.scoring }),
             )}
-            defaultValue={workoutScore}
+            value={workoutScore}
             required
         />
     </div>
@@ -79,13 +79,7 @@ const WorkoutDate: React.FC<{
     setWorkoutDate: (value: string) => void;
 }> = ({ classes, workoutDate, setWorkoutDate }) => (
     <div className={classes.formControl}>
-        <CustomNativeDateInput
-            id="workoutDate"
-            label="Date"
-            defaultValue={workoutDate}
-            onChange={setWorkoutDate}
-            required
-        />
+        <CustomNativeDateInput id="workoutDate" label="Date" value={workoutDate} onChange={setWorkoutDate} required />
     </div>
 );
 
@@ -98,7 +92,7 @@ const WorkoutDescription: React.FC<{
         <CustomTextArea
             id="workoutDescription"
             label="Workout"
-            defaultValue={workoutDescription}
+            value={workoutDescription}
             onChange={setWorkoutDescription}
             required
             rows={10}
@@ -115,7 +109,7 @@ const WorkoutObservations: React.FC<{
         <CustomTextArea
             id="workoutObservation"
             label="Observations"
-            defaultValue={workoutNotes}
+            value={workoutNotes}
             onChange={setWorkoutObservations}
             rows={1}
         />
@@ -130,7 +124,7 @@ const WorkoutButtons: React.FC<{
     <div className={classes.formControl}>
         <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
             <Grid item xs={6}>
-                <Button type="submit" variant="contained" color="secondary" onClick={cancelButtonHandler} fullWidth>
+                <Button variant="contained" color="secondary" onClick={cancelButtonHandler} fullWidth>
                     Cancel
                 </Button>
             </Grid>
@@ -143,6 +137,7 @@ const WorkoutButtons: React.FC<{
     </div>
 );
 
+// eslint-disable-next-line max-lines-per-function
 const Workout: React.FC<WorkoutProps> = ({
     workoutName,
     setWorkoutName,
@@ -160,6 +155,7 @@ const Workout: React.FC<WorkoutProps> = ({
     loadWorkoutScorings,
     workoutScoring,
     setWorkoutScoring,
+    cancelButtonHandler,
 }) => {
     useEffect(() => {
         loadWorkoutTypes();
@@ -198,7 +194,7 @@ const Workout: React.FC<WorkoutProps> = ({
                 <WorkoutButtons
                     classes={classes}
                     saveButtonHandler={() => console.log("Clicked Save")}
-                    cancelButtonHandler={() => console.log("Clicked Cancel")}
+                    cancelButtonHandler={cancelButtonHandler}
                 />
             </form>
         </Paper>

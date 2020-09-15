@@ -1,4 +1,4 @@
-import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Action, CaseReducer, createSlice, Draft, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 
 import { WorkoutScoringVO, WorkoutTypeVO } from "apiSpecs/api";
@@ -17,34 +17,37 @@ export const WorkoutInitialState: WorkoutState = {
     scorings: [],
 };
 
-export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.name = payload.trim();
+export const changeStringObject = (
+    draft: Draft<WorkoutState>,
+    name: keyof WorkoutState,
+    value: string,
+): Draft<WorkoutState> => {
+    draft[name] = value.trim();
     return draft;
+};
+
+export const nameChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
+    return changeStringObject(draft, "name", payload);
 };
 
 export const descriptionChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.description = payload.trim();
-    return draft;
+    return changeStringObject(draft, "description", payload);
 };
 
 export const notesChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.notes = payload.trim();
-    return draft;
+    return changeStringObject(draft, "notes", payload);
 };
 
 export const dateChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.date = payload.trim();
-    return draft;
+    return changeStringObject(draft, "date", payload);
 };
 
 export const typeChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.type = payload.trim();
-    return draft;
+    return changeStringObject(draft, "type", payload);
 };
 
 export const scoringChangedReducer: CaseReducer<WorkoutState, PayloadAction<string>> = (draft, { payload }) => {
-    draft.scoring = payload.trim();
-    return draft;
+    return changeStringObject(draft, "scoring", payload);
 };
 
 export const typesLoadedReducer: CaseReducer<WorkoutState, PayloadAction<WorkoutTypeVO[]>> = (draft, { payload }) => {
@@ -60,6 +63,16 @@ export const scoringsLoadedReducer: CaseReducer<WorkoutState, PayloadAction<Work
     return draft;
 };
 
+export const cancelButtonReducer: CaseReducer<WorkoutState, Action<string>> = (draft) => {
+    draft.name = "";
+    draft.date = moment().format("yyyy-MM-DD");
+    draft.type = "";
+    draft.scoring = "";
+    draft.description = "";
+    draft.notes = "";
+    return draft;
+};
+
 const WorkoutSlice = createSlice({
     name: "workout",
     initialState: WorkoutInitialState,
@@ -70,6 +83,7 @@ const WorkoutSlice = createSlice({
         dateChanged: dateChangedReducer,
         typeChanged: typeChangedReducer,
         scoringChanged: scoringChangedReducer,
+        cancelButtonAction: cancelButtonReducer,
     },
     extraReducers: {
         [loadWorkoutTypesThunk.fulfilled as any]: typesLoadedReducer,
@@ -84,6 +98,7 @@ export const {
     dateChanged,
     typeChanged,
     scoringChanged,
+    cancelButtonAction,
 } = WorkoutSlice.actions;
 
 export const { reducer } = WorkoutSlice;

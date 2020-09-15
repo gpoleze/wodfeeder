@@ -1,4 +1,4 @@
-import { AsyncThunkAction } from "@reduxjs/toolkit";
+import { AsyncThunkAction, PayloadAction } from "@reduxjs/toolkit";
 
 import { WorkoutScoringVO, WorkoutTypeVO } from "apiSpecs";
 
@@ -11,6 +11,7 @@ export interface WorkoutState {
     notes: string;
     types: WorkoutTypeVO[];
     scorings: WorkoutScoringVO[];
+    [key: string]: string | WorkoutTypeVO[] | WorkoutScoringVO[];
 }
 
 export interface WorkoutStateProps {
@@ -25,7 +26,7 @@ export interface WorkoutStateProps {
 }
 
 export interface WorkoutDispatchProps {
-    setWorkoutType: (name: string) => void;
+    setWorkoutType: (name: string) => PayloadAction<string>;
     setWorkoutScoring: (name: string) => void;
     setWorkoutDate: (name: string) => void;
     setWorkoutName: (name: string) => void;
@@ -33,6 +34,7 @@ export interface WorkoutDispatchProps {
     setWorkoutNotes: (description: string) => void;
     loadWorkoutTypes: () => AsyncThunkAction<WorkoutTypeVO[], never, { rejectValue: string }>;
     loadWorkoutScorings: () => AsyncThunkAction<WorkoutScoringVO[], never, { rejectValue: string }>;
+    cancelButtonHandler: () => void;
 }
 
 export interface WorkoutProps extends WorkoutStateProps, WorkoutDispatchProps {}

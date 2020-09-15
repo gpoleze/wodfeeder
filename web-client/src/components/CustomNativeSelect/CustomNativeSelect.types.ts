@@ -8,7 +8,7 @@ export interface CustomNativeSelectProps<T = any> {
     id: string;
     label: string;
     firstOptionText?: string;
-    defaultValue?: T;
+    value?: T;
     onChange: (value: T) => void;
     options: SelectOption[];
     required?: boolean;

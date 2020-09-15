@@ -1,2 +1,2 @@
-export * from "./CustomTextArea";
-export { default } from "./CustomTextArea";
+export * from "./CustomTextInput";
+export { default } from "./CustomTextInput";
