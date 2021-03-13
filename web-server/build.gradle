@@ -8,8 +8,8 @@ plugins {
 
 group = 'com.gabrielpf'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
-targetCompatibility = '14'
+sourceCompatibility = '15'
+targetCompatibility = '15'
 
 configurations {
     compileOnly {
