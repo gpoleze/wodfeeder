@@ -37,8 +37,8 @@ public class ExercisesService {
         return new ExerciseVO(exercise);
     }
 
-    public Optional<Exercise> find(UUID id) {
-        return exerciseRepo.findById(id);
+    public Optional<ExerciseVO> find(UUID id) {
+        return exerciseRepo.findById(id).map(ExerciseVO::new);
     }
 
     public List<ExerciseVO> find(String name) {

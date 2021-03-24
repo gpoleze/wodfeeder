@@ -39,7 +39,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> findById(@PathVariable UUID id) {
+    public ResponseEntity<ExerciseVO> findById(@PathVariable UUID id) {
         return ResponseEntity.of(exercisesService.find(id));
     }
 
