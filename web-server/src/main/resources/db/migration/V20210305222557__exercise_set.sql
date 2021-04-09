@@ -7,7 +7,8 @@ CREATE TABLE "exercise"
 
 CREATE TABLE "weight_type"
 (
-    "type" VARCHAR(32) NULL UNIQUE,
+    "id"   UUID        NOT NULL UNIQUE,
+    "type" VARCHAR(32) NOT NULL UNIQUE,
     PRIMARY KEY ("type")
 );
 
@@ -26,8 +27,8 @@ CREATE TABLE "exercise_set"
 
 );
 
-INSERT INTO weight_type(type)
-VALUES ('kilo'),
-       ('pounds'),
-       ('resistance bands')
+INSERT INTO weight_type(id, type)
+VALUES (uuid_generate_v4(), 'kilo'),
+       (uuid_generate_v4(), 'pounds'),
+       (uuid_generate_v4(), 'resistance bands')
 ;
