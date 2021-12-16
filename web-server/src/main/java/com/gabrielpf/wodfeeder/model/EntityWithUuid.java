@@ -22,7 +22,7 @@ public class EntityWithUuid {
         return id;
     }
 
-    public Workout setId(UUID id) {
+    public EntityWithUuid setId(UUID id) {
         this.id = id;
         return null;
     }
